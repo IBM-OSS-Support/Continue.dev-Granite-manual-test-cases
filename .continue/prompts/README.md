@@ -13,3 +13,16 @@
 ## We can set the parameters for the prompt file in the prompt file itself:
 
 ![image](https://github.com/user-attachments/assets/47eef664-6b6f-456a-86b9-a7199a0a9107)
+
+## Automate the execution of prompt file using python script:-
+# Pre-requisite :- python must be installed before execute the command
+
+Go to the location where python file is saved.
+Open the python file and edit the below values-
+1. Url - this value is replaced with running ollama url api.
+2. file_path - this value must be override with the path of prompt file which you are going to execute.
+To run the prompt file use the below command.
+“python3 run_prompt.py >> out.txt”
+
+run_prompt.py - is a python file
+Out.txt - is a file name to save the output in txt form.
