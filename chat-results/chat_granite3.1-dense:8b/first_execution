@@ -671,6 +671,16 @@ BankAccount
 BankSystem
  classes, including depositing, withdrawing, checking balance, creating accounts, and retrieving accounts. You can further expand these tests to cover edge cases and additional functionality as needed.
 
+========================================================================================================================================
+ Question11:
+Review the @features and suggest any improvements in the code structure or naming conventions
+
+==================================================================================================================================
+
+Question 12:
+@codebase Are there any logging mechanisms implemented in this project?
+Response :
+
 
 
 

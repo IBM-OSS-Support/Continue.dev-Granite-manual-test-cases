@@ -1,0 +1,880 @@
+Question1: What is Lambda function in python?
+Respone:
+# In Python, a lambda function is an anonymous function that can take any number of arguments, but can only have one expression. 
+
+# The syntax for a lambda function is as follows:
+lambda arguments: expression
+
+# Here's an example:
+
+# A simple lambda function to add 10 to the input number
+add_ten = lambda x: x + 10
+
+# You can call this function like so:
+print(add_ten(5))  # Outputs: 15
+====================================================================================================================
+
+Question 2: Write a code for quick-sort algorithm in Python
+    
+Respone:
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+# Example usage:
+print(quick_sort([3,6,8,10,1,2,1]))  # Outputs: [1, 1, 2, 3, 6, 8, 10]
+================================================================================================================
+Question 3: How do you declare constructors and destructors in Java?
+
+Response:
+
+// In Java, constructors are used to initialize objects. They are special methods that have the same name as the class and no return type (not even void). 
+
+// Here's an example of a constructor:
+
+public class MyClass {
+    // Instance variables
+    private int x;
+    private String name;
+
+    // Constructor
+    public MyClass(int x, String name) {
+        this.x = x;
+        this.name = name;
+    }
+}
+
+// To create an instance of MyClass and initialize its variables:
+MyClass obj = new MyClass(10, "John");
+
+// Destructors are not explicitly declared in Java like they are in C++. In Java, the garbage collector automatically manages memory. 
+
+// When an object is no longer referenced, it becomes eligible for garbage collection (destruction). 
+
+
+====================================================================================================================
+
+
+Question4: Write a code for Binary Search along with the documentation of the code.
+   
+
+Response:
+
+def binary_search(arr, low, high, x):
+    """
+    Perform a binary search on a sorted array.
+
+    Args:
+    arr (list): A list of comparable elements which is already sorted.
+    low (int): The lower index of the subarray to be searched.
+    high (int): The upper index of the subarray to be searched.
+    x (int/float): The target value to search for in the array.
+
+    Returns:
+    int: The index of the target value 'x' if found, else returns -1.
+
+    Binary Search is a searching algorithm that finds the position of a target value within a sorted array. 
+    It works by repeatedly dividing in half the portion of the list that could contain the item, until you've narrowed down the possible locations to just one.
+    """
+
+    # Check base case
+    if high >= low:
+
+        mid = (high + low) // 2  # Find the middle index
+
+        # If the element is present at the middle itself
+        if arr[mid] == x:
+            return mid
+
+        # If the element is smaller than mid, it can only be present in left subarray
+        elif arr[mid] > x:
+            return binary_search(arr, low, mid - 1, x)
+
+        # Else, the element can only be present in right subarray
+        else:
+            return binary_search(arr, mid + 1, high, x)
+
+    else:
+        # Element is not present in array
+        return -1
+
+
+# Example usage:
+sorted_array = [2, 3, 4, 10, 40]
+result = binary_search(sorted_array, 0, len(sorted_array)-1, 10)
+print("Element is at index:", result)  # Outputs: Element is at index: 3
+
+====================================================================================================================
+
+Question5: Fix the bugs in the code @documentation_with_bugs.py 
+
+
+class BankAccount:
+    """
+    A class representing a bank account with methods for deposit, withdrawal, checking balance and displaying transactions.
+
+    Attributes:
+    - account_number (str): The unique identifier of the account.
+    - balance (float): The current balance in the account.
+    - transactions (list): A list of strings detailing all transactions made on this account.
+
+    Methods:
+    - deposit(amount): Adds a specified amount to the account's balance and logs the transaction.
+    - withdraw(amount): Subtracts a specified amount from the account's balance if sufficient funds are available,
+                      and logs the transaction. Returns True if successful, False otherwise.
+    - check_balance(): Returns the current balance of the account.
+    - display_transactions(): Prints out all transactions made on this account.
+    """
+
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+    def deposit(self, amount):
+        """
+        Deposits a specified amount into the account and logs the transaction.
+
+        Args:
+        - amount (float): The amount to be deposited.
+        """
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+    def withdraw(self, amount):
+        """
+        Withdraws a specified amount from the account if sufficient funds are available, and logs the transaction.
+
+        Args:
+        - amount (float): The amount to be withdrawn.
+
+        Returns:
+        - bool: True if the withdrawal was successful, False otherwise.
+        """
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+    def check_balance(self):
+        """
+        Returns the current balance of the account.
+
+        Returns:
+        - float: The current balance.
+        """
+        return self.balance
+
+    def display_transactions(self):
+        """
+        Prints out all transactions made on this account.
+        """
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class BankSystem:
+    """
+    A class representing a bank system with methods to manage accounts.
+
+    Attributes:
+    - accounts (dict): A dictionary where keys are account numbers and values are BankAccount objects.
+
+    Methods:
+    - create_account(account_number): Creates a new BankAccount if the account number does not already exist.
+    - get_account(account_number): Retrieves a BankAccount object given its account number.
+    """
+
+    def __init__(self):
+        self.accounts = {}
+
+    def create_account(self, account_number):
+        """
+        Creates a new BankAccount if the account number does not already exist in the system.
+
+        Args:
+        - account_number (str): The unique identifier for the new account.
+
+        Returns:
+        - bool: True if the account was created successfully, False otherwise.
+        """
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(account_number)
+            return True
+        else:
+            print("Account already exists!")
+            return False
+
+    def get_account(self, account_number):
+        """
+        Retrieves a BankAccount object given its account number.
+
+        Args:
+        - account_number (str): The unique identifier for the account.
+
+        Returns:
+        - BankAccount or None: The BankAccount object if found, otherwise None.
+        """
+        return self.accounts.get(account_number)
+
+
+def main():
+    bank_system = BankSystem()
+
+    while True:
+        print("\nBank Account Management System")
+        print("1. Create new account")
+        print("2. Deposit funds")
+        print("3. Withdraw funds")
+        print("4. Check balance")
+        print("5. Display transaction history")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            account_number = input("Enter new account number: ")
+            bank_system.create_account(account_number)
+        elif choice == "2":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter deposit amount: "))
+            account = bank_system.get_account(account_number)
+            if account:
+                account.deposit(amount)
+        elif choice == "3":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter withdrawal amount: "))
+            account = bank_system.get_account(account_number)
+            if account and account.withdraw(amount):
+                print("Withdrawal successful!")
+        elif choice == "4":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                print(f"Account balance: {account.check_balance()}")
+        elif choice == "5":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                account.display_transactions()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
+====================================================================================================================
+
+Question6:Port the code @docmentation.py  to java
+
+Response:
+import java.util.*;
+
+class BankAccount {
+    private String accountNumber;
+    private double balance;
+    private List<String> transactions;
+
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        transactions.add("Deposited " + amount);
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient funds!");
+            return false;
+        }
+        balance -= amount;
+        transactions.add("Withdrew " + amount);
+        return true;
+    }
+
+    public double checkBalance() {
+        return balance;
+    }
+
+    public void displayTransactions() {
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
+    }
+}
+
+class BankSystem {
+    private Map<String, BankAccount> accounts;
+
+    public BankSystem() {
+        this.accounts = new HashMap<>();
+    }
+
+    public boolean createAccount(String accountNumber) {
+        if (!accounts.containsKey(accountNumber)) {
+            accounts.put(accountNumber, new BankAccount(accountNumber, 0));
+            return true;
+        } else {
+            System.out.println("Account already exists!");
+            return false;
+        }
+    }
+
+    public BankAccount getAccount(String accountNumber) {
+        return accounts.get(accountNumber);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankSystem bankSystem = new BankSystem();
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("\nBank Account Management System");
+            System.out.println("1. Create new account");
+            System.out.println("2. Deposit funds");
+            System.out.println("3. Withdraw funds");
+            System.out.println("4. Check balance");
+            System.out.println("5. Display transaction history");
+            System.out.println("6. Exit");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    String accountNumber = scanner.next();
+                    bankSystem.createAccount(accountNumber);
+                    break;
+                case 2:
+                    accountNumber = scanner.next();
+                    double amount = scanner.nextDouble();
+                    BankAccount account = bankSystem.getAccount(accountNumber);
+                    if (account != null) {
+                        account.deposit(amount);
+                    }
+                    break;
+                case 3:
+                    accountNumber = scanner.next();
+                    amount = scanner.nextDouble();
+                    account = bankSystem.getAccount(accountNumber);
+                    if (account != null && account.withdraw(amount)) {
+                        System.out.println("Withdrawal successful!");
+                    }
+                    break;
+                case 4:
+                    accountNumber = scanner.next();
+                    account = bankSystem.getAccount(accountNumber);
+                    if (account != null) {
+                        System.out.printf("Account balance: %.2f", account.checkBalance());
+                    }
+                    break;
+                case 5:
+                    accountNumber = scanner.next();
+                    account = bankSystem.getAccount(accountNumber);
+                    if (account != null) {
+                        account.displayTransactions();
+                    }
+                    break;
+                case 6:
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
+
+========================================================================================================================
+
+Question 7: Refactor java code to quarkus (Bank code)
+"Refactor the above generated code to quarkus"
+
+Converting a full-fledged console application like this into a Quarkus application involves significant changes, including setting up a Quarkus project, creating REST endpoints for each operation, and managing state with a database or in-memory storage. This is beyond the scope of a simple code refactoring task and requires a more comprehensive setup.
+
+However, I can provide you with a basic structure of how this might look like:
+
+// BankAccount.java
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class BankAccount {
+    @Id
+    private String accountNumber;
+
+    @Column(name = "balance")
+    private double balance;
+
+    @ElementCollection
+    private List<String> transactions = new ArrayList<>();
+
+    // Getters and setters...
+}
+
+// BankSystemResource.java
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.Optional;
+
+@Path("/bank")
+public class BankSystemResource {
+
+    @Inject
+    private EntityManager entityManager;
+
+    @POST
+    @Path("/accounts")
+    public Response createAccount(String accountNumber) {
+        // Implementation...
+    }
+
+    @GET
+    @Path("/accounts/{accountNumber}")
+    public Optional<BankAccount> getAccount(@PathParam("accountNumber") String accountNumber) {
+        return Optional.ofNullable(entityManager.find(BankAccount.class, accountNumber));
+    }
+
+    @PUT
+    @Path("/accounts/{accountNumber}/deposit")
+    public Response deposit(@PathParam("accountNumber") String accountNumber, double amount) {
+        // Implementation...
+    }
+
+    @PUT
+    @Path("/accounts/{accountNumber}/withdraw")
+    public Response withdraw(@PathParam("accountNumber") String accountNumber, double amount) {
+        // Implementation...
+    }
+
+    @GET
+    @Path("/accounts/{accountNumber}/balance")
+    public Double getBalance(@PathParam("accountNumber") String accountNumber) {
+        // Implementation...
+    }
+
+    @GET
+    @Path("/accounts/{accountNumber}/transactions")
+    public List<String> getTransactions(@PathParam("accountNumber") String accountNumber) {
+        BankAccount account = entityManager.find(BankAccount.class, accountNumber);
+        return account != null ? account.getTransactions() : Collections.emptyList();
+    }
+}
+This is a very simplified version and doesn't include the full logic of your original application (like checking if an account exists before creating it, handling withdrawals that exceed balance, etc.).
+
+To fully convert this to Quarkus, you would need to:
+
+Set up a new Quarkus project using https://code.quarkus.io/.
+Define the 
+BankAccount
+ entity with JPA annotations.
+Create REST endpoints for each operation (create account, deposit, withdraw, check balance, display transactions).
+Implement the logic within these endpoints.
+Configure a database in your application.properties file to persist your 
+BankAccount
+ objects.
+Quarkus is a full-stack framework that provides automatic configuration and optimization for both JVM and native execution, so it's quite powerful but also has a steeper learning curve compared to simple console applications.
+
+========================================================================================================================
+Question 8: Code optimisation (perhaps sort algorithm)
+"Optimize this code: @code_to_optimize.py "
+Response:
+
+The provided Python code is an implementation of the Bubble Sort algorithm. While it works correctly, Bubble Sort is not the most efficient sorting algorithm for large datasets due to its O(n^2) time complexity.
+
+A more optimized approach would be using a different sorting algorithm with better average and worst-case time complexities, such as QuickSort or MergeSort. However, if we're restricted to use Bubble Sort (as per the provided code), here's an optimized version of it:
+
+def optimized_bubble_sort(arr):
+    """
+    Optimized Bubble Sort algorithm that includes a flag to detect if any swap occurred during an iteration.
+
+    Args:
+    - arr (list): The list to be sorted.
+
+    Returns:
+    - list: The sorted list.
+    """
+    n = len(arr)
+    for i in range(n):
+        swapped = False  # Flag to check if any swap happened in the current pass
+
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True  # Swap occurred, so there's still work to do
+
+        # If no two elements were swapped during the pass, the array is sorted
+        if not swapped:
+            break
+
+    return arr
+
+
+# Example usage
+arr = [64, 34, 25, 12, 22, 11, 90]
+res_arr = optimized_bubble_sort(arr)
+print("Result array is:", res_arr)
+This version of Bubble Sort includes an optimization where it keeps track of whether any swaps occurred during a pass through the list. If no swaps occur, it means the list is already sorted and the algorithm can terminate early. This can significantly improve performance on nearly-sorted lists.
+
+======================================================================================================================
+Question 9: Documentation comment of bank code
+"Write documentation comment for @documentation.py"
+
+Response: 
+
+# documentation.py
+
+class BankAccount:
+    """
+    A class representing a bank account with methods for deposit, withdrawal, checking balance and displaying transactions.
+
+    Attributes:
+    - account_number (str): The unique identifier of the account.
+    - balance (float): The current balance in the account.
+    - transactions (list): A list of strings detailing all transactions made on this account.
+
+    Methods:
+    - deposit(amount): Adds a specified amount to the account's balance and logs the transaction.
+    - withdraw(amount): Subtracts a specified amount from the account's balance if sufficient funds are available,
+                      and logs the transaction. Returns True if successful, False otherwise.
+    - check_balance(): Returns the current balance of the account.
+    - display_transactions(): Prints out all transactions made on this account.
+    """
+
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+
+    def deposit(self, amount):
+        """
+        Deposits a specified amount into the account and logs the transaction.
+
+        Args:
+        - amount (float): The amount to be deposited.
+        """
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+
+
+    def withdraw(self, amount):
+        """
+        Withdraws a specified amount from the account if sufficient funds are available, and logs the transaction.
+
+        Args:
+        - amount (float): The amount to be withdrawn.
+
+        Returns:
+        - bool: True if the withdrawal was successful, False otherwise.
+        """
+        if amount > self.balance:
+            print("Insufficient funds!")
+            return False
+        self.balance -= amount
+        self.transactions.append(f"Withdrew {amount}")
+        return True
+
+
+    def check_balance(self):
+        """
+        Returns the current balance of the account.
+
+        Returns:
+        - float: The current balance.
+        """
+        return self.balance
+
+
+    def display_transactions(self):
+        """
+        Prints out all transactions made on this account.
+        """
+        for transaction in self.transactions:
+            print(transaction)
+
+
+class BankSystem:
+    """
+    A class representing a bank system with methods to manage accounts.
+
+    Attributes:
+    - accounts (dict): A dictionary where keys are account numbers and values are BankAccount objects.
+
+    Methods:
+    - create_account(account_number): Creates a new BankAccount if the account number does not already exist in the system.
+    - get_account(account_number): Retrieves a BankAccount object given its account number.
+    """
+
+    def __init__(self):
+        self.accounts = {}
+
+
+    def create_account(self, account_number):
+        """
+        Creates a new BankAccount if the account number does not already exist in the system.
+
+        Args:
+        - account_number (str): The unique identifier for the new account.
+
+        Returns:
+        - bool: True if the account was created successfully, False otherwise.
+        """
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(account_number)
+            return True
+        else:
+            print("Account already exists!")
+            return False
+
+
+    def get_account(self, account_number):
+        """
+        Retrieves a BankAccount object given its account number.
+
+        Args:
+        - account_number (str): The unique identifier for the account.
+
+        Returns:
+        - BankAccount or None: The BankAccount object if found, otherwise None.
+        """
+        return self.accounts.get(account_number)
+
+
+def main():
+    """
+    Main function to run the bank system application.
+    It provides a simple text-based interface for users to interact with their bank accounts.
+    """
+    bank_system = BankSystem()
+
+    while True:
+        print("\nBank Account Management System")
+        print("1. Create new account")
+        print("2. Deposit funds")
+        print("3. Withdraw funds")
+        print("4. Check balance")
+        print("5. Display transaction history")
+        print("6. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            account_number = input("Enter new account number: ")
+            bank_system.create_account(account_number)
+        elif choice == "2":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter deposit amount: "))
+            account = bank_system.get_account(account_number)
+            if account:
+                account.deposit(amount)
+        elif choice == "3":
+            account_number = input("Enter account number: ")
+            amount = float(input("Enter withdrawal amount: "))
+            account = bank_system.get_account(account_number)
+            if account and account.withdraw(amount):
+                print("Withdrawal successful!")
+        elif choice == "4":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                print(f"Account balance: {account.check_balance()}")
+        elif choice == "5":
+            account_number = input("Enter account number: ")
+            account = bank_system.get_account(account_number)
+            if account:
+                account.display_transactions()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+====================================================================================================================
+Question 10: Create Unit test for bank code
+
+Response:
+
+To create unit tests for the provided 
+BankAccount
+ and 
+BankSystem
+ classes, we'll use Python's built-in unittest module. Here's a basic example of how you might write these tests:
+
+import unittest
+from your_file import BankAccount, BankSystem  # replace 'your_file' with the actual filename
+
+
+class TestBankSystem(unittest.TestCase):
+
+    def setUp(self):
+        self.bank_system = BankSystem()
+
+    def test_create_account(self):
+        self.assertTrue(self.bank_system.create_account('123'))  # Should return True
+        self.assertFalse(self.bank_system.create_account('123'))  # Should return False (account already exists)
+
+    def test_get_account(self):
+        self.bank_system.create_account('123')
+        account = self.bank_system.get_account('123')
+        self.assertIsInstance(account, BankAccount)
+
+        non_existent_account = self.bank_system.get_account('456')
+        self.assertIsNone(non_existent_account)
+
+    def test_deposit(self):
+        account = self.bank_system.create_account('123')
+        self.assertEqual(account.check_balance(), 0)
+
+        account.deposit(100)
+        self.assertEqual(account.check_balance(), 100)
+
+    def test_withdraw(self):
+        account = self.bank_system.create_account('123')
+        self.assertEqual(account.check_balance(), 0)
+
+        # This should fail because insufficient funds
+        self.assertFalse(account.withdraw(100))
+        self.assertEqual(account.check_balance(), 0)
+
+        account.deposit(100)
+        self.assertTrue(account.withdraw(50))
+        self.assertEqual(account.check_balance(), 50)
+
+    def test_display_transactions(self):
+        account = self.bank_system.create_account('123')
+        account.deposit(100)
+        account.withdraw(50)
+
+        transactions = []
+        for _ in range(2):  # We expect two transactions (one deposit, one withdrawal)
+            transactions.extend(account.display_transactions())
+
+        self.assertEqual(len(transactions), 2)
+
+
+if __name__ == '__main__':
+    unittest.main()
+This test suite includes tests for creating accounts, retrieving them, depositing and withdrawing money, and checking the transaction history.
+
+Please note that you need to replace 'your_file' with the actual filename where your 
+BankAccount
+ and 
+BankSystem
+ classes are defined. Also, this is a basic example; in a real-world scenario, you'd want more comprehensive tests, possibly including edge cases and error handling.
+
+====================================================================================================================
+ Question11:
+Review the @features and suggest any improvements in the code structure or naming conventions
+
+
+Based on the provided repository map, here are some suggestions to improve the code structure and naming conventions:
+
+__init__.py
+: This is typically used for initializing a package. If this file is empty or only contains import statements, consider removing it to avoid confusion. If there's actual initialization logic, ensure it's clear and necessary.
+
+Suggestion: If no initialization is needed, you can delete this file.
+
+interest_calculator.py: This seems fine as it is, assuming it contains a class or functions related to calculating interest.
+
+Suggestion: Ensure the class/function names are descriptive. For example, if there's a class for calculating interest, consider naming it InterestCalculator.
+
+loan_manager.py: This file likely manages loan-related operations. Here are some suggestions:
+
+If this file contains classes, ensure they're named descriptively. For instance, if there's a class managing loans, name it LoanManager or something similar.
+
+Consider adding methods for different loan operations (like creating a loan, updating loan status, etc.). Make sure these method names are clear and follow snake_case convention in Python (e.g., create_loan, update_loan_status).
+
+If there's a main function or class to run the loan management system, consider naming it something like LoanSystem.
+
+General Naming Conventions:
+
+Use lowercase with words separated by underscores (snake_case) for variable and method names.
+Use CamelCase for class names.
+Keep names descriptive and meaningful to improve code readability.
+Example of improved structure:
+
+# loan_manager.py
+
+class LoanManager:
+    """Manages all loan-related operations."""
+
+    def __init__(self):
+        self.loans = {}  # Dictionary to store loans, key could be loan ID or similar unique identifier
+
+    def create_loan(self, loan_id, amount, interest_rate):
+        """Creates a new loan with the given parameters."""
+        if loan_id not in self.loans:
+            self.loans[loan_id] = Loan(loan_id, amount, interest_rate)
+            return True
+        else:
+            print("Loan ID already exists!")
+            return False
+
+    def update_loan_status(self, loan_id, new_status):
+        """Updates the status of an existing loan."""
+        if loan_id in self.loans:
+            self.loans[loan_id].update_status(new_status)
+            return True
+        else:
+            print("Loan not found!")
+            return False
+Remember, these are general suggestions and might need adjustments based on the specific requirements and existing codebase structure.
+====================================================================================================================
+
+Question 12:
+@codebase Are there any logging mechanisms implemented in this project?if not create it using python
+Response :
+
+Based on the provided repository map, there's no explicit mention of a logging mechanism in the files 
+__init__.py
+, interest_calculator.py, or loan_manager.py.
+
+To add basic logging to your Python application, you can use Python's built-in logging module. Here's an example of how you might set this up:
+
+Import the logging module at the top of each relevant file (e.g., 
+__init__.py
+, interest_calculator.py, and loan_manager.py):
+import logging
+Configure the logging settings. This can be done in a separate module or directly in your files. Here's an example of how to set it up:
+# setup_logging.py
+
+def configure_logging():
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S')
+Import and use the logging functions in your code:
+# For example, in loan_manager.py
+from setup_logging import configure_logging
+
+configure_logging()
+
+logger = logging.getLogger(__name__)  # Get a logger with the name of the current module
+
+def create_loan(self, loan_id, amount, interest_rate):
+    """Creates a new loan with the given parameters."""
+    logger.info(f"Creating loan with ID: {loan_id}, Amount: {amount}, Interest Rate: {interest_rate}")
+    if loan_id not in self.loans:
+        self.loans[loan_id] = Loan(loan_id, amount, interest_rate)
+        return True
+    else:
+        logger.warning("Loan ID already exists!")
+        return False
+This setup will log messages with different levels of severity (e.g., INFO, WARNING, ERROR). You can adjust the logging level using logging.basicConfig(level=...).
+
+Remember to replace the example logging statements with actual relevant information from your application for effective debugging and monitoring.
+

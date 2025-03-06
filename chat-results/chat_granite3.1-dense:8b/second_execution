@@ -802,6 +802,16 @@ display_transactions()
  method without printing it directly.
 
 
+========================================================================================================================================
+ Question11:
+Review the @features and suggest any improvements in the code structure or naming conventions
+
+==================================================================================================================================
+
+Question 12:
+@codebase Are there any logging mechanisms implemented in this project?
+Response :
+
 
 
 
