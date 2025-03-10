@@ -23,12 +23,23 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    // Function to fetch server IP
+    const getBackendURL = () => {
+        // Use the frontend's origin to determine backend URL
+        if (window.location.hostname === "localhost") {
+            console.log("🛠 Local development");
+            return "http://localhost:5001"; // Local development
+        } else {
+            console.log("🚀 Fyre Machine");
+            return "http://9.20.192.160:5001"; // Fyre Machine IP
+        }
+    };
+    
     const fetchServerIP = async () => {
         try {
-            const response = await fetch("http://localhost:5001/server-ip"); // Check if the API URL is correct
+            const backendURL = getBackendURL();
+            const response = await fetch(`${backendURL}/server-ip`);
             const data = await response.json();
-            
+    
             if (data.ip) {
                 console.log("✅ Server IP:", data.ip);
                 return data.ip;
