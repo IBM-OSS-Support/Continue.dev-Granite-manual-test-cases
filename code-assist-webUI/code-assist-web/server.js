@@ -56,7 +56,6 @@ const getMachineIP = () => {
 };
 
 const machineIP = getMachineIP();
-console.log(`✅ Using machine IP: ${machineIP}`);
 
 // API to get server IP
 app.get("/server-ip", (req, res) => {
@@ -65,5 +64,5 @@ app.get("/server-ip", (req, res) => {
 
 // ✅ Bind to 0.0.0.0 instead of localhost
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`✅ Server accessible at http://${machineIP}:${PORT}`);
+    console.log(`Server Running at your local IP and port at ${PORT}`);
 });

@@ -26,10 +26,10 @@ const ModelComparison = () => {
     const getBackendURL = () => {
         // Use the frontend's origin to determine backend URL
         if (window.location.hostname === "localhost") {
-            console.log("🛠 Local development");
+            console.log("🚀 Local Development");
             return "http://localhost:5001"; // Local development
         } else {
-            console.log("🚀 Fyre Machine");
+            console.log("🔥 Fyre Machine");
             return "http://9.20.192.160:5001"; // Fyre Machine IP
         }
     };
@@ -41,7 +41,6 @@ const ModelComparison = () => {
             const data = await response.json();
     
             if (data.ip) {
-                console.log("✅ Server IP:", data.ip);
                 return data.ip;
             } else {
                 console.warn("⚠️ No IP found in response:", data);
@@ -54,11 +53,6 @@ const ModelComparison = () => {
     };
 
     // Fetch server IP on component mount
-    useEffect(() => {
-        console.log(process.env.REACT_APP_MACHINE_IP, "Fetching server IP...", serverIP, "serverPort", serverPort);
-        fetchServerIP().then(ip => setServerIP(ip));
-    }, [serverIP, serverPort]);
-
     useEffect(() => {
         fetchServerIP().then(ip => setServerIP(ip));
     }, []);
