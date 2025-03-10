@@ -22,62 +22,57 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    // Fetch the backend IP address dynamically
+    // Fetch machine IP on component mount
     useEffect(() => {
-        const fetchServerIP = async () => {
+        const fetchMachineIP = async () => {
             try {
-                const response = await fetch("http://10.51.3.126:5001/api/files"); // Use backend IP
+                const response = await fetch("https://api.ipify.org?format=json");
+                if (!response.ok) throw new Error("Failed to fetch machine IP");
                 const data = await response.json();
-                console.log("Fetched Server IP:", data);
-                setServerIP(data.ip || "localhost");
+                setServerIP(data.ip);
             } catch (error) {
-                console.error("Error fetching server IP:", error);
-                setServerIP("localhost"); // Fallback
+                console.error("Error fetching machine IP:", error);
+                setApiError("Failed to fetch machine IP. Please try again later.");
             }
         };
-    
-        fetchServerIP();
-    }, []);    
+        fetchMachineIP();
+    }, []);
 
-    // Fetch available files
+    // Fetch available files on component mount
     useEffect(() => {
-        if (!serverIP) return;
-
         const fetchFileNames = async () => {
             try {
                 const response = await fetch(`http://${serverIP}:5001/api/files`);
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
-                console.log("Fetched Files:", files);
                 setAvailableFiles(files);
             } catch (error) {
                 console.error("Error fetching files:", error);
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
-
         fetchFileNames();
     }, [serverIP]);
 
-    // Fetch models data when files are available
+    // Fetch models data when compare option changes
     useEffect(() => {
-        if (!serverIP || availableFiles.length === 0) return;
-
         const fetchModelData = async () => {
             setIsLoading(true);
             setApiError(null);
-
             try {
+                // Fetch data from all files
                 const responses = await Promise.all(
-                    availableFiles.map(file =>
-                        fetch(`http://${serverIP}:5001/api/files/${file}`).then(r => r.json())
+                    availableFiles.map(file => 
+                        fetch(`http://${serverIP}:5001/api/files/${file}`)
+                            .then(r => r.json())
                     )
                 );
 
-                const allModels = responses.flatMap(response =>
-                    Array.isArray(response) ? response : []
+                // Flatten the responses into a single array
+                const allModels = responses.flatMap(response => 
+                    Object.values(response).flat()
                 );
-
+                
                 setModelsData(allModels);
             } catch (error) {
                 console.error("Error fetching models:", error);
@@ -87,8 +82,10 @@ const ModelComparison = () => {
             }
         };
 
-        fetchModelData();
-    }, [serverIP, availableFiles]);
+        if (availableFiles.length > 0) {
+            fetchModelData();
+        }
+    }, [availableFiles, serverIP]);
 
     // Prepare model lists
     const graniteModels = Array.from(new Set(
