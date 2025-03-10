@@ -28,7 +28,7 @@ const ModelComparison = () => {
             try {
                 const response = await fetch("http://10.51.3.126:5001/api/files"); // Use backend IP
                 const data = await response.json();
-                console.log("Fetched Server IP:", data.ip);
+                console.log("Fetched Server IP:", data);
                 setServerIP(data.ip || "localhost");
             } catch (error) {
                 console.error("Error fetching server IP:", error);
