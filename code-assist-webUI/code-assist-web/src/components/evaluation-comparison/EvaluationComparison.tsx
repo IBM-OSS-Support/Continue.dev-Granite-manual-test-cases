@@ -14,7 +14,7 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>("localhost"); // Default to localhost
+    const [serverIP, setServerIP] = useState<string>(process.env.REACT_APP_MACHINE_IP || "localhost"); // Default to REACT_APP_MACHINE_IP or localhost
     const [serverPort, setServerPort] = useState<number>(5001); // Default to 5001
 
     interface Model {

@@ -39,25 +39,23 @@ app.get('/api/files/:filename', (req, res) => {
 // Fetch Fyre machine IP and log it
 const getMachineIP = () => {
     const interfaces = os.networkInterfaces();
-    
-    let lastAddress = 'localhost';
     for (const name of Object.keys(interfaces)) {
-        for (const iface of interfaces[name].filter(iface => name === 'eth1' || name === 'en0')) {
+        for (const iface of interfaces[name].filter(name => name === 'eth1' || name === 'en0')) {
             if (iface.family === 'IPv4' && !iface.internal) {
-                console.log("name", name, "iface", iface, "lastAddress", lastAddress);
+                console.log("name::",name, "interfaces[name]:",interfaces[name], "iface:",iface);
                 
-                lastAddress = iface.address;
+                return iface.address;
             }
         }
     }
-    return lastAddress;
+    return 'localhost';
 };
 
 const machineIP = getMachineIP();
 console.log(`Fyre machine IP: ${machineIP}`, `PORT: ${PORT}`);
 
 // API to get server IP
-app.get("/api/server-ip", (req, res) => {
+app.get("/api/files", (req, res) => {
     res.json({ ip: machineIP, PORT });
 });
 
