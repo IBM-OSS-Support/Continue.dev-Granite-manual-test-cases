@@ -102,7 +102,7 @@ def append_content(json_data):
     combined_content = '{\n"name":"'+item['model'].strip()+'",\n"created_at":"'+item['created_at'].strip()+'",\n"prompt": \n{\t"'+item['message']['role'].strip()+'":"' + combined_content+'"\n}}'
     return combined_content
 
-config_file_path = '/Users/hariji/.continue/config.json'
+config_file_path = '/Users/harsh/.continue/config.json'
 config_data = read_config(config_file_path)
 
 # Function to process multiple prompt files
