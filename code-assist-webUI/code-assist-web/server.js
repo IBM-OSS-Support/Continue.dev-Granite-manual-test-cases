@@ -61,7 +61,7 @@ console.log(`Fyre machine IP: ${machineIP}`, `PORT: ${PORT}`);
 
 // API to get server IP
 app.get("/api/files", (req, res) => {
-    res.json({ ip: machineIP, PORT });
+    res.json({ ip: machineIP, port: PORT });
 });
 
 app.listen(PORT, () => {

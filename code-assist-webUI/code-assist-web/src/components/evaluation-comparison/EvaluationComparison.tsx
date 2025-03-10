@@ -14,7 +14,7 @@ const ModelComparison = () => {
     const [modelsData, setModelsData] = useState<any[]>([]); // State to store fetched models data
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
-    const [serverIP, setServerIP] = useState<string>(process.env.REACT_APP_MACHINE_IP || "localhost"); // Default to REACT_APP_MACHINE_IP or localhost
+    const [serverIP, setServerIP] = useState<string>(process.env.REACT_APP_MACHINE_IP || "localhost"); // Initial state from environment variable or fallback to localhost
     const [serverPort, setServerPort] = useState<number>(5001); // Default to 5001
 
     interface Model {
@@ -25,11 +25,11 @@ const ModelComparison = () => {
 
     // Fetch server IP on component mount
     useEffect(() => {
-        console.log("Fetching server IP...", serverIP, "serverPort", serverPort);
+        console.log(process.env.REACT_APP_MACHINE_IP, "Fetching server IP...", serverIP, "serverPort", serverPort);
         
         const fetchServerIP = async () => {
             try {
-                const response = await fetch(`http://${serverIP}:${serverPort}/api/server-ip`);
+                const response = await fetch(`/api/server-ip`);
                 if (!response.ok) throw new Error("Failed to fetch server IP");
                 const data = await response.json();
                 setServerIP(data.ip);
