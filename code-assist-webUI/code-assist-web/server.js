@@ -2,6 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const os = require("os");
+const { data } = require("react-router-dom");
 
 const app = express();
 const PORT = 5001;
@@ -34,6 +36,27 @@ app.get('/api/files/:filename', (req, res) => {
     });
 });
 
+// Fetch Fyre machine IP and log it
+const getMachineIP = () => {
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+};
+
+const machineIP = getMachineIP();
+console.log(`Fyre machine IP: ${machineIP}`, `PORT: ${PORT}`);
+
+// API to get server IP
+app.get("/api/files", (req, res) => {
+    res.json({ ip: machineIP, PORT });
+});
+
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://${machineIP}:${PORT}`);
 });
