@@ -26,17 +26,18 @@ const ModelComparison = () => {
     useEffect(() => {
         const fetchServerIP = async () => {
             try {
-                const response = await fetch("http://localhost:5001/server-ip");
+                const response = await fetch("http://10.51.3.126:5001/api/files"); // Use backend IP
                 const data = await response.json();
                 console.log("Fetched Server IP:", data.ip);
                 setServerIP(data.ip || "localhost");
             } catch (error) {
                 console.error("Error fetching server IP:", error);
-                setServerIP("localhost"); // Fallback to localhost
+                setServerIP("localhost"); // Fallback
             }
         };
+    
         fetchServerIP();
-    }, []);
+    }, []);    
 
     // Fetch available files
     useEffect(() => {
