@@ -22,8 +22,26 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    // Fetch available files on component mount
+    // Fetch the backend IP address dynamically
     useEffect(() => {
+        const fetchServerIP = async () => {
+            try {
+                const response = await fetch("http://localhost:5001/server-ip");
+                const data = await response.json();
+                console.log("Fetched Server IP:", data.ip);
+                setServerIP(data.ip || "localhost");
+            } catch (error) {
+                console.error("Error fetching server IP:", error);
+                setServerIP("localhost"); // Fallback to localhost
+            }
+        };
+        fetchServerIP();
+    }, []);
+
+    // Fetch available files
+    useEffect(() => {
+        if (!serverIP) return;
+
         const fetchFileNames = async () => {
             try {
                 const response = await fetch(`http://${serverIP}:5001/api/files`);
@@ -35,28 +53,29 @@ const ModelComparison = () => {
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
+
         fetchFileNames();
     }, [serverIP]);
 
-    // Fetch models data when compare option changes
+    // Fetch models data when files are available
     useEffect(() => {
+        if (!serverIP || availableFiles.length === 0) return;
+
         const fetchModelData = async () => {
             setIsLoading(true);
             setApiError(null);
+
             try {
-                // Fetch data from all files
                 const responses = await Promise.all(
-                    availableFiles.map(file => 
-                        fetch(`http://${serverIP}:5001/api/files/${file}`)
-                            .then(r => r.json())
+                    availableFiles.map(file =>
+                        fetch(`http://${serverIP}:5001/api/files/${file}`).then(r => r.json())
                     )
                 );
 
-                // Flatten the responses into a single array
-                const allModels = responses.flatMap(response => 
-                    Object.values(response).flat()
+                const allModels = responses.flatMap(response =>
+                    Array.isArray(response) ? response : []
                 );
-                
+
                 setModelsData(allModels);
             } catch (error) {
                 console.error("Error fetching models:", error);
@@ -66,10 +85,8 @@ const ModelComparison = () => {
             }
         };
 
-        if (availableFiles.length > 0) {
-            fetchModelData();
-        }
-    }, [availableFiles, serverIP]);
+        fetchModelData();
+    }, [serverIP, availableFiles]);
 
     // Prepare model lists
     const graniteModels = Array.from(new Set(
