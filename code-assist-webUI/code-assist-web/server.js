@@ -36,7 +36,7 @@ app.get("/api/files/:filename", (req, res) => {
     });
 });
 
-// ✅ Updated Function to get the second non-internal IPv4
+// ✅ Get second non-internal IPv4 address
 const getMachineIP = () => {
     const interfaces = os.networkInterfaces();
     let nonInternalIPs = [];
@@ -52,18 +52,18 @@ const getMachineIP = () => {
     if (nonInternalIPs.length >= 2) {
         return nonInternalIPs[1]; // Return the second non-internal IP if available
     }
-    return nonInternalIPs[0] || "localhost"; // Fallback to the first or localhost
+    return nonInternalIPs[0] || "127.0.0.1"; // Fallback to first or localhost
 };
 
 const machineIP = getMachineIP();
-console.log(`✅ Using second non-internal IP: ${machineIP}`);
+console.log(`✅ Using machine IP: ${machineIP}`);
 
-// ✅ API to get server IP
+// API to get server IP
 app.get("/server-ip", (req, res) => {
     res.json({ ip: machineIP, port: PORT });
 });
 
-// Start server
+// ✅ Bind to 0.0.0.0 instead of localhost
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`✅ Server accessible at http://${machineIP}:${PORT}`);
 });

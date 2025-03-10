@@ -25,6 +25,8 @@ const ModelComparison = () => {
 
     // Fetch backend server IP dynamically
     useEffect(() => {
+        console.log("Fetching Server IP...", serverIP);
+        
         const fetchServerIP = async () => {
             try {
                 const response = await fetch("http://localhost:5001/server-ip");
