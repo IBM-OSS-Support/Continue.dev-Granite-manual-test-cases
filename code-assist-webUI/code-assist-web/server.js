@@ -40,11 +40,16 @@ app.get('/api/files/:filename', (req, res) => {
 const getMachineIP = () => {
     const interfaces = os.networkInterfaces();
     for (const name of Object.keys(interfaces)) {
-        for (const iface of interfaces[name].filter(name => name === 'eth1' || name === 'en0')) {
+        for (const iface of interfaces[name].filter(iface => name === 'eth1' || name === 'en0')) {
             if (iface.family === 'IPv4' && !iface.internal) {
                 console.log("name::",name, "interfaces[name]:",interfaces[name], "iface:",iface);
-                
-                return iface.address;
+                if (name === 'eth1') {
+                    return iface.address;
+                } else if(name === 'en0') {
+                    const ip = "localhost";
+                    return ip;
+                }
+                // return iface.address;
             }
         }
     }
