@@ -42,7 +42,7 @@ const getMachineIP = () => {
     for (const name of Object.keys(interfaces)) {
         for (const iface of interfaces[name]) {
             if (iface.family === 'IPv4' && !iface.internal) {
-                console.log("interfaces:",interfaces, "iface:",iface, "iface.internal:", iface.internal);
+                console.log("interfaces[name]:",interfaces[name], "iface:",iface, "iface.internal:", iface.internal);
                 
                 return iface.address;
             }
