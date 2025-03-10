@@ -25,9 +25,11 @@ const ModelComparison = () => {
 
     // Fetch server IP on component mount
     useEffect(() => {
+        console.log("Fetching server IP...", serverIP, "serverPort", serverPort);
+        
         const fetchServerIP = async () => {
             try {
-                const response = await fetch("/api/server-ip");
+                const response = await fetch(`http://${serverIP}:${serverPort}/api/server-ip`);
                 if (!response.ok) throw new Error("Failed to fetch server IP");
                 const data = await response.json();
                 setServerIP(data.ip);
@@ -38,7 +40,7 @@ const ModelComparison = () => {
             }
         };
         fetchServerIP();
-    }, []);
+    }, [serverIP, serverPort]);
 
     // Fetch available files on component mount
     useEffect(() => {
