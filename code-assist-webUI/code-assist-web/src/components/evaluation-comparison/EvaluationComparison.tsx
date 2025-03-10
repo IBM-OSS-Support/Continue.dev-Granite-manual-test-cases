@@ -29,7 +29,7 @@ const ModelComparison = () => {
         
         const fetchServerIP = async () => {
             try {
-                const response = await fetch(`/api/server-ip`);
+                const response = await fetch(`http://${serverIP}:${serverPort}/api/server-ip`);
                 if (!response.ok) throw new Error("Failed to fetch server IP");
                 const data = await response.json();
                 setServerIP(data.ip);
