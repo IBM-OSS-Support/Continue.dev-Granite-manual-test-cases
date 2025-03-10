@@ -22,22 +22,6 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
-    // Fetch machine IP on component mount
-    useEffect(() => {
-        const fetchMachineIP = async () => {
-            try {
-                const response = await fetch("https://api.ipify.org?format=json");
-                if (!response.ok) throw new Error("Failed to fetch machine IP");
-                const data = await response.json();
-                setServerIP(data.ip);
-            } catch (error) {
-                console.error("Error fetching machine IP:", error);
-                setApiError("Failed to fetch machine IP. Please try again later.");
-            }
-        };
-        fetchMachineIP();
-    }, []);
-
     // Fetch available files on component mount
     useEffect(() => {
         const fetchFileNames = async () => {
