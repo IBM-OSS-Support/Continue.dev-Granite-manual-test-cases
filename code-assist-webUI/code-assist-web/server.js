@@ -57,7 +57,7 @@ const machineIP = getMachineIP();
 console.log(`Fyre machine IP: ${machineIP}`, `PORT: ${PORT}`);
 
 // API to get server IP
-app.get("/api/files", (req, res) => {
+app.get("/api/server-ip", (req, res) => {
     res.json({ ip: machineIP, PORT });
 });
 

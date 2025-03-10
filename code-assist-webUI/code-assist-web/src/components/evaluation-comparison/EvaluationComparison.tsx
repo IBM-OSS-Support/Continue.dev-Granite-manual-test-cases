@@ -15,6 +15,7 @@ const ModelComparison = () => {
     const [apiError, setApiError] = useState<string | null>(null); // State to handle API errors
     const [availableFiles, setAvailableFiles] = useState<string[]>([]); // State to store available files
     const [serverIP, setServerIP] = useState<string>("localhost"); // Default to localhost
+    const [serverPort, setServerPort] = useState<number>(5001); // Default to 5001
 
     interface Model {
         name: string;
@@ -22,11 +23,28 @@ const ModelComparison = () => {
         prompt: { user: string; assistant: string; }[];
     }
 
+    // Fetch server IP on component mount
+    useEffect(() => {
+        const fetchServerIP = async () => {
+            try {
+                const response = await fetch("/api/server-ip");
+                if (!response.ok) throw new Error("Failed to fetch server IP");
+                const data = await response.json();
+                setServerIP(data.ip);
+                setServerPort(data.port);
+            } catch (error) {
+                console.error("Error fetching server IP:", error);
+                setApiError("Failed to fetch server IP. Please try again later.");
+            }
+        };
+        fetchServerIP();
+    }, []);
+
     // Fetch available files on component mount
     useEffect(() => {
         const fetchFileNames = async () => {
             try {
-                const response = await fetch(`http://${serverIP}:5001/api/files`);
+                const response = await fetch(`http://${serverIP}:${serverPort}/api/files`);
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
                 setAvailableFiles(files);
@@ -35,8 +53,10 @@ const ModelComparison = () => {
                 setApiError("Failed to fetch available files. Please try again later.");
             }
         };
-        fetchFileNames();
-    }, [serverIP]);
+        if (serverIP !== "localhost") {
+            fetchFileNames();
+        }
+    }, [serverIP, serverPort]);
 
     // Fetch models data when compare option changes
     useEffect(() => {
@@ -47,7 +67,7 @@ const ModelComparison = () => {
                 // Fetch data from all files
                 const responses = await Promise.all(
                     availableFiles.map(file => 
-                        fetch(`http://${serverIP}:5001/api/files/${file}`)
+                        fetch(`http://${serverIP}:${serverPort}/api/files/${file}`)
                             .then(r => r.json())
                     )
                 );
@@ -69,7 +89,7 @@ const ModelComparison = () => {
         if (availableFiles.length > 0) {
             fetchModelData();
         }
-    }, [availableFiles, serverIP]);
+    }, [availableFiles, serverIP, serverPort]);
 
     // Prepare model lists
     const graniteModels = Array.from(new Set(
