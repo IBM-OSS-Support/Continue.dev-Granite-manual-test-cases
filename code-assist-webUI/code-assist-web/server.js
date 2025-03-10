@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const os = require("os");
-const { data } = require("react-router-dom");
 
 const app = express();
 const PORT = 5001;
@@ -20,50 +19,51 @@ app.get("/api/files", (req, res) => {
         if (err) {
             return res.status(500).json({ error: "Unable to scan directory" });
         }
-        // Filter only .json files
         res.json(files.filter(file => file.endsWith(".json")));
     });
 });
 
-app.get('/api/files/:filename', (req, res) => {
+// API to get JSON file content
+app.get("/api/files/:filename", (req, res) => {
     const { filename } = req.params;
-    const filePath = path.join(folderPath, filename); // Update the file to use folderPath
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    const filePath = path.join(folderPath, filename);
+    
+    fs.readFile(filePath, "utf8", (err, data) => {
         if (err) {
-            return res.status(500).json({ error: 'Failed to read file' });
+            return res.status(500).json({ error: "Failed to read file" });
         }
         res.json(JSON.parse(data));
     });
 });
 
-// Fetch Fyre machine IP and log it
+// ✅ Updated Function to get the second non-internal IPv4
 const getMachineIP = () => {
     const interfaces = os.networkInterfaces();
-    for (const name of Object.keys(interfaces)) {
-        for (const iface of interfaces[name].filter(iface => name === 'eth1' || name === 'en0')) {
-            if (iface.family === 'IPv4' && !iface.internal) {
-                console.log("name::",name, "interfaces[name]:",interfaces[name], "iface:",iface);
-                if (name === 'eth1') {
-                    return iface.address;
-                } else if(name === 'en0') {
-                    const ip = "localhost";
-                    return ip;
-                }
-                // return iface.address;
+    let nonInternalIPs = [];
+
+    for (const iface of Object.values(interfaces)) {
+        for (const entry of iface) {
+            if (entry.family === "IPv4" && !entry.internal) {
+                nonInternalIPs.push(entry.address); // Collect all non-internal IPs
             }
         }
     }
-    return 'localhost';
+
+    if (nonInternalIPs.length >= 2) {
+        return nonInternalIPs[1]; // Return the second non-internal IP if available
+    }
+    return nonInternalIPs[0] || "localhost"; // Fallback to the first or localhost
 };
 
 const machineIP = getMachineIP();
-console.log(`Fyre machine IP: ${machineIP}`, `PORT: ${PORT}`);
+console.log(`✅ Using second non-internal IP: ${machineIP}`);
 
-// API to get server IP
-app.get("/api/files", (req, res) => {
+// ✅ API to get server IP
+app.get("/server-ip", (req, res) => {
     res.json({ ip: machineIP, port: PORT });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://${machineIP}:${PORT}`);
+// Start server
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`✅ Server accessible at http://${machineIP}:${PORT}`);
 });
