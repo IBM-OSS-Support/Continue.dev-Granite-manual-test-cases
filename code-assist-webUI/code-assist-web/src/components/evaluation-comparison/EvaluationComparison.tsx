@@ -48,6 +48,7 @@ const ModelComparison = () => {
                 const response = await fetch(`http://${serverIP}:5001/api/files`);
                 if (!response.ok) throw new Error("Failed to fetch files");
                 const files = await response.json();
+                console.log("Fetched Files:", files);
                 setAvailableFiles(files);
             } catch (error) {
                 console.error("Error fetching files:", error);
