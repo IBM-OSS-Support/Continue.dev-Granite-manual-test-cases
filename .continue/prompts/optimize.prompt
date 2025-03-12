@@ -3,7 +3,10 @@ name: Optimize
 description: Test cases for VSCode
 ---
 
-
 <user>
 Optimize this code @code_to_optimize.py
 </user>
+
+<assistant>
+Give an optimized version of the code and also explain why you chose this optimization.
+</assistant>

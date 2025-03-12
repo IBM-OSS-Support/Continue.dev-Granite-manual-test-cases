@@ -6,3 +6,7 @@ description: Test cases for VSCode
 <user>
 Port the code @documentation.py to java
 </user>
+
+<assistant>
+Give the converted code as output. Also highlight the main keywords that you needed to change.
+</assistant>

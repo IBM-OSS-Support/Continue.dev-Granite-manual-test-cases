@@ -4,5 +4,9 @@ description: Test cases for VSCode
 ---
 
 <user>
-Refactor the above generated code to quarkus
+Refactor the code @documentation.py to quarkus
 </user>
+
+<assistant>
+Give the code as output and also write the instruction on how to execute the code.
+</assistant>
