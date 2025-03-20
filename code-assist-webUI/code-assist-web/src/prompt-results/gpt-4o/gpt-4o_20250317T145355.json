@@ -1,0 +1,15 @@
+{
+  "0": [
+    {
+      "name": "gpt-4o",
+      "date": "20250317T145355",
+      "file_name": "gpt-4o_20250317T145355.json",
+      "prompt": [
+        {
+          "user": "answer in brief: What is AWS?",
+          "assistant": "```python\n# file: aws_definition.py\ndef what_is_aws():\nreturn \"AWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon.\"\n```"
+        }
+      ]
+    }
+  ]
+}

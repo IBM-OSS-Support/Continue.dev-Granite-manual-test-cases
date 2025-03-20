@@ -1,6 +1,8 @@
 import pyautogui
-import time
+import time, os
 from m2j import generate_json
+from simple_term_menu import TerminalMenu
+import fetch_model_name
 
 """
 ################################################
@@ -16,16 +18,32 @@ PLEASE ENSURE SAME MODEL NAME ACROSS ALL PLACES
 ################################################
 """
 
-MODEL_NAME = "gpt-4o"
-sleep_time = 5
+MODEL_NAME = "claude3.5-sonnet"
+MODEL_TYPE = "NOT ASSIGNED"
+sleep_time = 20
+first_time = False
 
 def automate_continue_dev(input_text):
+    global first_time, MODEL_NAME
     try:
-        time.sleep(5)
-        pyautogui.write(input_text, interval=0.05)
-        pyautogui.press('enter')
-        pyautogui.press('enter')
-        time.sleep(sleep_time)
+        if first_time == False and MODEL_TYPE == 'granite':
+            first_time = True
+            time.sleep(3)
+            pyautogui.write(input_text, interval=0.1)
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            time.sleep(sleep_time)
+
+            MODEL_NAME = fetch_model_name.get_model_name()
+            print("\nGRANITE MODEL NAME: ", MODEL_NAME)
+
+        else:
+            time.sleep(3)
+            pyautogui.write(input_text, interval=0.1)
+            pyautogui.press('enter')
+            pyautogui.press('enter')
+            time.sleep(sleep_time)
+
     except pyautogui.FailSafeException:
         print("Fail-safe triggered. Mouse clicked away from the chat box.")
     except Exception as e:
@@ -47,10 +65,46 @@ def process_input_file(input_file):
         print(f"An unexpected error occurred: {e}")
 
 if __name__ == '__main__':
-    input_file = 'prompts_list.txt'
-    print(f"\nExecuting prompts from {input_file}")
-    print("##############################################################################################")
-    print(f"\n[WARNING] Please ensure that the model selected in chat box of Continue.dev is {MODEL_NAME}\n")
+    os.system('clear')
+    print("######################################################\n\n")
+    print("      Please select a file from the below options:        \n\n")
+    print("######################################################\n\n")
+    options = ["Simple Chat Prompts", "Context Providers", "Exit"]
+    terminal_menu = TerminalMenu(options)
+    selected_index = terminal_menu.show()
+    choice = options[selected_index]
+
+    if selected_index == 0:
+        input_file = 'prompts_list.txt'
+    elif selected_index == 1:
+        input_file = 'context_providers.txt'
+    else:
+        os.system('clear')
+        print("GOODBYE!")
+        exit(0)
+ 
+    os.system('clear')
+    print("######################################################\n\n")
+    print("      Please select a file from the below options:        \n\n")
+    print("######################################################\n\n")
+    options = ["Granite", "Other Models", "Exit"]
+    terminal_menu = TerminalMenu(options)
+    selected_index = terminal_menu.show()
+    choice = options[selected_index]
+    
+    if selected_index == 0:
+        MODEL_TYPE = 'granite'
+    elif selected_index == 1:
+        MODEL_TYPE = 'others'
+    else:
+        os.system('clear')
+        print("GOODBYE!")
+        exit(0)
+
+    os.system('clear')
+    print(f"\nExecuting prompts from {input_file}. The selected model type is: {MODEL_TYPE}")
+    print("\n##############################################################################################")
+    print(f"\n[WARNING] Please ensure that the model selected in chat box of Continue.dev is of type {MODEL_TYPE}\n")
     print("##############################################################################################")
     try:
         process_input_file(input_file)
@@ -58,5 +112,7 @@ if __name__ == '__main__':
         pyautogui.press('enter')
         pyautogui.press('enter')
         generate_json(MODEL_NAME)
+        print("Process completed!!\n")
+
     except Exception as e:
         print(f"An unexpected error occurred in the main function: {e}")

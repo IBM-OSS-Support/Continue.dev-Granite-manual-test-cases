@@ -16,6 +16,7 @@ def parse_md_to_json(filename, MODEL_NAME, timestamp):
             {
                 "name": MODEL_NAME,
                 "date": timestamp,
+                "file_name": "",
                 "prompt": []
             }
         ]
@@ -96,7 +97,6 @@ def get_last_created_file(folder_path):
     files.sort(key=os.path.getctime, reverse=True)  
     return files[0]
 
-
 def create_output_file(MODEL_NAME, result, file):
 
     folder_path = os.path.join(os.getcwd(), "code-assist-webUI/code-assist-web/src/prompt-results", MODEL_NAME)
@@ -112,8 +112,7 @@ def create_output_file(MODEL_NAME, result, file):
     print("\nFinal JSON file name: ", output_filename)
     with open(output_filename, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
-    print("\nEVERYTHING DONE!!\n")
-
+        
 def generate_json(MODEL_NAME):
 
     folder_path = os.path.join('outputfiles')
@@ -126,4 +125,12 @@ def generate_json(MODEL_NAME):
 #    print("Value of file: ", file)
     timestamp = file.split('_')[0].split('/')[1]
     result = parse_md_to_json(file, MODEL_NAME, timestamp)
+
+
+    if "0" in result and len(result["0"]) > 0:
+        for prompt in result["0"]:
+            prompt['file_name'] = MODEL_NAME + '_' + timestamp + '.json'
+
     create_output_file(MODEL_NAME, result, file)
+
+generate_json('gpt-4o')
