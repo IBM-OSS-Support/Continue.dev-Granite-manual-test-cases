@@ -5,18 +5,19 @@ from datetime import datetime
 import glob
 
 def clean_content(content):
-    # Remove ">" symbols from the start of each line in the content
+    #Remove ">" symbols from the start of each line in the content
     lines = content.split('\n')
     cleaned_lines = [re.sub(r'^>+\s*', '', line) for line in lines]
     return '\n'.join(cleaned_lines)
 
-def parse_md_to_json(filename, MODEL_NAME, timestamp):
+def parse_md_to_json(filename, MODEL_NAME, timestamp, TIMINGS):
     conversation = {
         "0": [
             {
                 "name": MODEL_NAME,
                 "date": timestamp,
                 "file_name": "",
+                "total_time": "",
                 "prompt": []
             }
         ]
@@ -27,7 +28,7 @@ def parse_md_to_json(filename, MODEL_NAME, timestamp):
     current_role = None
     current_content = []
     first_assistant_block_skipped = False
-    
+    timing_index = 0
     with open(filename, 'r', encoding='utf-8') as file:
         lines = file.readlines()
     
@@ -51,8 +52,10 @@ def parse_md_to_json(filename, MODEL_NAME, timestamp):
                         if user_content is not None and assistant_content is not None:
                             conversation["0"][0]["prompt"].append({
                                 "user": user_content,
-                                "assistant": assistant_content
+                                "assistant": assistant_content,
+                                "time": TIMINGS[timing_index] if timing_index < len(TIMINGS) else None
                             })
+                            timing_index += 1
                         user_content = content
                         assistant_content = None
                     elif current_role == "Assistant" and not first_assistant_block_skipped:
@@ -61,8 +64,10 @@ def parse_md_to_json(filename, MODEL_NAME, timestamp):
                         assistant_content = content
                         conversation["0"][0]["prompt"].append({
                             "user": user_content,
-                            "assistant": assistant_content
+                            "assistant": assistant_content,
+                            "time": TIMINGS[timing_index] if timing_index < len(TIMINGS) else None
                         })
+                        timing_index += 1
                         user_content = None
                         assistant_content = None
             
@@ -83,9 +88,10 @@ def parse_md_to_json(filename, MODEL_NAME, timestamp):
             if current_role == "Assistant" and user_content is not None:
                 conversation["0"][0]["prompt"].append({
                     "user": user_content,
-                    "assistant": content
+                    "assistant": content,
+                    "time": TIMINGS[timing_index] if timing_index < len(TIMINGS) else None
                 })
-    
+                timing_index += 1
     return conversation
 
 def get_last_created_file(folder_path):
@@ -113,8 +119,8 @@ def create_output_file(MODEL_NAME, result, file):
     with open(output_filename, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
         
-def generate_json(MODEL_NAME):
-
+def generate_json(MODEL_NAME, TIMINGS):
+    
     folder_path = os.path.join('outputfiles')
     file = get_last_created_file(folder_path)
     if file:
@@ -124,13 +130,13 @@ def generate_json(MODEL_NAME):
         exit(0)
 #    print("Value of file: ", file)
     timestamp = file.split('_')[0].split('/')[1]
-    result = parse_md_to_json(file, MODEL_NAME, timestamp)
-
+    result = parse_md_to_json(file, MODEL_NAME, timestamp, TIMINGS)
 
     if "0" in result and len(result["0"]) > 0:
         for prompt in result["0"]:
             prompt['file_name'] = MODEL_NAME + '_' + timestamp + '.json'
+            prompt['total_time'] = sum(TIMINGS)
 
     create_output_file(MODEL_NAME, result, file)
 
-generate_json('gpt-4o')
+# 
