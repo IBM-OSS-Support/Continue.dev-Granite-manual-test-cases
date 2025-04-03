@@ -102,7 +102,7 @@ def append_content(json_data):
     combined_content = '{\n"name":"'+item['model'].strip()+'",\n"created_at":"'+item['created_at'].strip()+'",\n"prompt": \n{\t"'+item['message']['role'].strip()+'":"' + combined_content+'"\n}}'
     return combined_content
 
-config_file_path = '/Users/harsh/.continue/config.json'
+config_file_path = '/Users/athirakm/.continue/config.json'
 config_data = read_config(config_file_path)
 
 # Function to process multiple prompt files
@@ -132,17 +132,9 @@ def main():
     if config_data:
     # List of .prompt files to process
         prompt_files = [
-            'binary_search.prompt',
-            'bugs.prompt',
-            'const_dest.prompt',
-            'documentation.prompt',
-            'lambda.prompt',
-            'optimize.prompt',
-            'port.prompt',
-            'quick_sort.prompt',
-            'refactor.prompt',
-            'review_code.prompt',
-            'unit_test.prompt'
+            
+            'port.prompt'
+           
         ]
 
     # Process each prompt file

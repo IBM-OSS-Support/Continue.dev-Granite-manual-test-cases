@@ -802,6 +802,115 @@ display_transactions()
  method without printing it directly.
 
 
+========================================================================================================================================
+ Question11:
+Review the @features and suggest any improvements in the code structure or naming conventions
+
+2 context items
+interest_calculator.py (1-12)
+interest_calculator.py
+loan_manager.py (1-46)
+loan_manager.py
+The provided Python scripts, 
+interest_calculator.py
+ and 
+loan_manager.py
+, are well-structured and follow good practices for object-oriented programming. However, there are a few suggestions to improve the code further:
+
+InterestCalculator Class: The class is straightforward and follows good naming conventions. It could be improved by adding docstrings to describe each method's functionality in more detail. This will enhance readability and maintainability.
+
+LoanManager Class: Similarly, this class also adheres to good practices but can benefit from additional docstrings for better understanding of its methods.
+
+Error Handling: In the 
+apply_loan
+ method of the 
+LoanManager
+ class, it would be beneficial to raise exceptions instead of just printing error messages when invalid inputs are detected. This will make debugging easier and provide more control over how errors are handled in the calling code.
+
+Consistency in Naming Conventions: The interest rate in the 
+apply_loan
+ method is named interest_rate, but it's actually an annual percentage rate (APR). It might be clearer to name this parameter annual_percentage_rate.
+
+Code Comments: While not strictly necessary, adding comments explaining complex logic or design decisions can improve code readability and maintainability.
+
+Type Hints: Adding type hints for function parameters and return types can make the code easier to understand and maintain. Python 3.5+ supports type hints, which can be used to specify expected data types.
+
+Unit Tests: It would be beneficial to include unit tests for both classes to ensure they behave as expected under various conditions. This is especially important for financial applications where accuracy is crucial.
+
+Here's an example of how you might incorporate some of these suggestions:
+
+class InterestCalculator:
+    """Class to calculate simple interest."""
+
+    def __init__(self, rate=5.0):
+        """Initialize with a default interest rate of 5%."""
+        self.rate = rate
+
+    def calculate_interest(self, balance: float, years: int) -> float:
+        """Calculate simple interest.
+
+        Args:
+            balance (float): The principal amount.
+            years (int): The time period in years.
+
+        Returns:
+            float: The calculated interest.
+        """
+        if balance <= 0 or years <= 0:
+            return 0
+        interest = (balance * self.rate * years) / 100
+        return interest
+For the 
+LoanManager class, similar improvements can be made by adding docstrings and type hints to its methods.
+==================================================================================================================================
+
+Question 12:
+@codebase Are there any logging mechanisms implemented in this project?
+Response :
+
+
+
+In the provided Python scripts, there is no explicit logging mechanism implemented. To add basic logging functionality, we can use Python's built-in logging module. Here's how you could modify the 
+BankAccount
+ class to include logging:
+
+import logging
+
+class BankAccount:
+    def __init__(self, account_number, balance=0):
+        """Initialize a new bank account."""
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+
+        # Configure the logger
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)  # Set log level to INFO (you can adjust this as needed)
+
+        # Create a console handler and set its level to INFO
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.INFO)
+
+        # Add the formatter to the handler
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        ch.setFormatter(formatter)
+
+        # Add the handler to the logger
+        self.logger.addHandler(ch)
+
+    def deposit(self, amount):
+        """Deposit funds into the account."""
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+        self.logger.info(f"Deposited {amount} to account {self.account_number}")
+
+    # Similarly, add logging to other methods like withdraw, check_balance, etc.
+This code sets up a logger for each 
+BankAccount
+ instance and logs informational messages whenever a deposit is made. You can adjust the log level (currently set to INFO) and the format of the log messages as needed. For more advanced logging configurations, you might want to look into using a dedicated logging configuration file or a library like loguru.
+
+For more information on Python's logging module, refer to the official documentation: https://docs.python.org/3/library/logging.html
+
 
 
 

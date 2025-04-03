@@ -1,0 +1,15 @@
+{
+    "0": [
+        {
+            "name":"llama3.2",
+            "created_at": "20250306T164540",
+            "file_name": "llama3.2_20250306T164540.json",
+            "prompt":[
+                {
+                    "user": "What is Lambda function in python?",
+                    "assistant": "In Python, a Lambda function, also known as an anonymous function, is a small, one-line function that can be defined and used in a single expression. It's a way to create simple, inline functions without the need for a name. The syntax for defining a Lambda function in Python looks like this:\n\n`lambda arguments: expression`\n\nHere, `arguments` are the input parameters of your function, and `expression` is what the function does with those inputs. The value returned by the lambda function is the result of evaluating the expression.\n\nLambda functions are often used when you need a short, simple function for use in situations where a regular defined function wouldn't be appropriate, such as when passing a function as an argument to another function or when using it in a list comprehension.\n\nHere's an example:\n\n```python\n# Define a Lambda function that adds 10 to its input\nadd_ten = lambda x: x + 10\n\n# Use the Lambda function\nresult = add_ten(5)\nprint(result)  # Outputs: 15\n```\nIn this example, `add_ten` is a Lambda function that takes one argument and returns its value plus ten."
+                }
+            ]
+        }
+    ]
+}

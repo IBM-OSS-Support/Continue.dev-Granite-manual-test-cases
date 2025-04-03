@@ -4,155 +4,243 @@
     flex-direction: column;
 
     .button-group {
-        margin-right: 0;
+      margin-right: 0;
     }
 
     .cds--btn {
-        flex-grow: 1;
+      flex-grow: 1;
+      max-inline-size: unset;
+      min-block-size: initial;
+      height: 2.5rem;
+      padding: 0.7rem 0.5rem;
     }
 
     .solid-background-toggle {
-        float: right;
-        
-        label {
-            line-height: 1.4;
-        }
+      float: right;
+      
+      label {
+        line-height: 1.4;
+      }
     }
 
     .cds--css-grid-column {
-        h4 {
-            margin: 0 0 2rem;
-        }
+      h4 {
+        margin: 0 0 2rem;
+      }
+    }
+
+    .chat-outter-wrap {
+      padding: 0.5rem;
+      margin: 0 0.4rem;
+      position: relative;
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
 
     .chat-screen {
-        $user-color: #007bff; // Blue for user messages
-        $assistant-color: #303030; // Dark gray for assistant messages
-        $background-color: #000000; // Dark background
-        $text-color: #e0e0e0; // Light text for readability
-        $border-radius: 15px;
-        $background-image: url('../../../public/new_black-bg.jpeg');
-      
-        background: $background-image;
-        border-radius: 6px;
-        box-shadow: 0px 0px 3px 4px rgba(31, 31, 31, 0.3);
-        padding: 20px;
-        width: 100%;
-        max-width: 800px;
-        max-height: 850px;
-        overflow-y: auto;
-        margin: 20px auto;
-        font-family: 'Segoe UI', system-ui, sans-serif;
-        color: $text-color;
-        border: 0.5px solid #6c6b6b;
+      $user-color: #007bff; // Blue for user messages
+      $assistant-color: #303030; // Dark gray for assistant messages
+      $background-color: #000000; // Dark background
+      $text-color: #e0e0e0; // Light text for readability
+      $border-radius: 15px;
+      $background-image: url('../../../public/new_black-bg.jpeg');
+    
+      background: $background-image;
+      border-radius: 6px;
+      box-shadow: 0px 0px 3px 4px rgba(31, 31, 31, 0.3);
+      padding: 20px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 850px;
+      overflow-y: auto;
+      margin: 20px auto;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: $text-color;
+      border: 0.5px solid #6c6b6b;
 
-        &.solid-bg {
-            background: $background-color;
-            border: 0.5px solid #6c6b6b;
+      &.solid-bg {
+          background: $background-color;
+          border: 0.5px solid #6c6b6b;
+      }
+    
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    
+      strong {
+        font-size: 0.8rem;
+        color: #a0a0a0; // Lighter gray for labels
+        margin-bottom: 2px;
+        display: block;
+      }
+    
+      [class$="message-bubble"] {
+        padding: 12px 16px;
+        border-radius: $border-radius;
+        max-width: 70%;
+        position: relative;
+        line-height: 1.4;
+        animation: fadeIn 0.3s ease-in;
+    
+        &::after {
+          content: '';
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          bottom: -6px;
+          transform: rotate(45deg);
+          background: inherit;
         }
-      
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-      
-        li {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-      
-        strong {
-          font-size: 0.8rem;
-          color: #a0a0a0; // Lighter gray for labels
-          margin-bottom: 2px;
-          display: block;
-        }
-      
-        [class$="message-bubble"] {
-          padding: 12px 16px;
-          border-radius: $border-radius;
-          max-width: 70%;
-          position: relative;
-          line-height: 1.4;
-          animation: fadeIn 0.3s ease-in;
-      
-          &::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            bottom: -6px;
-            transform: rotate(45deg);
-            background: inherit;
-          }
-        }
-      
-        .user-message-bubble {
+      }
+    
+      .user-message-bubble {
+        background: $user-color;
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 3px;
+    
+        &::after {
+          right: 20px;
           background: $user-color;
-          color: white;
-          margin-left: auto;
-          border-bottom-right-radius: 3px;
-      
-          &::after {
-            right: 20px;
-            background: $user-color;
-          }
-      
-          strong { color: rgba(255, 255, 255, 0.9); }
         }
-      
-        .assistant-message-bubble {
+    
+        strong { color: rgba(255, 255, 255, 0.9); }
+      }
+    
+      .assistant-message-bubble {
+        background: $assistant-color;
+        color: $text-color;
+        margin-right: auto;
+        border-bottom-left-radius: 3px;
+    
+        &::after {
+          left: 20px;
           background: $assistant-color;
-          color: $text-color;
-          margin-right: auto;
-          border-bottom-left-radius: 3px;
-      
-          &::after {
-            left: 20px;
-            background: $assistant-color;
-          }
         }
-      
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+      }
+    
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-        // scrollbar-gutter: stable;
-        // scrollbar-width: thin;
-        // scrollbar-color: #0f62fe #393939;
+      // scrollbar-gutter: stable;
+      // scrollbar-width: thin;
+      // scrollbar-color: #0f62fe #393939;
     }
 
     .skeleton-wrap {
-        .cds--date-picker--range .cds--date-picker-container, 
-        .cds--date-picker--range .cds--date-picker__input {
-            inline-size: 45rem;
-        }
+      .cds--date-picker--range .cds--date-picker-container, 
+      .cds--date-picker--range .cds--date-picker__input {
+        inline-size: 45rem;
+      }
     }
     .question-date-picker {
-        .cds--date-picker.cds--date-picker--single .cds--date-picker__input {
-            inline-size: 23.5rem;
+      .cds--date-picker.cds--date-picker--single {
+        width: 100%;
+        .cds--date-picker-container, .cds--date-picker-input__wrapper, .cds--date-picker-container .cds--date-picker-input__wrapper > span {
+          width: 100%;
         }
+        .cds--date-picker__input {
+          inline-size: initial;
+          width: 100%;
+        }
+      }
+    }
+    .result-combo-box,
+    .question-date-picker,
+    .question-combo-box {
+      margin: 0.8rem 0 0 0;
     }
     .compare-option-wrap {
-        padding: 15px 10px;
-        border-radius: 5px;
-        margin: 0px 0px 2.5rem;
-        background: #000011;
-        box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
+      padding: 0.7rem 1.2rem 1.2rem;
+      border-radius: 5px;
+      margin: 0px 0px 0.5rem;
+      background: #000011;
+      box-shadow: 0 0 4px 1px rgba(64, 64, 64, 0.8);
     }
+    .date-capsule-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0.2rem 0 0.8rem;
+
+      .date-capsule {
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+    }
+  
+  .score-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    
+    strong {
+        margin-bottom: 0.2rem;
+    }
+    .score-capsule {
+        color: white !important;
+        font-weight: bold;
+    }
+  }
 }
-.flatpickr-calendar.open {
-    inline-size: 23.5rem !important;
+// .flatpickr-calendar.open {
+//     inline-size: 23.5rem !important;
+// }
+.ribbon {
+  position: relative;
+
+  .ribbon4 {
+    position: absolute;
+    top: 15px;
+    padding: 8px 10px;
+    background: #015d01;
+    box-shadow: -1px 2px 3px rgba(0,0,0,.3);
+  }
+  .ribbon4:before, .ribbon4:after {
+    content: "";
+    position: absolute;
+  }
+  .ribbon4:before {
+    width: 7px;
+    height: 100%;
+    top: 0;
+    left: -6.5px;
+    padding: 0 0 7px;
+    background: inherit;
+    border-radius: 5px 0 0 5px;
+  }
+  .ribbon4:after {
+    width: 5px;
+    height: 5px;
+    bottom: -5px;
+    left: -4.5px;
+    background: #a5f3a5;
+    border-radius: 5px 0 0 5px;
+   }
 }

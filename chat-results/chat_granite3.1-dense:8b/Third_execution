@@ -690,6 +690,91 @@ Creating a new bank account using the BankSystem class and retrieving it success
 Retrieving an existing bank account from the BankSystem instance.
 Attempting to retrieve a non-existent bank account from the BankSystem instance, which should return None.
 
+========================================================================================================================================
+ Question11:
+Review the @features and suggest any improvements in the code structure or naming conventions
+The provided Python scripts, 
+interest_calculator.py
+ and 
+loan_manager.py
+, are well-structured and follow good practices for object-oriented programming. However, there are a few suggestions to improve the code further:
+
+InterestCalculator Class: The class is straightforward and follows good naming conventions. It could be improved by adding docstrings to describe each method's functionality in more detail. This will enhance readability and maintainability.
+
+LoanManager Class: Similarly, this class also adheres to good practices but can benefit from additional docstrings for better understanding of its methods.
+
+Error Handling: In the 
+apply_loan
+ method of the 
+LoanManager
+ class, it would be beneficial to raise exceptions instead of just printing error messages when invalid inputs are detected. This will make debugging easier and provide more control over how errors are handled in the calling code.
+
+Consistency in Naming Conventions: The interest rate in the 
+apply_loan
+ method is named interest_rate, but it's actually an annual percentage rate (APR). It might be clearer to name this parameter annual_percentage_rate.
+
+Code Comments: While not strictly necessary, adding comments explaining complex logic or design decisions can improve code readability and maintainability.
+
+Type Hints: Adding type hints for function parameters and return types can make the code easier to understand and maintain. Python 3.5+ supports type hints, which can be used to specify expected data types.
+
+Unit Tests: It would be beneficial to include unit tests for both classes to ensure they behave as expected under various conditions. This is especially important for financial applications where accuracy is crucial.
+
+Here's an example of how you might incorporate some of these suggestions:
+
+class InterestCalculator:
+    """Class to calculate simple interest."""
+
+    def __init__(self, rate=5.0):
+        """Initialize with a default interest rate of 5%."""
+        self.rate = rate
+
+    def calculate_interest(self, balance: float, years: int) -> float:
+        """Calculate simple interest.
+
+        Args:
+            balance (float): The principal amount.
+            years (int): The time period in years.
+
+        Returns:
+            float: The calculated interest.
+        """
+        if balance <= 0 or years <= 0:
+            return 0
+        interest = (balance * self.rate * years) / 100
+        return interest
+For the 
+LoanManager
+ class, similar improvements can be made by adding docstrings and type hints to its methods.
+
+
+==================================================================================================================================
+
+Question 12:
+@codebase Are there any logging mechanisms implemented in this project?
+Response :
+No, there are no explicit logging mechanisms implemented in the provided Python code. Logging is a crucial aspect of software development for tracking events that occur while your program runs and can be helpful for debugging purposes. In Java, you would typically use the java.util.logging package or a third-party library like Log4j to implement logging.
+
+For Python, you might consider using the built-in logging module. Here's an example of how you could add basic logging to your BankAccount class:
+
+import logging
+
+class BankAccount:
+    def __init__(self, account_number, balance=0):
+        self.account_number = account_number
+        self.balance = balance
+        self.transactions = []
+        self.interest_calculator = InterestCalculator()  # Interest feature
+        self.loan_manager = LoanManager()  # Loan feature
+
+        logging.basicConfig(level=logging.INFO)  # Set up basic configuration for logging
+
+    def deposit(self, amount):
+        self.balance += amount
+        self.transactions.append(f"Deposited {amount}")
+        logging.info(f"Deposit of {amount} made to account {self.account_number}. New balance: {self.balance}")
+
+    # Similarly, add logging statements in other methods
+In this example, the logging module is configured to log messages with an INFO level or higher. The logging.info() method is used to log informational messages, such as deposit transactions. You can adjust the logging level and format according to your needs. For more detailed information on Python's logging capabilities, you can refer to the official Python documentation: https://docs.python.org/3/howto/logging.html
 
 
 
