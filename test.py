@@ -4,4 +4,3 @@ total_sum = sum(squares)
 print("Numbers:", numbers)
 print("Sum of squares:", total_sum)
 print("complete)
-

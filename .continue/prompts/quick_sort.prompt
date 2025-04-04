@@ -7,4 +7,7 @@ description: Test cases for VSCode
 Write a code for quick-sort algorithm in Python.
 </user>
 
+<assistant>
+Give an optimized version of the code. Explain the code very briefly.
+</assistant>
 ---

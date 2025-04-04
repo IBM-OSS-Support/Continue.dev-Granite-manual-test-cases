@@ -1,9 +1,12 @@
 ---
-name: Bugs
+name: Fix-the-bugs
 description: Test cases for VSCode
 ---
-
 
 <user>
 Fix the bugs in the code: @documentation_with_bugs.py
 </user>
+
+<assistant>
+List down the bugs that you find and the fix that you make.
+</assistant>
