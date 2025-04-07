@@ -236,3 +236,12 @@ DEBUG [log_server_request] request | method="POST" params={} path="/completion" 
 time=2025-04-03T21:55:43.464+05:30 level=DEBUG source=sched.go:407 msg="context for request finished"
 time=2025-04-03T21:55:43.464+05:30 level=DEBUG source=sched.go:339 msg="runner with non-zero duration has gone idle, adding timer" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 duration=30m0s
 time=2025-04-03T21:55:43.464+05:30 level=DEBUG source=sched.go:357 msg="after processing request finished event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 refCount=0
+time=2025-04-03T22:25:43.429+05:30 level=DEBUG source=sched.go:341 msg="timer expired, expiring to unload" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T22:25:43.429+05:30 level=DEBUG source=sched.go:360 msg="runner expired event received" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T22:25:43.429+05:30 level=DEBUG source=sched.go:375 msg="got lock to unload" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T22:25:43.429+05:30 level=DEBUG source=server.go:1086 msg="stopping llama server"
+time=2025-04-03T22:25:43.431+05:30 level=DEBUG source=server.go:1092 msg="waiting for llama server to exit"
+time=2025-04-03T22:25:43.480+05:30 level=DEBUG source=server.go:1096 msg="llama server stopped"
+time=2025-04-03T22:25:43.480+05:30 level=DEBUG source=sched.go:380 msg="runner released" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T22:25:43.480+05:30 level=DEBUG source=sched.go:384 msg="sending an unloaded event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T22:25:43.480+05:30 level=DEBUG source=sched.go:308 msg="ignoring unload event with no pending requests"
