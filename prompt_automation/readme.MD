@@ -14,14 +14,19 @@ The project consists of several scripts that work together to facilitate automat
     - Clone the repository and provide necessary permissions to the files.
     - Ensure any dependencies required by the scripts (`pyautogui`, `psutil`, `glob`, etc.) are installed (from requirements.txt).
     - We need to setup the prompts list in these files: prompts_file.txt and context_providers.txt. Although, we can set it up in any number of files (1..n), and if you are running the prompts in same context, then it is recommended to use only one prompt file.
-    - Edit the prompt file and set up the prompts in such a way that they should not be conflicting with others. If the prompt in the text file is short, then it might conflict with any other automated task of continue.dev. This is to be done for any "@" (context providers/file/codebase, etc.) to be referenced by the prompt.![alt text](image.png)
+    - Edit the prompt file and set up the prompts in such a way that they should not be conflicting with others. If the prompt in the text file is short, then it might conflict with any other automated task of continue.dev. This is to be done for any "@" (context providers/file/codebase, etc.) to be referenced by the prompt.
+    ![alt text](image.png)
+
+    As you can see in the above image, we needed to reference "file.py", but even after entering the exact name, continue.dev highlights "file_io.py" first. So, in the automation process, wrong file will be selected.
+    - To ensure this does not happen, we need to use definite and specific names of the references instead of generic ones.
+    - Once the files are set, we can go on to executing the scripts.
 
 2. **Executing Scripts**:
     - Navigate to the main folder of the project. Ensure you are in the Granite-manual-test-cases directory.
     - Execute the command `python3 prompt_automation/guirunner.py` script as the main entry point to start the automation process. It will handle interactions based on the model and input files you choose.
     - Click on the chat box in the continue.dev extension and do not interact with any other area through the mouse, till the process is completed.
+    - The timing of Granite models is fetched automatically from Ollama. However, for API based models like Claude and GPT, we need to set the timing for each prompt beforehand manually. We need to set the value of variable "sleep_time" in guirunner.py such that each prompt could be completed in that many seconds. Usually, 60-80 seconds is enough threshold.
 3. **JSON Output**: After execution, JSON files containing processed prompts and timings are generated in the specified directory.
-
 
 ## Files and Their Descriptions
 
