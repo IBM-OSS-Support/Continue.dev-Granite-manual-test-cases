@@ -1,6 +1,6 @@
 # LLM Code Completion Prompts
 
-This repository contains prompt examples for evaluating code completion models (such as Granite-3.3:8B) using two common template strategies:
+This folder contains prompt examples for evaluating code completion models (such as Granite-3.3:8B) using two common template strategies:
 
 - **Hole Filler Template (HFT)** (prefix-only completion)
 - **Fill In the Middle (FIM)** (prefix and suffix, model fills the gap)
