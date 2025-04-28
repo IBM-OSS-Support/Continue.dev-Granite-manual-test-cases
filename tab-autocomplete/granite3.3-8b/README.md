@@ -6,7 +6,7 @@
 ## 📒 **Appendix: Prompt Design (for Reference)**
 
 - **Hole Filler Template:**  
-  Prefix only; cursor at end of code block.
+  Prefix only; cursor at end of code block. Prompts used: [prefix-only-usecases.py](usecases/prefix-only/prefix-only-usecases.py)
 - **FIM Template:**  
   Prefix (before hole), Suffix (after hole), cursor at the gap. See attached prompt breakdowns for exact examples.
 
