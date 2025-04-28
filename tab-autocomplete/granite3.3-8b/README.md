@@ -128,8 +128,4 @@
 - **Use Case Fit:**  
   - **Hole Filler:** For new function writing, classic autocomplete, or when the task is to finish a code block given the start.
   - **FIM:** For editing/filling gaps in the middle of existing code, quick patching, or tight refactoring loops.
-- **For Model Team:**  
-  - Consider additional fine-tuning/examples for class/method patterns, complex logic, and data science workflows (Pandas).
-  - Evaluate Hybrid prompt strategies for future experiments.
-
 ---
