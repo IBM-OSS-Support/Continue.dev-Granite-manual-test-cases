@@ -65,7 +65,7 @@
 - **Hole Filler:**  
   Robust, verbose, but logic is correct.
 - **FIM:**  
-  Clean, concise, and correct — in fact, more succinct than HFT.
+  Clean, concise, and correct — in fact, more succinct than HFT. Sometimes required manual cursor placement at line start for FIM to work.
 
 ### 5️⃣ Class Definitions with Dunder and Bonus
 
