@@ -1,7 +1,7 @@
 # Granite-3.3:8B — Code Completion Evaluation  
 # Comparison of Hole Filler Template vs. Fill In the Middle Template
 
-** Models used for the analysis: Granite3.3:8b-instruct, Granite3.2:8b-instruct**
+**Models used for the analysis: Granite3.3:8b-instruct, Granite3.2:8b-instruct**
 
 ---
 
