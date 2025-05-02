@@ -1,5 +1,5 @@
 # Granite-3.3:8B — Code Completion Evaluation  
-# Comparison of Hole Filler Template vs. Fill In the Middle Template**
+# Comparison of Hole Filler Template vs. Fill In the Middle Template
 
 ---
 
