@@ -1,5 +1,5 @@
 # Granite-3.3:8B — Code Completion Evaluation  
-**Comparison of Hole Filler Template vs. Fill In the Middle Template**
+# Comparison of Hole Filler Template vs. Fill In the Middle Template**
 
 ---
 
@@ -22,18 +22,22 @@
   - *Strengths:* Excels at filling isolated code holes (e.g., lambdas, recursion, exception logic), ideal for small focused completions, integrates well in refactoring workflows.
   - *Weaknesses:* Struggles with complex, multi-branch logic and structural completions (e.g., tax slabs, pandas aggregations, OOP methods); sometimes produces incomplete or vague output.
 
+- **Granite3.2 HFT:**  
+  - *Strengths:* Performs well on simple recursion and lambda logic.
+  - *Weaknesses:* Struggles with pandas APIs, exception handling, and multi-branch logic. Regression evident when compared to Granite3.3.
+
 ---
 
 ## 📊 Evaluation Summary Table
 
-| Test Case                                | Hole Filler Verdict                                 | FIM Verdict                                   |
-|-------------------------------------------|-----------------------------------------------------|-----------------------------------------------|
-| 1. Nested Conditions (Tax Slabs)          | ⚠️ Partial: Syntax ok, logic error in slab calc      | ❌ Broken: Dead code, misses slab, syntax err  |
-| 2. Lambda + Filter                        | ✅ Excellent: Clean, correct, idiomatic              | ✅ Excellent: Clean, correct, idiomatic        |
-| 3. Pandas Chaining                        | ✅ Good: Uses NamedAgg, minor format issue           | ❌ Vague: "all columns" non-Python output      |
-| 4. Exception Handling with Custom Message  | ✅ Solid: Logical, correct, verbose                  | ✅ Excellent: Clean, concise, correct          |
-| 5. Class with Dunder/Bonus                | ✅ Good: Dunder and bonus logic are correct          | ❌ Broken: Incomplete, missing return, logic   |
-| 6. Recursive Function (Factorial)         | ✅ Excellent: Canonical recursion, clean             | ✅ Excellent: Canonical recursion, clean       |
+| Test Case                                | Granite3.3 HFT                                 | Granite3.3 FIM                             | Granite3.2 HFT                             |
+|-------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
+| 1. Nested Conditions (Tax Slabs)          | ⚠️ Partial: Logic mismatch                      | ❌ Broken: Dead code, syntax error          | ❌ Broken: Hallucinated slabs, syntax error  |
+| 2. Lambda + Filter                        | ✅ Excellent: Clean, correct, idiomatic         | ✅ Excellent: Clean, correct, idiomatic     | ✅ Correct: Slight delay in full completion  |
+| 3. Pandas Chaining                        | ✅ Good: Uses NamedAgg                          | ❌ Vague: "all columns" output              | ❌ Broken: SQL dicts, malformed, unusable    |
+| 4. Exception Handling with Custom Message | ✅ Solid: Verbose but correct                   | ✅ Excellent: Clean, concise                | ❌ No completion at all                     |
+| 5. Class with Dunder/Bonus                | ✅ Good: Correct methods and logic              | ❌ Broken: Incomplete, missing return       | ⚠️ Partial: Good `__str__`, missing bonus    |
+| 6. Recursive Function (Factorial)         | ✅ Excellent: Canonical recursion               | ✅ Excellent: Canonical recursion           | ✅ Excellent: Canonical recursion            |
 
 ---
 
@@ -45,6 +49,7 @@
   Partial logic, hardcodes slab values, does not fully respect business logic, but structure is valid Python.
 - **FIM:**  
   Misses a whole branch, inserts dead code, and outputs syntactically invalid Python.
+- **Granite3.2 HFT:** Outputs syntax error (`*` expression), hallucinated slab ranges (1.5M, 2M), and unreachable blocks.
 
 ### 2️⃣ Lambda + Filter
 
@@ -52,6 +57,7 @@
   Generates a correct, idiomatic lambda filter for even numbers.
 - **FIM:**  
   Also generates correct lambda. Both modes perform equally well.
+- Granite3.2 required a spacebar nudge for the closing brackets but otherwise fine.
 
 ### 3️⃣ Pandas Chaining
 
@@ -59,6 +65,7 @@
   Uses advanced API (`NamedAgg`), correct overall structure, only minor formatting issues.
 - **FIM:**  
   Produces non-Python output ("all columns"), does not provide a real aggregation statement.
+- **Granite3.2:** Injects SQL-like syntax in place of pandas, and ends with malformed junk tokens.
 
 ### 4️⃣ Exception Handling with Custom Messages
 
@@ -66,6 +73,7 @@
   Robust, verbose, but logic is correct.
 - **FIM:**  
   Clean, concise, and correct — in fact, more succinct than HFT. Sometimes required manual cursor placement at line start for FIM to work.
+- **Granite3.2** fails to even generate basic exception logic.
 
 ### 5️⃣ Class Definitions with Dunder and Bonus
 
@@ -73,6 +81,7 @@
   Generates correct __init__ and __str__. Implements calculate_bonus logic as intended (salary check, bonus calculation, returns correct value). Minor verbosity at end, but not incorrect. Solid performance for both OOP syntax and business logic.
 - **FIM:**  
   Output is incomplete, missing both condition and return. Fails to provide usable code for this scenario.
+- **Granite3.2:** Outputs a good `__str__`, but omits `calculate_bonus()` entirely.
 
 ### 6️⃣ Recursive Logic
 
@@ -80,6 +89,7 @@
   Outputs canonical recursive implementation; perfect.
 - **FIM:**  
   Same as HFT; perfect recursion.
+- **Granite3.2:** Outputs the correct recursion.
 
 ---
 
@@ -89,9 +99,11 @@
 
 **Strengths:**
 - Good at classic code completion and generating boilerplate or sequential code.
+- Improved OOP handling vs. 3.2.
 - Handles simple functions, recursion, and basic functional programming patterns well.
 - Can generate complex API calls if context is linear.
 - Excels at both classic and OOP code completions, including dunder methods and conditional logic inside methods.
+
 
 **Weaknesses:**
 - Hallucinates or fumbles structured/branching logic.
@@ -120,6 +132,7 @@
 - **Model Quality:**  
   - Granite-3.3:8B is strong on simple/medium code completion, recursion, lambdas, and straightforward exception logic in both modes.
   - It needs improvement in class structure, complex branching, and context-heavy or "abstract" tasks (like custom aggregation).
+  - Granite3.2 shows significant regressions and is not recommended for production developer workflows requiring structured logic or completeness.
 
 ---
 
