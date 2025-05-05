@@ -32,14 +32,15 @@
 
 ## 📊 Evaluation Summary Table
 
-| Test Case                                | Granite3.3 HFT                                 | Granite3.3 FIM                             | Granite3.2 HFT                             |
-|-------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|
-| 1. Nested Conditions (Tax Slabs)          | ⚠️ Partial: Logic mismatch                      | ❌ Broken: Dead code, syntax error          | ❌ Broken: Hallucinated slabs, syntax error  |
-| 2. Lambda + Filter                        | ✅ Excellent: Clean, correct, idiomatic         | ✅ Excellent: Clean, correct, idiomatic     | ✅ Correct: Slight delay in full completion  |
-| 3. Pandas Chaining                        | ✅ Good: Uses NamedAgg                          | ❌ Vague: "all columns" output              | ❌ Broken: SQL dicts, malformed, unusable    |
-| 4. Exception Handling with Custom Message | ✅ Solid: Verbose but correct                   | ✅ Excellent: Clean, concise                | ❌ No completion at all                     |
-| 5. Class with Dunder/Bonus                | ✅ Good: Correct methods and logic              | ❌ Broken: Incomplete, missing return       | ⚠️ Partial: Good `__str__`, missing bonus    |
-| 6. Recursive Function (Factorial)         | ✅ Excellent: Canonical recursion               | ✅ Excellent: Canonical recursion           | ✅ Excellent: Canonical recursion            |
+| Test Case                                | Granite3.3 HFT                                 | Granite3.3 FIM                             | Granite3.2 HFT                             | Granite3.3:2B-Base FIM                      |
+|-------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|---------------------------------------------|
+| 1. Nested Conditions (Tax Slabs)          | ⚠️ Partial: Logic mismatch                      | ❌ Broken: Dead code, syntax error          | ❌ Broken: Hallucinated slabs, syntax error  | ❌ Broken: Skips middle slab, stray logic    |
+| 2. Lambda + Filter                        | ✅ Excellent: Clean, correct, idiomatic         | ✅ Excellent: Clean, correct, idiomatic     | ✅ Correct: Slight delay in full completion  | ✅ Excellent: Smooth and correct             |
+| 3. Pandas Chaining                        | ✅ Good: Uses NamedAgg                          | ❌ Vague: "all columns" output              | ❌ Broken: SQL dicts, malformed, unusable    | ❌ Broken: Garbage import + invalid agg      |
+| 4. Exception Handling with Custom Message | ✅ Solid: Verbose but correct                   | ✅ Excellent: Clean, concise                | ❌ No completion at all                      | ✅ Good: Correct error type (generic)        |
+| 5. Class with Dunder/Bonus                | ✅ Good: Correct methods and logic              | ❌ Broken: Incomplete, missing return       | ⚠️ Partial: Good `__str__`, missing bonus    | ❌ Broken: No logic, just motivational print |
+| 6. Recursive Function (Factorial)         | ✅ Excellent: Canonical recursion               | ✅ Excellent: Canonical recursion           | ✅ Excellent: Canonical recursion            | ❌ Broken: Missing multiplication step       |
+
 
 ---
 
