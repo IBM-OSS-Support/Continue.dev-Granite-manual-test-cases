@@ -1,0 +1,13 @@
+---
+name: Suggest-improvements
+description: Test cases for VSCode
+---
+
+<user>
+Review the code @regression.py and suggest any improvements
+</user>
+
+
+<assistant>
+Suggest improvements in code readability and documentation of the code.
+</assistant>

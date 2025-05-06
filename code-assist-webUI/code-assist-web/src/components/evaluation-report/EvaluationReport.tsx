@@ -202,7 +202,7 @@ const EvaluationReport: React.FC = () => {
             className={showAll ? 'card-btn active' : 'card-btn'}
             size="xl"
             onClick={() => setShowAll(!showAll)}>
-            {showAll ? "Hide Data" : "View All Data"}
+            {showAll ? "View All Data" : "Hide Data"}
           </Button>
         </Column>
       </Grid>
@@ -255,7 +255,7 @@ const EvaluationReport: React.FC = () => {
         </Modal>
       )}
 
-      {showAll && (
+      {!showAll && (
         <>
           <Grid fullWidth narrow className="page-content">
             <Column lg={16} className="content-tile">

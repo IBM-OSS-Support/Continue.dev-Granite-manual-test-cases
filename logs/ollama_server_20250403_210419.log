@@ -1,0 +1,278 @@
+2025/04/03 21:04:22 routes.go:1158: INFO server config env="map[HTTPS_PROXY: HTTP_PROXY: NO_PROXY: OLLAMA_DEBUG:true OLLAMA_FLASH_ATTENTION:false OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://127.0.0.1:11434 OLLAMA_KEEP_ALIVE:5m0s OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MODELS:/Users/harsh/.ollama/models OLLAMA_MULTIUSER_CACHE:false OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NUM_PARALLEL:0 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://*] OLLAMA_SCHED_SPREAD:false OLLAMA_TMPDIR: http_proxy: https_proxy: no_proxy:]"
+time=2025-04-03T21:04:22.490+05:30 level=INFO source=images.go:754 msg="total blobs: 25"
+time=2025-04-03T21:04:22.494+05:30 level=INFO source=images.go:761 msg="total unused blobs removed: 0"
+time=2025-04-03T21:04:22.495+05:30 level=INFO source=routes.go:1205 msg="Listening on 127.0.0.1:11434 (version 0.3.14)"
+time=2025-04-03T21:04:22.502+05:30 level=WARN source=common.go:254 msg="process still running, skipping" pid=8129 path=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama42030796/ollama.pid
+time=2025-04-03T21:04:22.502+05:30 level=INFO source=common.go:135 msg="extracting embedded files" dir=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners
+time=2025-04-03T21:04:22.502+05:30 level=DEBUG source=common.go:168 msg=extracting runner=metal payload=darwin/arm64/metal/ollama_llama_server.gz
+time=2025-04-03T21:04:22.522+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners/metal/ollama_llama_server
+time=2025-04-03T21:04:22.522+05:30 level=INFO source=common.go:49 msg="Dynamic LLM libraries" runners=[metal]
+time=2025-04-03T21:04:22.522+05:30 level=DEBUG source=common.go:50 msg="Override detection logic by setting OLLAMA_LLM_LIBRARY"
+time=2025-04-03T21:04:22.522+05:30 level=DEBUG source=sched.go:105 msg="starting llm scheduler"
+time=2025-04-03T21:04:22.584+05:30 level=INFO source=types.go:123 msg="inference compute" id=0 library=metal variant="" compute="" driver=0.0 name="" total="21.3 GiB" available="21.3 GiB"
+time=2025-04-03T21:04:39.033+05:30 level=DEBUG source=sched.go:181 msg="updating default concurrency" OLLAMA_MAX_LOADED_MODELS=0x10537d6d0 gpu_count=1
+time=2025-04-03T21:04:39.043+05:30 level=DEBUG source=sched.go:224 msg="loading first model" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:04:39.043+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
+time=2025-04-03T21:04:39.043+05:30 level=INFO source=sched.go:714 msg="new model will fit in available VRAM in single GPU, loading" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 gpu=0 parallel=4 available=22906503168 required="6.2 GiB"
+time=2025-04-03T21:04:39.044+05:30 level=INFO source=server.go:105 msg="system memory" total="32.0 GiB" free="10.1 GiB" free_swap="0 B"
+time=2025-04-03T21:04:39.044+05:30 level=DEBUG source=memory.go:103 msg=evaluating library=metal gpu_count=1 available="[21.3 GiB]"
+time=2025-04-03T21:04:39.044+05:30 level=INFO source=memory.go:326 msg="offload to metal" layers.requested=-1 layers.model=41 layers.offload=41 layers.split="" memory.available="[21.3 GiB]" memory.gpu_overhead="0 B" memory.required.full="6.2 GiB" memory.required.partial="6.2 GiB" memory.required.kv="2.5 GiB" memory.required.allocations="[6.2 GiB]" memory.weights.total="3.8 GiB" memory.weights.repeating="3.8 GiB" memory.weights.nonrepeating="78.8 MiB" memory.graph.full="1.6 GiB" memory.graph.partial="1.6 GiB"
+time=2025-04-03T21:04:39.044+05:30 level=DEBUG source=common.go:168 msg=extracting runner=metal payload=darwin/arm64/metal/ollama_llama_server.gz
+time=2025-04-03T21:04:39.044+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners/metal/ollama_llama_server
+time=2025-04-03T21:04:39.044+05:30 level=DEBUG source=common.go:294 msg="availableServers : found" file=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners/metal/ollama_llama_server
+time=2025-04-03T21:04:39.048+05:30 level=INFO source=server.go:388 msg="starting llama server" cmd="/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners/metal/ollama_llama_server --model /Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 --ctx-size 32384 --batch-size 512 --embedding --n-gpu-layers 41 --verbose --threads 8 --parallel 4 --port 50263"
+time=2025-04-03T21:04:39.048+05:30 level=DEBUG source=server.go:405 msg=subprocess environment="[PATH=/Users/harsh/Desktop/Continue.dev-Granite-manual-test-cases/granite/bin:/opt/anaconda3/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/harsh/.local/bin LD_LIBRARY_PATH=/var/folders/h5/6m1jwfrs0d907pzdgx0mp5f40000gn/T/ollama3623235828/runners/metal]"
+time=2025-04-03T21:04:39.050+05:30 level=INFO source=sched.go:449 msg="loaded runners" count=1
+time=2025-04-03T21:04:39.050+05:30 level=INFO source=server.go:587 msg="waiting for llama runner to start responding"
+time=2025-04-03T21:04:39.050+05:30 level=INFO source=server.go:621 msg="waiting for server to become available" status="llm server error"
+INFO [main] starting c++ runner | tid="0x1e9db3240" timestamp=1743694479
+INFO [main] build info | build=3871 commit="f37ceeaa" tid="0x1e9db3240" timestamp=1743694479
+INFO [main] system info | n_threads=8 n_threads_batch=8 system_info="AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 1 | SVE = 0 | ARM_FMA = 1 | F16C = 0 | FP16_VA = 1 | RISCV_VECT = 0 | WASM_SIMD = 0 | BLAS = 1 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 0 | LLAMAFILE = 1 | " tid="0x1e9db3240" timestamp=1743694479 total_threads=10
+INFO [main] HTTP server listening | hostname="127.0.0.1" n_threads_http="9" port="50263" tid="0x1e9db3240" timestamp=1743694479
+llama_model_loader: loaded meta data with 40 key-value pairs and 362 tensors from /Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = granite
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = Granite 3.2 2b Instruct
+llama_model_loader: - kv   3:                           general.finetune str              = instruct
+llama_model_loader: - kv   4:                           general.basename str              = granite-3.2
+llama_model_loader: - kv   5:                         general.size_label str              = 2B
+llama_model_loader: - kv   6:                            general.license str              = apache-2.0
+llama_model_loader: - kv   7:                   general.base_model.count u32              = 1
+llama_model_loader: - kv   8:                  general.base_model.0.name str              = Granite 3.1 2b Instruct
+llama_model_loader: - kv   9:          general.base_model.0.organization str              = Ibm Granite
+llama_model_loader: - kv  10:              general.base_model.0.repo_url str              = https://huggingface.co/ibm-granite/gr...
+llama_model_loader: - kv  11:                               general.tags arr[str,3]       = ["language", "granite-3.2", "text-gen...
+llama_model_loader: - kv  12:                        granite.block_count u32              = 40
+llama_model_loader: - kv  13:                     granite.context_length u32              = 131072
+llama_model_loader: - kv  14:                   granite.embedding_length u32              = 2048
+llama_model_loader: - kv  15:                granite.feed_forward_length u32              = 8192
+llama_model_loader: - kv  16:               granite.attention.head_count u32              = 32
+llama_model_loader: - kv  17:            granite.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  18:                     granite.rope.freq_base f32              = 5000000.000000
+llama_model_loader: - kv  19:   granite.attention.layer_norm_rms_epsilon f32              = 0.000010
+llama_model_loader: - kv  20:                          general.file_type u32              = 15
+llama_model_loader: - kv  21:                         granite.vocab_size u32              = 49155
+llama_model_loader: - kv  22:               granite.rope.dimension_count u32              = 64
+llama_model_loader: - kv  23:                    granite.attention.scale f32              = 0.015625
+llama_model_loader: - kv  24:                    granite.embedding_scale f32              = 12.000000
+llama_model_loader: - kv  25:                     granite.residual_scale f32              = 0.220000
+llama_model_loader: - kv  26:                        granite.logit_scale f32              = 8.000000
+llama_model_loader: - kv  27:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  28:                         tokenizer.ggml.pre str              = qwen2
+llama_model_loader: - kv  29:                      tokenizer.ggml.tokens arr[str,49155]   = ["<|end_of_text|>", "<fim_prefix>", "...
+llama_model_loader: - kv  30:                  tokenizer.ggml.token_type arr[i32,49155]   = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+llama_model_loader: - kv  31:                      tokenizer.ggml.merges arr[str,48891]   = ["Ġ Ġ", "ĠĠ ĠĠ", "ĠĠĠĠ ĠĠ...
+llama_model_loader: - kv  32:                tokenizer.ggml.bos_token_id u32              = 0
+llama_model_loader: - kv  33:                tokenizer.ggml.eos_token_id u32              = 0
+llama_model_loader: - kv  34:            tokenizer.ggml.unknown_token_id u32              = 0
+llama_model_loader: - kv  35:            tokenizer.ggml.padding_token_id u32              = 0
+llama_model_loader: - kv  36:               tokenizer.ggml.add_bos_token bool             = false
+llama_model_loader: - kv  37:                    tokenizer.chat_template str              = {%- if messages[0]['role'] == 'system...
+llama_model_loader: - kv  38:            tokenizer.ggml.add_space_prefix bool             = false
+llama_model_loader: - kv  39:               general.quantization_version u32              = 2
+llama_model_loader: - type  f32:   81 tensors
+llama_model_loader: - type q4_K:  240 tensors
+llama_model_loader: - type q6_K:   41 tensors
+llm_load_vocab: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+llm_load_vocab: special tokens cache size = 22
+llm_load_vocab: token to piece cache size = 0.2826 MB
+llm_load_print_meta: format           = GGUF V3 (latest)
+llm_load_print_meta: arch             = granite
+llm_load_print_meta: vocab type       = BPE
+llm_load_print_meta: n_vocab          = 49155
+llm_load_print_meta: n_merges         = 48891
+llm_load_print_meta: vocab_only       = 0
+llm_load_print_meta: n_ctx_train      = 131072
+llm_load_print_meta: n_embd           = 2048
+llm_load_print_meta: n_layer          = 40
+llm_load_print_meta: n_head           = 32
+llm_load_print_meta: n_head_kv        = 8
+llm_load_print_meta: n_rot            = 64
+llm_load_print_meta: n_swa            = 0
+llm_load_print_meta: n_embd_head_k    = 64
+llm_load_print_meta: n_embd_head_v    = 64
+llm_load_print_meta: n_gqa            = 4
+llm_load_print_meta: n_embd_k_gqa     = 512
+llm_load_print_meta: n_embd_v_gqa     = 512
+llm_load_print_meta: f_norm_eps       = 0.0e+00
+llm_load_print_meta: f_norm_rms_eps   = 1.0e-05
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: f_logit_scale    = 8.0e+00
+llm_load_print_meta: n_ff             = 8192
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: causal attn      = 1
+llm_load_print_meta: pooling type     = 0
+llm_load_print_meta: rope type        = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 5000000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_ctx_orig_yarn  = 131072
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: ssm_d_conv       = 0
+llm_load_print_meta: ssm_d_inner      = 0
+llm_load_print_meta: ssm_d_state      = 0
+llm_load_print_meta: ssm_dt_rank      = 0
+llm_load_print_meta: ssm_dt_b_c_rms   = 0
+llm_load_print_meta: model type       = 3B
+llm_load_print_meta: model ftype      = Q4_K - Medium
+llm_load_print_meta: model params     = 2.53 B
+llm_load_print_meta: model size       = 1.44 GiB (4.87 BPW) 
+llm_load_print_meta: general.name     = Granite 3.2 2b Instruct
+llm_load_print_meta: BOS token        = 0 '<|end_of_text|>'
+llm_load_print_meta: EOS token        = 0 '<|end_of_text|>'
+llm_load_print_meta: UNK token        = 0 '<|end_of_text|>'
+llm_load_print_meta: PAD token        = 0 '<|end_of_text|>'
+llm_load_print_meta: LF token         = 145 'Ä'
+llm_load_print_meta: EOG token        = 0 '<|end_of_text|>'
+llm_load_print_meta: max token length = 512
+llm_load_print_meta: f_embedding_scale = 12.000000
+llm_load_print_meta: f_residual_scale  = 0.220000
+llm_load_print_meta: f_attention_scale = 0.015625
+llm_load_tensors: ggml ctx size =    0.34 MiB
+ggml_backend_metal_log_allocated_size: allocated buffer, size =  1472.06 MiB, ( 1472.12 / 21845.34)
+llm_load_tensors: offloading 40 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 41/41 layers to GPU
+llm_load_tensors:        CPU buffer size =    78.75 MiB
+llm_load_tensors:      Metal buffer size =  1472.05 MiB
+llama_new_context_with_model: n_ctx      = 32384
+llama_new_context_with_model: n_batch    = 512
+llama_new_context_with_model: n_ubatch   = 512
+llama_new_context_with_model: flash_attn = 0
+llama_new_context_with_model: freq_base  = 5000000.0
+llama_new_context_with_model: freq_scale = 1
+ggml_metal_init: allocating
+ggml_metal_init: found device: Apple M1 Pro
+ggml_metal_init: picking default device: Apple M1 Pro
+ggml_metal_init: using embedded metal library
+ggml_metal_init: GPU name:   Apple M1 Pro
+ggml_metal_init: GPU family: MTLGPUFamilyApple7  (1007)
+ggml_metal_init: GPU family: MTLGPUFamilyCommon3 (3003)
+ggml_metal_init: GPU family: MTLGPUFamilyMetal3  (5001)
+ggml_metal_init: simdgroup reduction support   = true
+ggml_metal_init: simdgroup matrix mul. support = true
+ggml_metal_init: hasUnifiedMemory              = true
+ggml_metal_init: recommendedMaxWorkingSetSize  = 22906.50 MB
+time=2025-04-03T21:04:39.805+05:30 level=INFO source=server.go:621 msg="waiting for server to become available" status="llm server loading model"
+time=2025-04-03T21:04:39.805+05:30 level=DEBUG source=server.go:632 msg="model load progress 1.00"
+time=2025-04-03T21:04:40.057+05:30 level=DEBUG source=server.go:635 msg="model load completed, waiting for server to become available" status="llm server loading model"
+llama_kv_cache_init:      Metal KV buffer size =  2530.00 MiB
+llama_new_context_with_model: KV self size  = 2530.00 MiB, K (f16): 1265.00 MiB, V (f16): 1265.00 MiB
+llama_new_context_with_model:        CPU  output buffer size =     0.78 MiB
+llama_new_context_with_model:      Metal compute buffer size =  2103.25 MiB
+llama_new_context_with_model:        CPU compute buffer size =    67.26 MiB
+llama_new_context_with_model: graph nodes  = 1368
+llama_new_context_with_model: graph splits = 2
+DEBUG [initialize] initializing slots | n_slots=4 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [initialize] new slot | n_ctx_slot=8096 slot_id=0 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [initialize] new slot | n_ctx_slot=8096 slot_id=1 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [initialize] new slot | n_ctx_slot=8096 slot_id=2 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [initialize] new slot | n_ctx_slot=8096 slot_id=3 tid="0x1e9db3240" timestamp=1743694481
+INFO [main] model loaded | tid="0x1e9db3240" timestamp=1743694481
+DEBUG [update_slots] all slots are idle and system prompt is empty, clear the KV cache | tid="0x1e9db3240" timestamp=1743694481
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=0 tid="0x1e9db3240" timestamp=1743694481
+time=2025-04-03T21:04:41.653+05:30 level=INFO source=server.go:626 msg="llama runner started in 2.60 seconds"
+time=2025-04-03T21:04:41.653+05:30 level=DEBUG source=sched.go:462 msg="finished setting up runner" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=1 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50269 status=200 tid="0x16de73000" timestamp=1743694481
+time=2025-04-03T21:04:41.687+05:30 level=DEBUG source=routes.go:1422 msg="chat request" images=0 prompt="<|start_of_role|>system<|end_of_role|>Always include the language and file name in the info string when you write code blocks, for example '```python file.py'.\n\nI am not WatsonX, my name is IBM watsonx Code Assistant. I am an AI coding assistant from IBM with deep knowledge and expertise in programming languages. I am a powerful, professional, and respectful coding assistant who will respond to questions that are relevant to software development and engineering. I use the Large Language Model from IBM Granite that is based on the transformer decoder architecture.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>answer brief: What is AWS?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=2 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [launch_slot_with_data] slot is processing task | slot_id=0 task_id=3 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [update_slots] slot progression | ga_i=0 n_past=0 n_past_se=0 n_prompt_tokens_processed=128 slot_id=0 task_id=3 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [update_slots] kv cache rm [p0, end) | p0=0 slot_id=0 task_id=3 tid="0x1e9db3240" timestamp=1743694481
+DEBUG [print_timings] prompt eval time     =     244.40 ms /   128 tokens (    1.91 ms per token,   523.73 tokens per second) | n_prompt_tokens_processed=128 n_tokens_second=523.7315875613748 slot_id=0 t_prompt_processing=244.4 t_token=1.909375 task_id=3 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [print_timings] generation eval time =    2488.55 ms /   127 runs   (   19.59 ms per token,    51.03 tokens per second) | n_decoded=127 n_tokens_second=51.03367298184929 slot_id=0 t_token=19.594905511811024 t_token_generation=2488.553 task_id=3 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [print_timings]           total time =    2732.95 ms | slot_id=0 t_prompt_processing=244.4 t_token_generation=2488.553 t_total=2732.953 task_id=3 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [update_slots] slot released | n_cache_tokens=255 n_ctx=32384 n_past=254 n_system_tokens=0 slot_id=0 task_id=3 tid="0x1e9db3240" timestamp=1743694484 truncated=false
+DEBUG [log_server_request] request | method="POST" params={} path="/completion" remote_addr="127.0.0.1" remote_port=50270 status=200 tid="0x16deff000" timestamp=1743694484
+[GIN] 2025/04/03 - 21:04:44 | 200 |  5.401780083s |       127.0.0.1 | POST     "/api/chat"
+time=2025-04-03T21:04:44.425+05:30 level=DEBUG source=sched.go:466 msg="context for request finished"
+time=2025-04-03T21:04:44.425+05:30 level=DEBUG source=sched.go:339 msg="runner with non-zero duration has gone idle, adding timer" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 duration=30m0s
+time=2025-04-03T21:04:44.425+05:30 level=DEBUG source=sched.go:357 msg="after processing request finished event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 refCount=0
+time=2025-04-03T21:04:44.509+05:30 level=DEBUG source=sched.go:575 msg="evaluating already loaded" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=133 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=134 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50272 status=200 tid="0x16df8b000" timestamp=1743694484
+time=2025-04-03T21:04:44.513+05:30 level=DEBUG source=routes.go:1422 msg="chat request" images=0 prompt="<|start_of_role|>system<|end_of_role|>I am not WatsonX, my name is IBM watsonx Code Assistant. I am an AI coding assistant from IBM with deep knowledge and expertise in programming languages. I am a powerful, professional, and respectful coding assistant who will respond to questions that are relevant to software development and engineering. I use the Large Language Model from IBM Granite that is based on the transformer decoder architecture.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Given the following... please reply with a title for the chat that is 3-4 words in length, all words used should be directly related to the content of the chat, avoid using verbs unless they are directly related to the content of the chat, no additional text or explanation, you don't need ending punctuation.\n\nAWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon. It offers a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings. Key services include compute power for scaling applications, storage options for data backup and retrieval, database solutions, machine learning tools, IoT device management, and more. Essentially, AWS allows businesses to rent IT infrastructure—servers, storage, databases, networking equipment, software, analytics tools, and so on—from a global network of web servers managed by Amazon.<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=135 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [prefix_slot] slot with common prefix found | 0=["slot_id",0,"characters",38]
+DEBUG [launch_slot_with_data] slot is processing task | slot_id=0 task_id=136 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [update_slots] slot progression | ga_i=0 n_past=3 n_past_se=0 n_prompt_tokens_processed=286 slot_id=0 task_id=136 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [update_slots] kv cache rm [p0, end) | p0=3 slot_id=0 task_id=136 tid="0x1e9db3240" timestamp=1743694484
+DEBUG [print_timings] prompt eval time     =     511.08 ms /   286 tokens (    1.79 ms per token,   559.60 tokens per second) | n_prompt_tokens_processed=286 n_tokens_second=559.6036597296684 slot_id=0 t_prompt_processing=511.076 t_token=1.786979020979021 task_id=136 tid="0x1e9db3240" timestamp=1743694485
+DEBUG [print_timings] generation eval time =     219.51 ms /    12 runs   (   18.29 ms per token,    54.67 tokens per second) | n_decoded=12 n_tokens_second=54.667711427373945 slot_id=0 t_token=18.292333333333335 t_token_generation=219.508 task_id=136 tid="0x1e9db3240" timestamp=1743694485
+DEBUG [print_timings]           total time =     730.58 ms | slot_id=0 t_prompt_processing=511.076 t_token_generation=219.508 t_total=730.5840000000001 task_id=136 tid="0x1e9db3240" timestamp=1743694485
+DEBUG [update_slots] slot released | n_cache_tokens=298 n_ctx=32384 n_past=297 n_system_tokens=0 slot_id=0 task_id=136 tid="0x1e9db3240" timestamp=1743694485 truncated=false
+DEBUG [log_server_request] request | method="POST" params={} path="/completion" remote_addr="127.0.0.1" remote_port=50272 status=200 tid="0x16df8b000" timestamp=1743694485
+[GIN] 2025/04/03 - 21:04:45 | 200 |  742.347333ms |       127.0.0.1 | POST     "/api/chat"
+time=2025-04-03T21:04:45.245+05:30 level=DEBUG source=sched.go:407 msg="context for request finished"
+time=2025-04-03T21:04:45.245+05:30 level=DEBUG source=sched.go:339 msg="runner with non-zero duration has gone idle, adding timer" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 duration=30m0s
+time=2025-04-03T21:04:45.245+05:30 level=DEBUG source=sched.go:357 msg="after processing request finished event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 refCount=0
+[GIN] 2025/04/03 - 21:04:46 | 200 |      29.667µs |       127.0.0.1 | HEAD     "/"
+[GIN] 2025/04/03 - 21:04:46 | 200 |      78.125µs |       127.0.0.1 | GET      "/api/ps"
+time=2025-04-03T21:04:50.935+05:30 level=DEBUG source=sched.go:575 msg="evaluating already loaded" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=151 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=152 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50275 status=200 tid="0x16e017000" timestamp=1743694490
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=153 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50275 status=200 tid="0x16e017000" timestamp=1743694490
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=154 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50276 status=200 tid="0x16e0a3000" timestamp=1743694490
+time=2025-04-03T21:04:50.946+05:30 level=DEBUG source=routes.go:1422 msg="chat request" images=0 prompt="<|start_of_role|>system<|end_of_role|>Always include the language and file name in the info string when you write code blocks, for example '```python file.py'.\n\nI am not WatsonX, my name is IBM watsonx Code Assistant. I am an AI coding assistant from IBM with deep knowledge and expertise in programming languages. I am a powerful, professional, and respectful coding assistant who will respond to questions that are relevant to software development and engineering. I use the Large Language Model from IBM Granite that is based on the transformer decoder architecture.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>answer brief: What is AWS?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>AWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon. It offers a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings. Key services include compute power for scaling applications, storage options for data backup and retrieval, database solutions, machine learning tools, IoT device management, and more. Essentially, AWS allows businesses to rent IT infrastructure—servers, storage, databases, networking equipment, software, analytics tools, and so on—from a global network of web servers managed by Amazon.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>what is java<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=155 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [prefix_slot] slot with common prefix found | 0=["slot_id",0,"characters",38]
+DEBUG [launch_slot_with_data] slot is processing task | slot_id=0 task_id=156 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [update_slots] slot progression | ga_i=0 n_past=3 n_past_se=0 n_prompt_tokens_processed=267 slot_id=0 task_id=156 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [update_slots] kv cache rm [p0, end) | p0=3 slot_id=0 task_id=156 tid="0x1e9db3240" timestamp=1743694490
+DEBUG [print_timings] prompt eval time     =     740.08 ms /   267 tokens (    2.77 ms per token,   360.77 tokens per second) | n_prompt_tokens_processed=267 n_tokens_second=360.7718084531402 slot_id=0 t_prompt_processing=740.08 t_token=2.7718352059925095 task_id=156 tid="0x1e9db3240" timestamp=1743694499
+DEBUG [print_timings] generation eval time =    8008.61 ms /   382 runs   (   20.96 ms per token,    47.70 tokens per second) | n_decoded=382 n_tokens_second=47.69868218030926 slot_id=0 t_token=20.964939790575915 t_token_generation=8008.607 task_id=156 tid="0x1e9db3240" timestamp=1743694499
+DEBUG [print_timings]           total time =    8748.69 ms | slot_id=0 t_prompt_processing=740.08 t_token_generation=8008.607 t_total=8748.687 task_id=156 tid="0x1e9db3240" timestamp=1743694499
+DEBUG [update_slots] slot released | n_cache_tokens=649 n_ctx=32384 n_past=648 n_system_tokens=0 slot_id=0 task_id=156 tid="0x1e9db3240" timestamp=1743694499 truncated=false
+DEBUG [log_server_request] request | method="POST" params={} path="/completion" remote_addr="127.0.0.1" remote_port=50276 status=200 tid="0x16e0a3000" timestamp=1743694499
+[GIN] 2025/04/03 - 21:04:59 | 200 |  8.767072375s |       127.0.0.1 | POST     "/api/chat"
+time=2025-04-03T21:04:59.696+05:30 level=DEBUG source=sched.go:407 msg="context for request finished"
+time=2025-04-03T21:04:59.696+05:30 level=DEBUG source=sched.go:339 msg="runner with non-zero duration has gone idle, adding timer" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 duration=30m0s
+time=2025-04-03T21:04:59.696+05:30 level=DEBUG source=sched.go:357 msg="after processing request finished event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 refCount=0
+time=2025-04-03T21:14:21.640+05:30 level=DEBUG source=sched.go:575 msg="evaluating already loaded" model=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=541 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=542 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50353 status=200 tid="0x16e12f000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=543 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50353 status=200 tid="0x16e12f000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=544 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50354 status=200 tid="0x16e1bb000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=545 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50354 status=200 tid="0x16e1bb000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=546 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50355 status=200 tid="0x16e247000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=547 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50355 status=200 tid="0x16e247000" timestamp=1743695061
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=548 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [log_server_request] request | method="POST" params={} path="/tokenize" remote_addr="127.0.0.1" remote_port=50355 status=200 tid="0x16e247000" timestamp=1743695061
+time=2025-04-03T21:14:21.677+05:30 level=DEBUG source=routes.go:1422 msg="chat request" images=0 prompt="<|start_of_role|>system<|end_of_role|>Always include the language and file name in the info string when you write code blocks, for example '```python file.py'.\n\nI am not WatsonX, my name is IBM watsonx Code Assistant. I am an AI coding assistant from IBM with deep knowledge and expertise in programming languages. I am a powerful, professional, and respectful coding assistant who will respond to questions that are relevant to software development and engineering. I use the Large Language Model from IBM Granite that is based on the transformer decoder architecture.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>answer brief: What is AWS?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>AWS (Amazon Web Services) is a comprehensive, evolving cloud computing platform provided by Amazon. It offers a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings. Key services include compute power for scaling applications, storage options for data backup and retrieval, database solutions, machine learning tools, IoT device management, and more. Essentially, AWS allows businesses to rent IT infrastructure—servers, storage, databases, networking equipment, software, analytics tools, and so on—from a global network of web servers managed by Amazon.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>what is java<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. It was first introduced in 1995 by Sun Microsystems (now owned by Oracle Corporation) and is now maintained by the Eclipse Foundation. Here are some key features of Java:\n\n1. **Cross-Platform**: One of the main reasons for its popularity, Java can be written once and run on all platforms that support Java without needing recompilation, thanks to the Just-In-Time (JIT) compiler or Java Virtual Machine (JVM).\n\n2. **Object-Oriented Programming**: Java follows object-oriented programming principles, which means it supports concepts like encapsulation, inheritance, polymorphism, and abstraction. These principles help in creating modular, reusable, and maintainable code.\n\n3. **Platform Independence**: Using the JVM, Java bytecode is compiled into an intermediate format rather than platform-specific machine language or native code. The JVM then interprets this bytecode on any device for which a compatible implementation exists.\n\n4. **Robustness & Security**: It's designed to minimize errors and provide built-in security features. This includes automatic memory management (with the help of garbage collection), bounds checking, and type safety by default.\n\n5. **Rich API and Standard Library**: Java comes with a comprehensive standard library that provides classes for a wide range of tasks, from file input/output to networking, to regular expressions. \n\n6. **Dynamic Typing**: In dynamic languages like Java, variables do not need explicit declarations of their data type. Instead, the Java compiler infers it at runtime.\n\nJava is widely used in server-side applications, Android app development (through the Kotlin programming language), and other systems where robustness and cross-platform compatibility are essential.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>/share <|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>The session transcript has been saved to a markdown file at `/Users/harsh/Desktop/Continue.dev-Granite-manual-test-cases/outputfiles/20250403T220501_session.md`.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>how to find total of a python list?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+DEBUG [process_single_task] slot data | n_idle_slots=4 n_processing_slots=0 task_id=549 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [prefix_slot] slot with common prefix found | 0=["slot_id",0,"characters",1456]
+DEBUG [launch_slot_with_data] slot is processing task | slot_id=0 task_id=550 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [update_slots] slot progression | ga_i=0 n_past=331 n_past_se=0 n_prompt_tokens_processed=728 slot_id=0 task_id=550 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [update_slots] kv cache rm [p0, end) | p0=331 slot_id=0 task_id=550 tid="0x1e9db3240" timestamp=1743695061
+DEBUG [print_timings] prompt eval time     =    1999.99 ms /   728 tokens (    2.75 ms per token,   364.00 tokens per second) | n_prompt_tokens_processed=728 n_tokens_second=364.00200201101103 slot_id=0 t_prompt_processing=1999.989 t_token=2.7472376373626375 task_id=550 tid="0x1e9db3240" timestamp=1743695069
+DEBUG [print_timings] generation eval time =    5972.21 ms /   251 runs   (   23.79 ms per token,    42.03 tokens per second) | n_decoded=251 n_tokens_second=42.02797891300576 slot_id=0 t_token=23.79367330677291 t_token_generation=5972.212 task_id=550 tid="0x1e9db3240" timestamp=1743695069
+DEBUG [print_timings]           total time =    7972.20 ms | slot_id=0 t_prompt_processing=1999.989 t_token_generation=5972.212 t_total=7972.201000000001 task_id=550 tid="0x1e9db3240" timestamp=1743695069
+DEBUG [update_slots] slot released | n_cache_tokens=979 n_ctx=32384 n_past=978 n_system_tokens=0 slot_id=0 task_id=550 tid="0x1e9db3240" timestamp=1743695069 truncated=false
+DEBUG [log_server_request] request | method="POST" params={} path="/completion" remote_addr="127.0.0.1" remote_port=50356 status=200 tid="0x16dde7000" timestamp=1743695069
+[GIN] 2025/04/03 - 21:14:29 | 200 |  8.016608667s |       127.0.0.1 | POST     "/api/chat"
+time=2025-04-03T21:14:29.651+05:30 level=DEBUG source=sched.go:407 msg="context for request finished"
+time=2025-04-03T21:14:29.651+05:30 level=DEBUG source=sched.go:339 msg="runner with non-zero duration has gone idle, adding timer" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 duration=30m0s
+time=2025-04-03T21:14:29.651+05:30 level=DEBUG source=sched.go:357 msg="after processing request finished event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4 refCount=0
+time=2025-04-03T21:44:29.616+05:30 level=DEBUG source=sched.go:341 msg="timer expired, expiring to unload" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:44:29.617+05:30 level=DEBUG source=sched.go:360 msg="runner expired event received" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:44:29.617+05:30 level=DEBUG source=sched.go:375 msg="got lock to unload" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:44:29.618+05:30 level=DEBUG source=server.go:1086 msg="stopping llama server"
+time=2025-04-03T21:44:29.618+05:30 level=DEBUG source=server.go:1092 msg="waiting for llama server to exit"
+time=2025-04-03T21:44:29.645+05:30 level=DEBUG source=server.go:1096 msg="llama server stopped"
+time=2025-04-03T21:44:29.645+05:30 level=DEBUG source=sched.go:380 msg="runner released" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:44:29.645+05:30 level=DEBUG source=sched.go:384 msg="sending an unloaded event" modelPath=/Users/harsh/.ollama/models/blobs/sha256-36c09b22ee395b0a80053af776e65d8c34cc38ee47eb1d842c2578f0dacd10d4
+time=2025-04-03T21:44:29.645+05:30 level=DEBUG source=sched.go:308 msg="ignoring unload event with no pending requests"

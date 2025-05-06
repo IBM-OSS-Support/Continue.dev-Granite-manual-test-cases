@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Press Cmd+Shift+U and Run Python Script",
+            "type": "shell",
+            "command": "osascript",
+            "args": [
+                "-e",
+                "tell application \"System Events\" to keystroke \"u\" using {command down, shift down}",
+                "-e",
+                "tell application \"System Events\" to keystroke \"i\" using {shift down}",
+                "delay 0.5", 
+                "-e",
+                "tell application \"System Events\" to keystroke \"u\" using {command down, shift down}",
+                "-e",
+                "tell application \"Terminal\" to do script \"python3 guirunner.py\""
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

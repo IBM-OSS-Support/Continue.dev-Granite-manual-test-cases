@@ -1,0 +1,12 @@
+---
+name: URL-summary
+description: Test cases for VSCode
+---
+
+<user>
+@url:https://docs.continue.dev/customize/deep-dives/codebase Retrieve and summarize the main concepts from the article.
+</user>
+
+<assistant>
+List 5 points only.
+</assistant>

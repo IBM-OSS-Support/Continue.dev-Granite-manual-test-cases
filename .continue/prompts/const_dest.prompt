@@ -6,3 +6,7 @@ description: Test cases for VSCode
 <user>
 How do you declare constructors and destructors in Java?
 </user>
+
+<assistant>
+Give the definition and example of constructors and destructors. Also give the code of how to use them.
+</assistant>

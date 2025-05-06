@@ -6,3 +6,7 @@ description: Test cases for VSCode
 <user>
 Write documentation comments for the code @documentation.py
 </user>
+
+<assistant>
+Write inline comments in the code and then a summary of the full code in the end.
+</assistant>

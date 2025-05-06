@@ -6,3 +6,7 @@ description: Test cases for VSCode
 <user>
 Write a code for Binary Search along with the documentation of the code.
 </user>
+
+<assistant>
+Give a commented code of binary search and then a brief explanation of the code.
+</assistant>

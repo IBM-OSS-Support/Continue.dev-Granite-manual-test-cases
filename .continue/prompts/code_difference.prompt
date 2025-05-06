@@ -1,9 +1,12 @@
 ---
-name: Code-difference.
+name: Code-difference
 description: Test cases for VSCode
 ---
 
 <user>
-Can you tell me the difference between @documentation and @documentation_with_bugs 
-Which one do you think is ready to use right now?
+Can you tell me the difference between @documentation.py and @documentation_with_bugs.py 
 </user>
+
+<assistant>
+Give the list of differences among the files. Give one line summary of which one is better and why.
+</assistant>

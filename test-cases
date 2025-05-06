@@ -48,3 +48,14 @@ Question 13: Code complete using Tab-autocomplete. (Simple)
 Question 14: Code complete using Tab-autocomplete. (Moderate)
 
 Models under test: Llama 3.2, granite-8b-instruct-128k (gen 3 is coming), Mystral Mamba latest, starcoder2
+
+What is Lambda function in python?
+Write a code for quick-sort algorithm in Python.
+How do you declare constructors and destructors in Java?
+Write a code for Binary Search along with the documentation of the code.
+Fix the bugs in the code: @documentation_with_bugs.py
+Port this code to java @documentation.py
+Optimize the code @code_to_optimize.py
+Create Unit test for this code: @documentation.py
+Review this code and suggest any improvements @regression.py
+Retrieve and summarize the main concepts from the article @url:https://docs.continue.dev/customize/deep-dives/codebase

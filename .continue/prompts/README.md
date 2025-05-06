@@ -13,3 +13,10 @@
 ## We can set the parameters for the prompt file in the prompt file itself:
 
 ![image](https://github.com/user-attachments/assets/47eef664-6b6f-456a-86b9-a7199a0a9107)
+
+
+STEPS:
+1. Ensure OUTPUTFILES folder is present
+1. Set MODEL_NAME
+2. Select the same model in Continue.dev
+3. Clear the output panel of VS-Code
