@@ -21,7 +21,27 @@ Question 9: Documentation comment of bank code
 
 Question 10: Create Unit test for bank code
 
-Qusetion 11 : Review the @test (folder) and suggest any improvements in the code structure or naming conventions
+Question 11: Review the @test (folder) and suggest any improvements in the code structure or naming conventions
+
+Question 12:  what is the relation between  @file_io.py and  @manager.py (@file)
+
+Question 13: @view_books explain the code in this(@code)
+
+Question 14: @Git Diff identify the recent changes in @run_multi_prompt.py ( @Git Diff)
+
+Question 15: @File Tree give me the folder structure of @tasks(@File Tree)
+
+Question 16: @Operating system Provide detailed information about the architecture and platform of the system including specifics such as OS version, kernel type, and any relevant hardware details. (@Operating system)
+
+Question 17: @Terminal run the python code in @Current File(@Terminal)
+
+Question 18: @currentfile analyze the currently open files in my editor. Are there any syntax errors or missing code (@currentfile)
+
+Question 19: Analyze the code at @URL: https://raw.githubusercontent.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases/granite3.2-test/documentation.py   and explain how the BankSystem and BankAccount classes interact to manage account creation, deposits, withdrawals, and transaction history.
+
+Question 20: @Docs
+             @summary which is the best LLM model?
+
 
 Question 13: Code complete using Tab-autocomplete. (Simple)
 
