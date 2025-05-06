@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderMenuButton, HeaderName, SideNav, SideNavItems, SideNavLink, Theme } from '@carbon/react';
-import {Home, UserAvatar, Folders, Group, GroupResource} from '@carbon/react/icons';
+import {Home, UserAvatar, Folders, Group, GroupResource, ServerDns, CloudLogging, Compare} from '@carbon/react/icons';
 import { ActiveTabProvider } from './use-active-tab/UseActiveTab';
 import "./_Navigation.scss";
 
@@ -20,14 +20,18 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 
   React.useEffect(() => {
-    if (location.pathname === '/' || location.pathname === '/dashboard') {
+    if (location.pathname === '#/') {
+      setActiveTab('Welcome Folks...');
+    } else if (location.pathname === '#/dashboard') {
       setActiveTab('Dashboard');
-    } else if (location.pathname === '/summary') {
+    } else if (location.pathname === '#/summary') {
       setActiveTab('Summary');
-    } else if (location.pathname === '/leaderboard') {
-      setActiveTab('Leaderboard');
-    } else if (location.pathname === '/model-comparison') {
-      setActiveTab('EvaluationComparison');
+    } else if (location.pathname === '#/leaderboard') {
+      setActiveTab('BigCodeBench Leaderboard');
+    } else if (location.pathname === '#/model-comparison') {
+      setActiveTab('Model Comparison');
+    } else if (location.pathname === '#/model-server-logs') {
+      setActiveTab('Model Server Logs');
     }
   }, [location]);
 
@@ -50,7 +54,7 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             prefix=""
           >
             {/* Code-assist */}
-            <img alt="IBM code-assist Logo" src="/ibm-code-assist-logo.svg" width={175} height={47} title="IBM code-assist" />
+            <img alt="IBM code-assist Logo" src={`${process.env.PUBLIC_URL}/ibm-code-assist-logo.svg`} width={175} height={47} title="IBM code-assist" />
           </HeaderName>
           <SideNav
             id="side-nav"
@@ -58,18 +62,21 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             isRail
           >
             <SideNavItems>
-              <SideNavLink renderIcon={Home} href="/dashboard" onClick={() => handleNavLinkClick('Dashboard')}>
+              <SideNavLink renderIcon={Home} href="#/dashboard" onClick={() => handleNavLinkClick('Dashboard')}>
                 Dashboard
               </SideNavLink>
-              <SideNavLink renderIcon={Folders} href="/summary" onClick={() => handleNavLinkClick('Summary')}>
+              <SideNavLink renderIcon={Folders} href="#/summary" onClick={() => handleNavLinkClick('Summary')}>
                 Summary
               </SideNavLink>
-              <SideNavLink renderIcon={Group} href="/leaderboard" onClick={() => handleNavLinkClick('Leaderboard')}>
+              <SideNavLink renderIcon={Group} href="#/leaderboard" onClick={() => handleNavLinkClick('BigCodeBench Leaderboard')}>
                 BigCodeBench Leaderboard
               </SideNavLink>
-              <SideNavLink renderIcon={GroupResource} href="/model-comparison" onClick={() => handleNavLinkClick('EvaluationComparison')}>
+              <SideNavLink renderIcon={Compare} href="#/model-comparison" onClick={() => handleNavLinkClick('Model Comparison')}>
                 Model Comparison
               </SideNavLink>
+              {/* <SideNavLink renderIcon={CloudLogging} href="#/model-server-logs" onClick={() => handleNavLinkClick('Model Server Logs')}>
+                Model Server Logs
+              </SideNavLink> */}
             </SideNavItems>
           </SideNav>
           <HeaderGlobalBar>

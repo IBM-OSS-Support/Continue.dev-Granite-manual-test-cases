@@ -1,0 +1,22 @@
+{
+  "0": [
+    {
+      "name": "granite-code:8b-instruct",
+      "date": "20250429T103335",
+      "file_name": "granite-code:8b-instruct_20250429T103335.json",
+      "total_time": 132001.13129615784,
+      "prompt": [
+        {
+          "user": "answer brief: What is AWS?",
+          "assistant": "AWS stands for Amazon Web Services. It provides cloud computing and APIs to companies and individuals. It can be used to train AIs, host websites, run analytics, manage blockchains, run containers, host games, interface with Internet of Things items, run quantum computing, develop and test robots, provide security, manage blockchains, run serverless code, runvertex processing, provide cost management, manage security, run fraud detection, provide internet of things support, run machine learning as a service, manage security, run big data analytics, run financial services, run blockchain analytics.",
+          "time": 66884.72008705139
+        },
+        {
+          "user": "What is java?",
+          "assistant": "Java is a programming language developed by Sun Microsystems (now owned by Oracle Corporation) in the mid-1990s. It is widely used for building cross-platform applications, including desktop applications, server-side applications, and mobile apps. Java programs are compiled into bytecode, which can be run on any machine with a Java Virtual Machine (JVM) installed. The language has a rich set of libraries and frameworks, making it easy to develop complex applications quickly and efficiently. Some popular uses of Java include web development, desktop application development, Android app development, and game development.",
+          "time": 65116.411209106445
+        }
+      ]
+    }
+  ]
+}

@@ -166,7 +166,7 @@
       }
     }
     .result-combo-box,
-    .question-date-picker,
+    .log-combo-box,
     .question-combo-box {
       margin: 0.8rem 0 0 0;
     }
@@ -208,39 +208,204 @@
         font-weight: bold;
     }
   }
+
+  .time-taken-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0.2rem 0 0.8rem;
+
+    > p > strong > span {
+      position: relative;
+      vertical-align: middle;
+      margin: 0 0.2rem 0 0;
+
+      &:hover {
+        &::after {
+          content: "Total Time Taken to Complete all Prompts.";
+          position: absolute;
+          bottom: 1.4rem;
+          left: -6.5rem;
+          background: #000011;
+          color: #ffffff;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          font-size: 0.7rem;
+          font-weight: 600;
+          z-index: 1;
+          box-shadow: 0 0 4px 1px rgb(96 96 96 / 80%);
+          width: 250px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+
+    .flash-icon {
+      position: relative;
+
+      &:hover {
+        &::after {
+          content: "Quickest reply provided among these Models.";
+          position: absolute;
+          bottom: 1.4rem;
+          left: -3.5rem;
+          background: #000011;
+          color: #ffffff;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          font-size: 0.7rem;
+          font-weight: 600;
+          z-index: 1;
+          box-shadow: 0 0 4px 1px rgb(96 96 96 / 80%);
+          width: 150px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
+  .cds--snippet--multi {
+    background: #000011;
+    &.cds--snippet--has-right-overflow {
+      &:after {
+        background-image: linear-gradient(to right, #0000, #000000);
+      }
+    }
+  }
+  .filter-btn-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0.5rem 0 0 0;
+  }
+  .log-modal {
+    &.cds--modal {
+      &.is-visible {
+          .cds--modal-container {
+              min-height: 55%;
+          }
+      }
+    }
+    .log-summary-tile {
+        > p {
+            min-width: 45%;
+        }
+    }
+    .log-summary-tile {
+        margin-bottom: 1.5rem;
+        > h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        .log-summary-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+    
+            > p {
+                min-width: 45%;
+            }
+        }
+    } 
+    .cds--btn--tertiary {
+      flex-grow: 0;
+      max-inline-size: unset;
+      min-block-size: initial;
+      min-width: 10rem;
+      height: 2.5rem;
+      padding: 0.7rem 0.5rem;
+
+      .cds--btn__icon {
+        top: 0.6rem;
+      }
+    }
+    .cds--snippet--multi {
+      background: #000011;
+      height: 100%;
+      max-inline-size: 100%;
+      margin-top: 0.75rem;
+      &.cds--snippet--has-right-overflow {
+        &:after {
+          background-image: linear-gradient(to right, #0000, #000000);
+        }
+      }
+      .cds--snippet-container {
+          min-height: 100% !important;
+      }
+    }
+    .skeleton-wrap {
+      .cds--date-picker--range {
+        .cds--date-picker-container, .cds--date-picker__input {
+          inline-size: 37rem;
+        }
+      }
+    }
+  }
+  .response-time {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding-top: 0.5rem;
+  }
+
+  .information-wrap {
+    padding: 1rem 2.4rem;
+    margin-inline-start: 0 !important;
+    margin-top: 2rem;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+
+    h4 {
+        margin: 0 0 1rem 0;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .cds--list__item {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        &::before {
+            font-weight: bold;
+        }
+    }
+    .ribbon {
+      .ribbon4 {
+        position: relative;
+        top: initial;
+        left: initial;
+        margin: 0 0.4rem;
+      }
+    }
+  }
+  .download-log-wrap {
+    .close-icon {
+      &:hover {
+        cursor: pointer;
+        color: #a2191f;
+      }
+    }
+  }
 }
-// .flatpickr-calendar.open {
-//     inline-size: 23.5rem !important;
-// }
 .ribbon {
   position: relative;
 
   .ribbon4 {
     position: absolute;
-    top: 15px;
-    padding: 8px 10px;
-    background: #015d01;
-    box-shadow: -1px 2px 3px rgba(0,0,0,.3);
+    top: -1.85rem;
+    left: -0.5rem;
+    padding: 5px;
+    background: #015d0191;
+    box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.3);
+    font-size: 0.75rem;
+    border-radius: 4px 4px 0 0;
   }
-  .ribbon4:before, .ribbon4:after {
-    content: "";
-    position: absolute;
-  }
-  .ribbon4:before {
-    width: 7px;
-    height: 100%;
-    top: 0;
-    left: -6.5px;
-    padding: 0 0 7px;
-    background: inherit;
-    border-radius: 5px 0 0 5px;
-  }
-  .ribbon4:after {
-    width: 5px;
-    height: 5px;
-    bottom: -5px;
-    left: -4.5px;
-    background: #a5f3a5;
-    border-radius: 5px 0 0 5px;
-   }
 }

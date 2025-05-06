@@ -116,9 +116,9 @@ app.get("/server-ip", (req, res) => {
 });
 
 // ✅ Bind to 0.0.0.0 instead of localhost
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`✅ Server Running at ${machineIP}:${PORT}`);
-});
+// app.listen(PORT, "0.0.0.0", () => {
+//     console.log(`✅ Server Running at ${machineIP}:${PORT}`);
+// });
 
 app.get("/api/code-assist", (req, res) => {
     const filePath = path.join(__dirname, "src", "code-assist-data.json");
@@ -131,4 +131,61 @@ app.get("/api/code-assist", (req, res) => {
         if (err) return res.status(500).json({ error: "Failed to read code assist data" });
         res.json(JSON.parse(data));
     });
+});
+
+// ✅ Configure logs directory path (create if needed)
+const logsPath = path.join(__dirname, "logs");
+if (!fs.existsSync(logsPath)) {
+    fs.mkdirSync(logsPath, { recursive: true });
+}
+
+// ✅ API to get list of log files
+app.get("/logs", (req, res) => {
+    fs.readdir(logsPath, (err, files) => {
+        if (err) {
+            console.error("❌ ERROR: Unable to scan log files:", err);
+            return res.status(500).json({ error: "Unable to scan log files" });
+        }
+
+        const logFiles = files.map(file => {
+          // Handle both formats: _YYYYMMDDTHHMMSS.log and _YYYYMMDD_HHMMSS.log
+          const dateMatch = file.match(/_(\d{8}[T_]\d{6})\.log$/); 
+          if (dateMatch) {
+            const cleanDate = dateMatch[1].replace('_', 'T'); // Standardize to T separator
+            return {
+              name: file,
+              date: `${cleanDate.slice(0,4)}-${cleanDate.slice(4,6)}-${cleanDate.slice(6,11)}:${cleanDate.slice(11,13)}:${cleanDate.slice(13,15)}`
+            };
+          }
+          return { name: file, date: "Unknown Date" };
+        });
+        res.json(logFiles);
+    });
+});
+
+// ✅ API to get specific log file content
+app.get("/logs/:fileName", (req, res) => {
+    const { fileName } = req.params;
+    const filePath = path.join(logsPath, fileName);
+
+    // Security check to prevent path traversal
+    if (!filePath.startsWith(logsPath)) {
+        return res.status(400).json({ error: "Invalid file path" });
+    }
+
+    fs.readFile(filePath, "utf8", (err, data) => {
+        if (err) {
+            if (err.code === "ENOENT") {
+                return res.status(404).json({ error: "Log file not found" });
+            }
+            console.error("❌ ERROR: Failed to read log file:", err);
+            return res.status(500).json({ error: "Failed to read log file" });
+        }
+        res.send(data);
+    });
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server Running at ${machineIP}:${PORT}`);
+  console.log(`📂 Logs available at: http://${machineIP}:${PORT}/logs`);
 });

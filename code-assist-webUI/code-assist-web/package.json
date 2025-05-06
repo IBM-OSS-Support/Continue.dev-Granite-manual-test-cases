@@ -17,9 +17,13 @@
   },
   "scripts": {
     "start": "node server.js & react-scripts start",
-    "build": "react-scripts build",
+    "start-docs": "cd docs & npm run start",
+    "build": "react-scripts build && node ../../scripts/generate-index.js && rsync -a build/ ../../docs && rm -r build",
+    "build-docs": "cd docs & npm run build",
+    "build-webui": "tsc -p tsconfig.json",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepublishOnly": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +46,8 @@
   "devDependencies": {
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
-    "sass": "^1.83.4"
-  }
+    "sass": "^1.83.4",
+    "typescript": "^4.4.2"
+  },
+  "homepage": "https://ibm-oss-support.github.io/IBM-Code-Assist-Web-UI"
 }

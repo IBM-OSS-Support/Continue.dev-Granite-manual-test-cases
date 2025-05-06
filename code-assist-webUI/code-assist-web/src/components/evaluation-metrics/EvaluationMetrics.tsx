@@ -14,6 +14,7 @@ import {
   UnorderedList,
   ListItem,
   Button,
+  OrderedList,
 } from "@carbon/react";
 import "@carbon/charts/styles.css";
 import "./_EvaluationMetrics.scss";
@@ -154,6 +155,35 @@ const EvaluationMetrics = () => {
                     )}
                 </DataTable>
             </Column>
+            <Column lg={16} md={8} sm={4}>
+                  <div className="information-wrap">
+                      <h4>Notes:</h4>
+                      <OrderedList>
+                          <ListItem>Evaluated using BigCodeBench API's.</ListItem>
+                          <ListItem>
+                            Hard Set vs Full Set:
+                            <OrderedList nested>
+                              <ListItem> Hard Set: A subset of ~150 BigCodeBench tasks which is more user-facing and challenging.</ListItem>
+                              <ListItem>Full Set: The full set of 1140 BigCodeBench tasks.</ListItem>
+                            </OrderedList>
+                          </ListItem>
+                          <ListItem>Models are ranked according to (calibrated) Pass@1 using greedy decoding. Setup details can be found here.</ListItem>
+                          <ListItem>
+                            Complete vs Instruct:
+                            <OrderedList nested>
+                              <ListItem>Complete: Code Completion based on the structured long-context docstring. This variant tests if the models are good at coding.</ListItem>
+                              <ListItem>Instruct (🔥Vibe Check🔥): Code Generation based on the brief NL-oriented instructions. This variant tests if the models are really capable enough to understand human intents to code.</ListItem>
+                            </OrderedList>
+                          </ListItem>
+                          <ListItem>Pass@1: The percentage of tasks where the model's top prediction matches the ground truth.</ListItem>
+                          <ListItem>Pass@1 Score: The average Pass@1 score across all tasks.</ListItem>
+                          <ListItem>Rank: The rank of the model based on the Pass@1 score.</ListItem>
+                          <ListItem>Click on the "Switch to Hard" button to view the hard dataset.</ListItem>
+                          <ListItem>Click on the "Switch to Full" button to view the full dataset.</ListItem>
+                          <ListItem>Click on the "Show More" button to view the complete and instruct prompt scores.</ListItem>
+                      </OrderedList>
+                  </div>
+                </Column>
         </Grid>
     </div>
   );
