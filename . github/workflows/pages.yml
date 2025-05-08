@@ -61,11 +61,11 @@ jobs:
       - name: Verify docs directory contents
         run: ls -la code-assist-webUI/docs
 
-      - name: Deploy to sachin_code-assist-website
+      - name: Deploy to main branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: code-assist-webUI/docs
-          publish_branch: sachin_code-assist-website
+          publish_branch: main
           force_orphan: true
           commit_message: "Deploy to GitHub Pages"
