@@ -1,0 +1,22 @@
+{
+  "0": [
+    {
+      "name": "granite-code:3b-instruct",
+      "date": "20250429T214112",
+      "file_name": "granite-code:3b-instruct_20250429T214112.json",
+      "total_time": 132016.7543888092,
+      "prompt": [
+        {
+          "user": "answer brief: What is AWS?",
+          "assistant": "AWS stands for Amazon Web Services. It provides cloud computing and APIs to companies and individuals.",
+          "time": 66897.79210090637
+        },
+        {
+          "user": "What is java?",
+          "assistant": "Java is a programming language that is widely used for enterprise-level applications.",
+          "time": 65118.96228790283
+        }
+      ]
+    }
+  ]
+}
