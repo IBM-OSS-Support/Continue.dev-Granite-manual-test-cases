@@ -4,7 +4,7 @@
       "name": "granite3.2:2b",
       "date": "20250403T225221",
       "file_name": "granite3.2:2b_20250403T225221.json",
-      "total_time": 6755.12,
+      "total_time": 132977.41770744324,
       "prompt": [
         {
           "user": "answer brief: What is AWS?",

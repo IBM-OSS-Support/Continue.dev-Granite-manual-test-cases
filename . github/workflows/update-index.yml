@@ -1,0 +1,36 @@
+name: Update Prompt Results Index
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'code-assist-webUI/code-assist-web/src/prompt-results/**'
+      - '!code-assist-webUI/code-assist-web/src/prompt-results/index.json'
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
+    - name: Generate index.json
+      run: |
+        cd code-assist-webUI/code-assist-web
+        node scripts/generate-index.js
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add code-assist-webUI/code-assist-web/src/prompt-results/index.json
+        git commit -m "Auto-update index.json" || echo "No changes to commit"
+        git push

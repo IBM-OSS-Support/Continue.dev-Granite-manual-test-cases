@@ -1,0 +1,22 @@
+{
+  "0": [
+    {
+      "name": "granite3.2:8b",
+      "date": "20250425T143619",
+      "file_name": "granite3.2:8b_20250425T143619.json",
+      "total_time": 131977.41770744324,
+      "prompt": [
+        {
+          "user": "answer brief: What is AWS?",
+          "assistant": "AWS, or Amazon Web Services, is a comprehensive cloud services platform offered by Amazon. It provides a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings. These services operate from data centers around the globe, offering computing power, database storage, content delivery, and other functionalities to help businesses scale and grow. Key features include scalability, flexibility, security, and cost-effectiveness.",
+          "time": 66858.03866386414
+        },
+        {
+          "user": "What is java?",
+          "assistant": "Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. It's a general-purpose language intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation.\nKey features of Java include:\n1. Platform Independence: Java programs are not written to run on any specific hardware or operating system, but rather on a virtual machine.\n2. Object-Oriented: It follows the principles of Object-Oriented Programming (OOP), including encapsulation, inheritance, and polymorphism.\n3. Robustness: The language is designed to be robust, with features that help detect errors at compile time.\n4. Secure: Java's security model includes built-in protections against certain types of malicious code.\n5. Multithreaded: It supports multithreading, which allows for the execution of multiple threads concurrently within a single program.\nJava is widely used in Android app development, web applications (using frameworks like Spring), enterprise software, and big data technologies.",
+          "time": 65119.3790435791
+        }
+      ]
+    }
+  ]
+}

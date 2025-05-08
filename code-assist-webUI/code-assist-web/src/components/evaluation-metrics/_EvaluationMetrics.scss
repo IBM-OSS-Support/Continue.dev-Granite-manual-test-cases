@@ -31,14 +31,23 @@
     }
 
     .information-wrap {
-        padding: 1rem 1.4rem;
+        padding: 1rem 2.4rem;
         margin-inline-start: 0 !important;
         margin-top: 2rem;
         border: 1px solid #aaaaaa;
 
-        > .cds--list__item {
+        h4 {
+            margin: 0 0 1rem 0;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .cds--list__item {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
             &::before {
-                top: 4px;
                 font-weight: bold;
             }
         }

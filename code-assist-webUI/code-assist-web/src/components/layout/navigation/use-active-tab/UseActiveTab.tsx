@@ -1,5 +1,6 @@
 // UseActiveTab.tsx
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, use } from 'react';
+import { useLocation } from "react-router-dom";
 
 const ActiveTabContext = createContext<string | null>(null);
 
@@ -12,12 +13,17 @@ interface ActiveTabProviderProps {
 
 export const ActiveTabProvider: React.FC<ActiveTabProviderProps> = ({ value, children }) => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
+  useEffect(() => {
+    setActiveTab(value);
+  }, [value]);
+  console.log("ActiveTabProvider value", value);
   console.log("ActiveTabProvider activeTab", activeTab);
   
+  const location = useLocation();
 
   useEffect(() => {
     // Assuming you want to set the initial active tab based on route
-    const pathname = window.location.pathname;
+    const pathname = location.pathname;
     console.log("pathname", pathname);
     
     if (pathname === '/' || pathname === '/dashboard') {
@@ -28,6 +34,8 @@ export const ActiveTabProvider: React.FC<ActiveTabProviderProps> = ({ value, chi
       setActiveTab('BigCodeBench Leaderboard');
     } else if (pathname === '/model-comparison') {
       setActiveTab('Model Comparison');
+    } else if (pathname === '/model-server-logs') {
+      setActiveTab('Model Server Logs');
     }
   }, []);
 
