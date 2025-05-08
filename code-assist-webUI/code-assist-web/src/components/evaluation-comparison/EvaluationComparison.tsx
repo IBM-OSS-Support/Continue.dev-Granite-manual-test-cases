@@ -1524,14 +1524,14 @@ const ModelComparison = () => {
                             <div className="information-wrap">
                                 <h4>Notes:</h4>
                                 <OrderedList>
-                                    <ListItem>Pass@1: The percentage of tasks where the model's top prediction matches the ground truth.</ListItem>
-                                    <ListItem>Pass@1 Score is fetched using the BigCodeBench API.</ListItem>
+                                    {/* <ListItem>Pass@1: The percentage of tasks where the model's top prediction matches the ground truth.</ListItem>
+                                    <ListItem>Pass@1 Score is fetched using the BigCodeBench API.</ListItem> */}
                                     <ListItem>' <FlashFilled size={14} color="#facc15" strokeWidth={2} /> ' indicates, Quickest reply provided among Compared Models.</ListItem>
                                     <ListItem style={{ display: 'flex'}}>' <div className="ribbon"><span className="ribbon4">Recommended</span></div> ' indicates, User to choose better Model.</ListItem>
                                     <ListItem style={{ display: 'flex'}}>' <Alarm size={20} style={{ margin: "0 0.4rem"}}  /> ' indicates time taken to complete that prompt (question).</ListItem>
-                                    <ListItem>' <Tag type="green"/> ' indicates better pass@1 score.</ListItem>
+                                    {/* <ListItem>' <Tag type="green"/> ' indicates better pass@1 score.</ListItem>
                                     <ListItem>' <Tag type="red" /> ' indicates worst pass@1 score.</ListItem>
-                                    <ListItem>' <Tag type="outline">N/A</Tag> ' indicates pass@1 score is not available for that Model.</ListItem>
+                                    <ListItem>' <Tag type="outline">N/A</Tag> ' indicates pass@1 score is not available for that Model.</ListItem> */}
                                     <ListItem>Click on the "Reset Filter" button to reset the filter.</ListItem>
                                     <ListItem>Click on the "Remove Prompt Background Wallpaper" button to remove the background wallpaper.</ListItem>
                                     <ListItem>Click on the "Select a Result" dropdown to select a result version.</ListItem>

@@ -4,17 +4,17 @@
       "name": "gpt-4o",
       "date": "20250311T203629",
       "file_name": "gpt-4o_20250311T203629.json",
-      "total_time": 74755.125432,
+      "total_time": 614755.41770744324,
       "prompt": [
         {
           "user": "answer brief: What is AWS?",
           "assistant": "AWS (Amazon Web Services) is a comprehensive cloud computing platform provided by Amazon. It offers a wide range of services, including computing power, storage, databases, machine learning, and more, enabling businesses to build and scale applications without managing physical infrastructure.",
-          "time": "7029.70"
+          "time": 57029.7012543820
         },
         {
           "user": "What is java?",
           "assistant": "Java is a high-level, object-oriented programming language developed by Sun Microsystems (now owned by Oracle). It is platform-independent due to its 'write once, run anywhere' (WORA) capability, enabled by the Java Virtual Machine (JVM). Java is widely used for building web, mobile, desktop applications, and enterprise systems.",
-          "time": "6029.70"
+          "time": 51029.70261251251
         }
       ]
     }

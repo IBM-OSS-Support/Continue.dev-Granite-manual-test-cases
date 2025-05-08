@@ -9,7 +9,7 @@
         {
           "user": "answer brief: What is AWS?",
           "assistant": "AWS, or Amazon Web Services, is a comprehensive cloud services platform offered by Amazon. It provides a mix of infrastructure as a service (IaaS), platform as a service (PaaS), and packaged software as a service (SaaS) offerings. These services operate from data centers around the globe, offering computing power, database storage, content delivery, and other functionalities to help businesses scale and grow. Key features include scalability, flexibility, security, and cost-effectiveness.",
-          "time": 66858.03866386414
+          "time": 66858.3866386414
         },
         {
           "user": "What is java?",
