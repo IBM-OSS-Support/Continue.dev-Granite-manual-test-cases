@@ -1,7 +1,7 @@
 {
     "0": [
         {
-            "Name": "granite3.2:8b", 
+            "Name": "granite3.3:8b", 
             "Data": [
                 {
                     "Method": "Bug Fixing (HumanEvalFix)",
@@ -17,7 +17,7 @@
                     "Method": "Port Code from Python to Java (MultiPL-E)",
                     "Number of Problems Evaluated": 158,
                     "Duration": "15 minutes",
-                    "Pass@1": "0.80",
+                    "Pass@1": "0.50",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model struggles with translating code between Python and Java, with no successful results (pass@1 = 0.0).",
                     "Response": "",
@@ -27,7 +27,7 @@
                     "Method": "Refactoring from Java to Quarkus (HumanEvalSynthesize)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "19 minutes",
-                    "Pass@1": "0.50",
+                    "Pass@1": "0.35",
                     "BLEU Score": "Not applicable",
                     "Observation": "Similar to the Python-to-Java task, the model fails to produce accurate refactored code for Quarkus (pass@1 = 0.0).",
                     "Response": "",
@@ -47,7 +47,7 @@
                     "Method": "Unit Test Case (HumanEval)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "30 minutes",
-                    "Pass@1": "0.604",
+                    "Pass@1": "0.504",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model performs poorly in generating correct unit test cases, with a pass@1 rate of only 0.6%.",
                     "Response": "",
@@ -56,7 +56,7 @@
             ]
         },
         {
-            "Name": "granite3.1:8b", 
+            "Name": "granite3.2:8b", 
             "Data": [
                 {
                     "Method": "Bug Fixing (HumanEvalFix)",
@@ -91,13 +91,13 @@
             ]
         },
         {
-            "Name": "claude3.5-sonnet", 
+            "Name": "granite-code:8b-instruct", 
             "Data": [
                 {
                     "Method": "Bug Fixing (HumanEvalFix)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "20 minutes",
-                    "Pass@1": "0.282",
+                    "Pass@1": "0.382",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model demonstrates moderate success in bug-fixing scenarios, achieving an 18.29% pass@1 rate.Incorrect code generated(factorize):from typing import List",
                     "Response": "{\"def factorize(n: int) -> List[int]:\n    import math\n\n    fact = []\n\n    i = 0\n\n    while i <= int(math.sqrt(n) + 1):\n        if n % i == 0:\n            fact.append(i)\n\n            n //= i\n        else:\n            i += 1\n\n    if n > 1:\n        fact.append(n)\n\n    return fact}",
@@ -107,7 +107,7 @@
                     "Method": "Port Code from Python to Java (MultiPL-E)",
                     "Number of Problems Evaluated": 158,
                     "Duration": "35 minutes",
-                    "Pass@1": "0.120",
+                    "Pass@1": "0.150",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model struggles with translating code between Python and Java, with no successful results (pass@1 = 0.0).",
                     "Response": "",
@@ -117,7 +117,7 @@
                     "Method": "Refactoring from Java to Quarkus (HumanEvalSynthesize)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "39 minutes",
-                    "Pass@1": "0.310",
+                    "Pass@1": "0.280",
                     "BLEU Score": "Not applicable",
                     "Observation": "Similar to the Python-to-Java task, the model fails to produce accurate refactored code for Quarkus (pass@1 = 0.0).",
                     "Response": "",
@@ -137,62 +137,7 @@
                     "Method": "Unit Test Case (HumanEval)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "30 minutes",
-                    "Pass@1": "0.106",
-                    "BLEU Score": "Not applicable",
-                    "Observation": "The model performs poorly in generating correct unit test cases, with a pass@1 rate of only 0.6%.",
-                    "Response": "",
-                    "Issue": ""
-                }
-            ]
-        },
-        {
-            "Name": "llama3.2", 
-            "Data": [
-                {
-                    "Method": "Bug Fixing (HumanEvalFix)",
-                    "Number of Problems Evaluated": 164,
-                    "Duration": "22 minutes",
-                    "Pass@1": "0.182",
-                    "BLEU Score": "Not applicable",
-                    "Observation": "The model demonstrates moderate success in bug-fixing scenarios, achieving an 18.29% pass@1 rate.Incorrect code generated(factorize):from typing import List",
-                    "Response": "{\"def factorize(n: int) -> List[int]:\n    import math\n\n    fact = []\n\n    i = 0\n\n    while i <= int(math.sqrt(n) + 1):\n        if n % i == 0:\n            fact.append(i)\n\n            n //= i\n        else:\n            i += 1\n\n    if n > 1:\n        fact.append(n)\n\n    return fact}",
-                    "Issue": "The loop starts with i = 0, which causes a division by zero error. It should start with i = 2."
-                },
-                {
-                    "Method": "Port Code from Python to Java (MultiPL-E)",
-                    "Number of Problems Evaluated": 158,
-                    "Duration": "32 minutes",
-                    "Pass@1": "0.180",
-                    "BLEU Score": "Not applicable",
-                    "Observation": "The model struggles with translating code between Python and Java, with no successful results (pass@1 = 0.0).",
-                    "Response": "",
-                    "Issue": ""
-                },
-                {
-                    "Method": "Refactoring from Java to Quarkus (HumanEvalSynthesize)",
-                    "Number of Problems Evaluated": 164,
-                    "Duration": "33 minutes",
-                    "Pass@1": "0.340",
-                    "BLEU Score": "Not applicable",
-                    "Observation": "Similar to the Python-to-Java task, the model fails to produce accurate refactored code for Quarkus (pass@1 = 0.0).",
-                    "Response": "",
-                    "Issue": ""
-                },
-                {
-                    "Method": "Documentation (codexglue_code_to_text)",
-                    "Number of Problems Evaluated": 150,
-                    "Duration": "15 minutes",
-                    "Pass@1": "Not applicable",
-                    "BLEU Score": "16.76",
-                    "Observation": "The model performs moderately well in generating documentation, achieving a BLEU score of 16.76. This indicates a reasonable alignment with reference documentation.",
-                    "Response": "",
-                    "Issue": ""
-                },
-                {
-                    "Method": "Unit Test Case (HumanEval)",
-                    "Number of Problems Evaluated": 164,
-                    "Duration": "30 minutes",
-                    "Pass@1": "0.106",
+                    "Pass@1": "0.406",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model performs poorly in generating correct unit test cases, with a pass@1 rate of only 0.6%.",
                     "Response": "",
@@ -217,7 +162,7 @@
                     "Method": "Port Code from Python to Java (MultiPL-E)",
                     "Number of Problems Evaluated": 158,
                     "Duration": "30 minutes",
-                    "Pass@1": "0.20",
+                    "Pass@1": "0.60",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model struggles with translating code between Python and Java, with no successful results (pass@1 = 0.0).",
                     "Response": "",
@@ -247,7 +192,7 @@
                     "Method": "Unit Test Case (HumanEval)",
                     "Number of Problems Evaluated": 164,
                     "Duration": "25 minutes",
-                    "Pass@1": "0.206",
+                    "Pass@1": "0.606",
                     "BLEU Score": "Not applicable",
                     "Observation": "The model performs poorly in generating correct unit test cases, with a pass@1 rate of only 0.6%.",
                     "Response": "",

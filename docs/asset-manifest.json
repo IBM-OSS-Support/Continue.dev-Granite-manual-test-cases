@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/IBM-Code-Assist-Web-UI/static/css/main.75be7784.css",
-    "main.js": "/IBM-Code-Assist-Web-UI/static/js/main.89924fb0.js",
+    "main.js": "/IBM-Code-Assist-Web-UI/static/js/main.aeca9fb7.js",
     "static/media/new_black-bg.jpeg": "/IBM-Code-Assist-Web-UI/static/media/new_black-bg.3e2d5a0ba655fa977ddf.jpeg",
     "static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.woff2": "/IBM-Code-Assist-Web-UI/static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.2861a6629748147a32ea.woff2",
     "static/media/IBMPlexSerif-SemiBoldItalic-Latin1.woff2": "/IBM-Code-Assist-Web-UI/static/media/IBMPlexSerif-SemiBoldItalic-Latin1.6305238484fd3cc045b0.woff2",
@@ -98,10 +98,10 @@
     "static/media/Gold1-icon.svg": "/IBM-Code-Assist-Web-UI/static/media/Gold1-icon.139989d2447a3ca02d13.svg",
     "index.html": "/IBM-Code-Assist-Web-UI/index.html",
     "main.75be7784.css.map": "/IBM-Code-Assist-Web-UI/static/css/main.75be7784.css.map",
-    "main.89924fb0.js.map": "/IBM-Code-Assist-Web-UI/static/js/main.89924fb0.js.map"
+    "main.aeca9fb7.js.map": "/IBM-Code-Assist-Web-UI/static/js/main.aeca9fb7.js.map"
   },
   "entrypoints": [
     "static/css/main.75be7784.css",
-    "static/js/main.89924fb0.js"
+    "static/js/main.aeca9fb7.js"
   ]
 }

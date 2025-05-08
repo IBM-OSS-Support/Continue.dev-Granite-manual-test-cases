@@ -1139,11 +1139,11 @@ const ModelComparison = () => {
 
                                             <p><strong>Description:</strong> Currently No Description Available.</p>
                                             
-                                            <div className="score-wrapper">
+                                            {/*<div className="score-wrapper">
                                                 <strong>Pass@1 Score</strong>
                                                 <Tag className="score-capsule" size="md" type={tagType}>
                                                     {formattedScore}
-                                                </Tag>
+                                                </Tag> */}
                                                 {/* <Tag className="score-capsule" size="md"  type={
                                                     modelScores[selectedGranite] && modelScores[selectedOther]
                                                         ? parseFloat(
@@ -1175,7 +1175,7 @@ const ModelComparison = () => {
                                                         return "N/A";
                                                     })()}
                                                 </Tag> */}
-                                            </div>
+                                            {/*</div>*/}
 
                                             <div className="time-taken-wrap">
                                                 <p>
