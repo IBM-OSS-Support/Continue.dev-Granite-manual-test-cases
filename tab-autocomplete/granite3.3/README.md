@@ -42,6 +42,7 @@
 - Both FIM models delivered **>75% accurate completions**.
 - HFT dropped to **~40% correctness**, with notable bugs.
 - Some completions were verbose but logically valid, while others needed trimming or manual indentation.
+- `8b-instruct (FIM)` was also suggesting good test cases at the end to run on the functions that was filled.
 
 ### 👎 Esc Usage as Friction Signal
 
@@ -77,12 +78,3 @@
 - ⚠️ Avoid using **8b-instruct (HFT)** as default; not robust enough without better prompt tuning.
 
 ---
-
-## 🔁 Next Steps
-
-If you'd like:
-- A **PDF version**
-- A **slide deck summary**
-- Or integration with your evaluation scripts
-
-Let me know, and I’ll prepare the required assets.
