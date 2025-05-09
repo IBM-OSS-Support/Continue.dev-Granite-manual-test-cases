@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Continue.dev-Granite-manual-test-cases/static/css/main.a93693ee.css",
-    "main.js": "/Continue.dev-Granite-manual-test-cases/static/js/main.77b5bf93.js",
+    "main.js": "/Continue.dev-Granite-manual-test-cases/static/js/main.7e9ca6d1.js",
     "static/media/new_black-bg.jpeg": "/Continue.dev-Granite-manual-test-cases/static/media/new_black-bg.3e2d5a0ba655fa977ddf.jpeg",
     "static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.woff2": "/Continue.dev-Granite-manual-test-cases/static/media/IBMPlexSerif-SemiBoldItalic-Cyrillic.2861a6629748147a32ea.woff2",
     "static/media/IBMPlexSerif-SemiBoldItalic-Latin1.woff2": "/Continue.dev-Granite-manual-test-cases/static/media/IBMPlexSerif-SemiBoldItalic-Latin1.6305238484fd3cc045b0.woff2",
@@ -98,10 +98,10 @@
     "static/media/Gold1-icon.svg": "/Continue.dev-Granite-manual-test-cases/static/media/Gold1-icon.139989d2447a3ca02d13.svg",
     "index.html": "/Continue.dev-Granite-manual-test-cases/index.html",
     "main.a93693ee.css.map": "/Continue.dev-Granite-manual-test-cases/static/css/main.a93693ee.css.map",
-    "main.77b5bf93.js.map": "/Continue.dev-Granite-manual-test-cases/static/js/main.77b5bf93.js.map"
+    "main.7e9ca6d1.js.map": "/Continue.dev-Granite-manual-test-cases/static/js/main.7e9ca6d1.js.map"
   },
   "entrypoints": [
     "static/css/main.a93693ee.css",
-    "static/js/main.77b5bf93.js"
+    "static/js/main.7e9ca6d1.js"
   ]
 }
