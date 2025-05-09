@@ -120,3 +120,17 @@ This is **not a comprehensive benchmark**, and outcomes may vary under different
 These evaluations were based on **manual testing** over a few interactive sessions.
 
 ---
+
+
+## 📝 Note
+
+These models were evaluated using a limited and curated set of 12 Python code completion scenarios.  
+The test cases were selected to span various real-world programming patterns (e.g., recursion, conditionals, pandas usage), but they do **not comprehensively cover** the entire scope of Python programming.
+
+All observations were based on interactive completions during **a few manual test runs**.  
+Performance may vary under different coding environments, datasets, or usage patterns.  
+This report is intended to give a directional insight rather than an exhaustive benchmark.
+
+---
+
+---
