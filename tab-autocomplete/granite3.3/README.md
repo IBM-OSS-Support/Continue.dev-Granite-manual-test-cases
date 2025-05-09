@@ -1,147 +1,88 @@
-# Granite-3.3:8B — Code Completion Evaluation  
-# Comparison of Hole Filler Template vs. Fill In the Middle Template
+# 🧠 Granite3.3 Models — Code Completion Evaluation Report
 
-**Models used for the analysis: Granite3.3:8b-instruct, Granite3.2:8b-instruct**
+## 🔍 Models Evaluated
 
----
-
-## 📒 **Appendix: Prompt Design (for Reference)**
-
-- **Hole Filler Template:**  
-  Prefix only; cursor at end of code block. Prompts used: [prefix-only-usecases.py](usecases/prefix-only/prefix-only-usecases.py)
-- **FIM Template:**  
-  Prefix (before hole), Suffix (after hole), cursor at the gap. See attached prompt breakdowns for exact examples. Prompts used: [fim-usecases.py](usecases/fim/fim-usecases.py)
+| Model                             | Template Used | Parameter Size |
+|----------------------------------|---------------|----------------|
+| `granite3.3:2b-base`             | FIM           | 2B             |
+| `granite3.3:8b-instruct`         | FIM           | 8B             |
+| `granite3.3:8b-instruct`         | HFT (default) | 8B             |
 
 ---
 
-## ✅ Executive Summary
+## Detailed model wise reports
+- [`granite3.3:2b-base FIM`](/usecases/granite33-2b-base-fim/README.md)
+- [`granite3.3:8b-instruct FIM`](/usecases/granite33-8b-instruct-fim/README.md)
+- [`granite3.3:2b-base HFT`](/usecases/granite33-8b-instruct-hft/README.md)
 
-- **Hole Filler Template (HFT):**  
-  - *Strengths:* Reliable for sequential code completions, strong with Python syntax and functional code, robust for simple to moderately complex code.
-  - *Weaknesses:* Prone to hallucinations in structured/multi-branch logic, verbose in certain scenarios.
+---
+## ✅ Overall Performance Summary
 
-- **Fill In the Middle (FIM):**  
-  - *Strengths:* Excels at filling isolated code holes (e.g., lambdas, recursion, exception logic), ideal for small focused completions, integrates well in refactoring workflows.
-  - *Weaknesses:* Struggles with complex, multi-branch logic and structural completions (e.g., tax slabs, pandas aggregations, OOP methods); sometimes produces incomplete or vague output.
-
-- **Granite3.2 HFT:**  
-  - *Strengths:* Performs well on simple recursion and lambda logic.
-  - *Weaknesses:* Struggles with pandas APIs, exception handling, and multi-branch logic. Regression evident when compared to Granite3.3.
+| Model                      | Correct | Partially Acceptable | Incorrect | Total Tab | Total Esc | Notes |
+|---------------------------|--------:|----------------------:|----------:|----------:|----------:|-------|
+| `2b-base (FIM)`           | 9       | 2                     | 1         | 21        | 3         | Strong consistency despite smaller size |
+| `8b-instruct (FIM)`       | 9       | 2                     | 1         | 24        | 9         | Better logic, occasional repetition bug |
+| `8b-instruct (HFT)`       | 5       | 3                     | 4         | 21        | 13        | Most error-prone, poor handling of structure |
 
 ---
 
-## 📊 Evaluation Summary Table
+## 🔬 Insights & Model Comparisons
 
-| Test Case                                | Granite3.3 HFT                                 | Granite3.3 FIM                             | Granite3.2 HFT                             | Granite3.3:2B-Base FIM                      |
-|-------------------------------------------|------------------------------------------------|--------------------------------------------|---------------------------------------------|---------------------------------------------|
-| 1. Nested Conditions (Tax Slabs)          | ⚠️ Partial: Logic mismatch                      | ❌ Broken: Dead code, syntax error          | ❌ Broken: Hallucinated slabs, syntax error  | ❌ Broken: Skips middle slab, stray logic    |
-| 2. Lambda + Filter                        | ✅ Excellent: Clean, correct, idiomatic         | ✅ Excellent: Clean, correct, idiomatic     | ✅ Correct: Slight delay in full completion  | ✅ Excellent: Smooth and correct             |
-| 3. Pandas Chaining                        | ✅ Good: Uses NamedAgg                          | ❌ Vague: "all columns" output              | ❌ Broken: SQL dicts, malformed, unusable    | ❌ Broken: Garbage import + invalid agg      |
-| 4. Exception Handling with Custom Message | ✅ Solid: Verbose but correct                   | ✅ Excellent: Clean, concise                | ❌ No completion at all                      | ✅ Good: Correct error type (generic)        |
-| 5. Class with Dunder/Bonus                | ✅ Good: Correct methods and logic              | ❌ Broken: Incomplete, missing return       | ⚠️ Partial: Good `__str__`, missing bonus    | ❌ Broken: No logic, just motivational print |
-| 6. Recursive Function (Factorial)         | ✅ Excellent: Canonical recursion               | ✅ Excellent: Canonical recursion           | ✅ Excellent: Canonical recursion            | ❌ Broken: Missing multiplication step       |
+### 🧩 Template Format Impact
 
+- **FIM** (Fill-in-the-Middle) clearly outperformed **HFT** (Hole-Filler) across the board.
+- FIM handled **prefix + suffix** completions much better than HFT, which often failed in logic-heavy completions.
+- HFT exhibited:
+  - Misplaced control flow (`else` without matching `if`)
+  - Missing return statements
+  - Incomplete logic for bonus, pandas chaining, and tax brackets.
 
----
+### 💡 Correctness vs Acceptability
 
-## 📝 Detailed Comparison by Use Case
+- Both FIM models delivered **>75% accurate completions**.
+- HFT dropped to **~40% correctness**, with notable bugs.
+- Some completions were verbose but logically valid, while others needed trimming or manual indentation.
 
-### 1️⃣ Nested Conditions (Tax Slabs)
+### 👎 Esc Usage as Friction Signal
 
-- **Hole Filler:**  
-  Partial logic, hardcodes slab values, does not fully respect business logic, but structure is valid Python.
-- **FIM:**  
-  Misses a whole branch, inserts dead code, and outputs syntactically invalid Python.
-- **Granite3.2 HFT:** Outputs syntax error (`*` expression), hallucinated slab ranges (1.5M, 2M), and unreachable blocks.
+- Esc count serves as a useful friction signal:
+  - `2b-base (FIM)`: **3 Esc presses**
+  - `8b-instruct (FIM)`: **9 Esc presses**
+  - `8b-instruct (HFT)`: **13 Esc presses**
+- High Esc usage with HFT indicates **developer dissatisfaction** and frequent interruption to correct output.
 
-### 2️⃣ Lambda + Filter
+### 💬 UX Issues Observed
 
-- **Hole Filler:**  
-  Generates a correct, idiomatic lambda filter for even numbers.
-- **FIM:**  
-  Also generates correct lambda. Both modes perform equally well.
-- Granite3.2 required a spacebar nudge for the closing brackets but otherwise fine.
-
-### 3️⃣ Pandas Chaining
-
-- **Hole Filler:**  
-  Uses advanced API (`NamedAgg`), correct overall structure, only minor formatting issues.
-- **FIM:**  
-  Produces non-Python output ("all columns"), does not provide a real aggregation statement.
-- **Granite3.2:** Injects SQL-like syntax in place of pandas, and ends with malformed junk tokens.
-
-### 4️⃣ Exception Handling with Custom Messages
-
-- **Hole Filler:**  
-  Robust, verbose, but logic is correct.
-- **FIM:**  
-  Clean, concise, and correct — in fact, more succinct than HFT. Sometimes required manual cursor placement at line start for FIM to work.
-- **Granite3.2** fails to even generate basic exception logic.
-
-### 5️⃣ Class Definitions with Dunder and Bonus
-
-- **Hole Filler:**  
-  Generates correct __init__ and __str__. Implements calculate_bonus logic as intended (salary check, bonus calculation, returns correct value). Minor verbosity at end, but not incorrect. Solid performance for both OOP syntax and business logic.
-- **FIM:**  
-  Output is incomplete, missing both condition and return. Fails to provide usable code for this scenario.
-- **Granite3.2:** Outputs a good `__str__`, but omits `calculate_bonus()` entirely.
-
-### 6️⃣ Recursive Logic
-
-- **Hole Filler:**  
-  Outputs canonical recursive implementation; perfect.
-- **FIM:**  
-  Same as HFT; perfect recursion.
-- **Granite3.2:** Outputs the correct recursion.
+- `8b-instruct (FIM)` showed **repeating completions** in some cases (e.g., Employee class).
+- All models overgenerated at times, especially on pandas aggregations.
+- Indentation bugs were present in multiple completions — mostly recoverable, but a sign of prompt misalignment.
 
 ---
 
-## 🟢 Strengths & 🔴 Weaknesses
+## 🏆 Final Ranking
 
-### Hole Filler Template (HFT)
-
-**Strengths:**
-- Good at classic code completion and generating boilerplate or sequential code.
-- Improved OOP handling vs. 3.2.
-- Handles simple functions, recursion, and basic functional programming patterns well.
-- Can generate complex API calls if context is linear.
-- Excels at both classic and OOP code completions, including dunder methods and conditional logic inside methods.
-
-
-**Weaknesses:**
-- Hallucinates or fumbles structured/branching logic.
-- Tends to generate verbose code (especially with print statements).
-
-### Fill In the Middle (FIM) Template
-
-**Strengths:**
-- Excels at targeted, in-place code hole filling (e.g., filling in a lambda, a recursive call, or a single exception raise).
-- More concise for isolated code blocks.
-- Integrates well in a refactoring workflow or patch-based code editing.
-
-**Weaknesses:**
-- Unreliable for multi-branch, multi-step, or structural completions (e.g., tax slab logic, pandas aggregations, full method bodies).
-- Sometimes produces vague or invalid output when the required logic is complex.
-- Suffers on OOP patterns and logic-heavy completions.
+| Rank | Model                    | Reasoning |
+|------|--------------------------|-----------|
+| 🥇 1 | `granite3.3:2b-base (FIM)`     | Compact, consistent, and low-friction completions |
+| 🥈 2 | `granite3.3:8b-instruct (FIM)` | More powerful logic but occasional noise and repetition |
+| 🥉 3 | `granite3.3:8b-instruct (HFT)` | Frequent logic errors, high rejection rate |
 
 ---
 
-## ⚖️ **Overall Verdict**
+## 📌 Recommendations
 
-- **For most real-world developer workflows:**  
-  - Use **Hole Filler Template** for general code completion, larger blocks, or full function/method generation.
-  - Use **FIM Template** for targeted patching, simple insertions, or automated refactoring tasks that require context before and after the hole.
-
-- **Model Quality:**  
-  - Granite-3.3:8B is strong on simple/medium code completion, recursion, lambdas, and straightforward exception logic in both modes.
-  - It needs improvement in class structure, complex branching, and context-heavy or "abstract" tasks (like custom aggregation).
-  - Granite3.2 shows significant regressions and is not recommended for production developer workflows requiring structured logic or completeness.
+- ✅ Prefer **FIM template** for all code completion tasks.
+- ✅ Use **2b-base (FIM)** for efficiency-critical environments.
+- 🧪 Apply **8b-instruct (FIM)** where richer logic is required, but monitor for repetition bugs.
+- ⚠️ Avoid using **8b-instruct (HFT)** as default; not robust enough without better prompt tuning.
 
 ---
 
-## 📌 **Recommendations**
+## 🔁 Next Steps
 
-- **Use Case Fit:**  
-  - **Hole Filler:** For new function writing, classic autocomplete, or when the task is to finish a code block given the start.
-  - **FIM:** For editing/filling gaps in the middle of existing code, quick patching, or tight refactoring loops.
----
+If you'd like:
+- A **PDF version**
+- A **slide deck summary**
+- Or integration with your evaluation scripts
+
+Let me know, and I’ll prepare the required assets.
