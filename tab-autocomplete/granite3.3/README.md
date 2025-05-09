@@ -50,6 +50,23 @@
 
 ---
 
+| #  | Test Case Description              | Expected Outcome Description                            | 2b-base (FIM)        | 8b-instruct (FIM)      | 8b-instruct (HFT)       |
+|----|------------------------------------|----------------------------------------------------------|----------------------|------------------------|--------------------------|
+| 1  | Nested tax (prefix)               | Simple 3-slab bracket formula                            | ❌ Overcomplicated   | ✅ Minor indent issue  | ❌ Incorrect math        |
+| 2  | Lambda filter (prefix)           | `lambda x: x % 2 == 0`                                   | ✅ Correct           | ✅ Correct             | ❌ Wrong comma, fixed    |
+| 3  | Pandas chaining (prefix)         | Basic `.agg({})` usage                                   | ✅ Verbose but valid | ✅ Valid               | ⚠️ Brackets messy        |
+| 4  | Raise ValueError (prefix)        | Simple exception message                                 | ✅ Correct           | ✅ Correct             | ✅ Correct               |
+| 5  | `__str__` method (prefix)        | Employee string representation                           | ⚠️ Slightly off      | ⚠️ Repeats indefinitely| ✅ Acceptable            |
+| 6  | Factorial recursion (prefix)     | `return n * factorial(n - 1)`                            | ✅ Correct           | ✅ Correct             | ✅ Correct               |
+| 7  | Nested tax (suffix)              | Logic with suffix, proper bracket handling               | ❌ Incorrect logic   | ✅ Correct             | ❌ Misplaced returns     |
+| 8  | Lambda filter (suffix)           | `lambda x: x % 2 == 0`                                   | ✅ After Esc retry   | ✅ Correct             | ✅ Correct               |
+| 9  | Pandas chaining (suffix)         | Multi-agg with suffix context                            | ⚠️ Verbose           | ✅ (uses np funcs)     | ⚠️ Poorly formatted agg  |
+| 10 | Withdraw with print (suffix)     | Fully printed flow with account update                   | ✅ Correct           | ⚠️ Indentation issue  | ✅ Correct               |
+| 11 | Bonus method (suffix)            | Return salary-based bonus                                | ✅ Acceptable        | ⚠️ Indent error fixed  | ❌ Missing return stmt   |
+| 12 | Factorial (suffix)               | Same as prefix, with suffix                              | ✅ Correct           | ✅ Correct             | ✅ Correct               |
+
+---
+
 ## 🔬 Insights & Model Comparisons
 
 ### 🧩 Template Format Impact
