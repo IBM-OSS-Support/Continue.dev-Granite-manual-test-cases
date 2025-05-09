@@ -8,10 +8,10 @@ import { se } from "date-fns/locale";
 
 // GitHub configuration
 const GITHUB_USERNAME = "IBM-OSS-Support";
-const REPO_BRANCH = "gh-pages";
-const GITHUB_INDEX_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/IBM-Code-Assist-Web-UI/${REPO_BRANCH}/code-assist-webUI/code-assist-web/src/prompt-results/index.json`;
-const GITHUB_BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/IBM-Code-Assist-Web-UI/${REPO_BRANCH}/code-assist-webUI/code-assist-web/src`;
-const GITHUB_LOG_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/IBM-Code-Assist-Web-UI/${REPO_BRANCH}/logs`;
+const REPO_BRANCH = "main";
+const GITHUB_INDEX_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/Continue.dev-Granite-manual-test-cases/${REPO_BRANCH}/code-assist-webUI/code-assist-web/src/prompt-results/index.json`;
+const GITHUB_BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/Continue.dev-Granite-manual-test-cases/${REPO_BRANCH}/code-assist-webUI/code-assist-web/src`;
+const GITHUB_LOG_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/Continue.dev-Granite-manual-test-cases/${REPO_BRANCH}/logs`;
 
 interface Model {
     name: string;
@@ -1139,11 +1139,11 @@ const ModelComparison = () => {
 
                                             <p><strong>Description:</strong> Currently No Description Available.</p>
                                             
-                                            <div className="score-wrapper">
+                                            {/* <div className="score-wrapper">
                                                 <strong>Pass@1 Score</strong>
                                                 <Tag className="score-capsule" size="md" type={tagType}>
                                                     {formattedScore}
-                                                </Tag>
+                                                </Tag> */}
                                                 {/* <Tag className="score-capsule" size="md"  type={
                                                     modelScores[selectedGranite] && modelScores[selectedOther]
                                                         ? parseFloat(
@@ -1175,7 +1175,7 @@ const ModelComparison = () => {
                                                         return "N/A";
                                                     })()}
                                                 </Tag> */}
-                                            </div>
+                                            {/* </div> */}
 
                                             <div className="time-taken-wrap">
                                                 <p>
