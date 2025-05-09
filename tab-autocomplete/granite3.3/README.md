@@ -11,9 +11,9 @@
 ---
 
 ## Detailed model wise reports
-- [`granite3.3:2b-base FIM`](usecases/granite33-2b-base-fim/README.md)
-- [`granite3.3:8b-instruct FIM`](usecases/granite33-8b-instruct-fim/README.md)
-- [`granite3.3:2b-base HFT`](usecases/granite33-8b-instruct-hft/README.md)
+- [granite3.3:2b-base FIM](usecases/granite33-2b-base-fim/README.md)
+- [granite3.3:8b-instruct FIM](usecases/granite33-8b-instruct-fim/README.md)
+- [granite3.3:2b-base HFT](usecases/granite33-8b-instruct-hft/README.md)
 
 ---
 ## ✅ Overall Performance Summary
