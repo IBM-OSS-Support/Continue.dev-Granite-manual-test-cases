@@ -1,0 +1,1 @@
+# Granite3.3:8b-instruct (HFT) — Code Completion Evaluation Report
