@@ -2,19 +2,10 @@
   "gpt-4o": [
     "gpt-4o/gpt-4o_20250311T203629.json"
   ],
-  "granite-code:3b-instruct": [
-    "granite-code:3b-instruct/granite-code:3b-instruct_20250429T214112.json"
-  ],
-  "granite-code:8b-instruct": [
-    "granite-code:8b-instruct/granite-code:8b-instruct_20250429T103335.json"
-  ],
-  "granite3.2:2b": [
-    "granite3.2:2b/granite3.2:2b_20250403T225221.json"
-  ],
   "granite3.2:8b": [
-    "granite3.2:8b/granite3.2:8b_20250425T143619.json"
+    "granite3.2:8b/granite3.2:8b_20250512T154424.json"
   ],
   "granite3.3:8b": [
-    "granite3.3:8b/granite3.3:8b_20250425T142503.json"
+    "granite3.3:8b/granite3.3:8b_20250512T131746.json"
   ]
 }
