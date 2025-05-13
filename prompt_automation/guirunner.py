@@ -35,7 +35,7 @@ def wait_for_log_update(server, keyword="DEBUG [print_timings]           total t
                 print("Found the log: ", log)
                 return log
         print("Waiting for log update...")
-        time.sleep(1)
+        time.sleep(3)
 
 def automate_continue_dev(input_text):
     global first_time, MODEL_NAME, TIMINGS
@@ -140,7 +140,8 @@ if __name__ == '__main__':
         pyautogui.press('enter')
         pyautogui.press('enter')
         TIMINGS = list(map(float, TIMINGS))
-        generate_json(MODEL_NAME, TIMINGS)
+        output_filename = generate_json(MODEL_NAME, TIMINGS)
+        server.rename_log_file(output_filename)
         print("Process completed!!\n")
 
     except Exception as e:
