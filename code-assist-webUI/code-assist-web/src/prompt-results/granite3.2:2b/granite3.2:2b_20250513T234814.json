@@ -1,0 +1,17 @@
+{
+  "0": [
+    {
+      "name": "granite3.2:2b",
+      "date": "20250513T234814",
+      "file_name": "granite3.2:2b_20250513T234814.json",
+      "total_time": 762.48,
+      "prompt": [
+        {
+          "user": "answer brief: What is AWS?",
+          "assistant": "AWS stands for Amazon Web Services. It's a comprehensive, evolving cloud computing platform provided by Amazon that offers a mix of Infrastructure as a Service (IaaS), Platform as a Service (PaaS) and packaged software services known as Execution Environment as a Service (XaaS). This allows businesses to access a wide range of computing resources such as servers, storage, databases, analytics, machine learning, and mobile services. The primary goal is to provide scalable, flexible, and cost-effective IT infrastructure solutions for users on-demand.",
+          "time": 762.48
+        }
+      ]
+    }
+  ]
+}

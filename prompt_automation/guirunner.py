@@ -144,5 +144,7 @@ if __name__ == '__main__':
         server.rename_log_file(output_filename)
         print("Process completed!!\n")
 
+        ## npm build
+
     except Exception as e:
         print(f"An unexpected error occurred in the main function: {e}")

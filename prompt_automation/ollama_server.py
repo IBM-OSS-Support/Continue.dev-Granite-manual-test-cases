@@ -91,15 +91,15 @@ class OllamaServer:
         for proc in psutil.process_iter(['name']):
             if 'ollama' in proc.info['name']:
                 proc.kill()
-    # Append this method to the OllamaServer class
 
     def rename_log_file(self, json_filename: str) -> bool:
         if not self.current_log_file or not os.path.exists(self.current_log_file):
             print("No current log file to rename.")
             return False
 
+        print("JSONFILENAME: ", json_filename)
 #        base_name = os.path.basename(self.current_log_file)
-        new_file_name = json_filename.split(".json")[0] + ".log"
+        new_file_name = os.path.join(self.log_dir, json_filename.split("/")[-1].split(".json")[0] + "_server_log.log")
         try:
             os.rename(self.current_log_file, new_file_name)
             print(f"Log file renamed to {new_file_name}")
