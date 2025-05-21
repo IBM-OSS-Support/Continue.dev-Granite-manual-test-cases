@@ -17,6 +17,7 @@ import { GaugeChart, ScaleTypes, LineChart } from "@carbon/charts-react";
 import "@carbon/charts/styles.css"; // Import Carbon Styles
 import "./_EvaluationReport.scss";
 import codeAssistData from "../../code-assist-data.json"; 
+import { ThemeContext, ThemeContextType } from "../layout/theme-context/ThemeContext";
 
 // Define the type for the data item
 interface DataItem {
@@ -55,6 +56,7 @@ const EvaluationReport: React.FC = () => {
   const [pageSize, setPageSize] = useState(5); // Initial page size set to 5
   const [modalPage, setModalPage] = useState(1);
   const [modalPageSize, setModalPageSize] = useState(5); // Initial page size set to 5
+  const { themeType: currentTheme } = React.useContext(ThemeContext) as ThemeContextType;
 
   const openModal = (methodName: string) => {
     const methodData = data.find((row) => row.Name === methodName);
@@ -120,9 +122,10 @@ const EvaluationReport: React.FC = () => {
   
   const overallPassRateGaugeData = [{ group: "value", value: overallPassRate }];
   const overallBleuScoreGaugeData = [{ group: "value", value: overallBleuScore }];
+  const theme = currentTheme || 'g90'; // ✅ Pull live theme from context
 
   const passRateGaugeOptions = {
-    theme: "g90",
+    theme: theme,
     title: "Average Pass@1 Rate in % for All Tests",
     height: '250px',
     width: '100%',
@@ -137,7 +140,7 @@ const EvaluationReport: React.FC = () => {
   };
 
   const bleuScoreGaugeOptions = {
-    theme: "g90",
+    theme: theme,
     title: "Average BLEU Score in % for All Tests",
     height: '250px',
     width: '100%',
@@ -152,7 +155,7 @@ const EvaluationReport: React.FC = () => {
   };
 
   const timeTakenLineOptions = {
-    theme: "g90",
+    theme: theme,
     title: "Average Time Taken per Method for All Tests",
     height: '300px',
     width: '100%',

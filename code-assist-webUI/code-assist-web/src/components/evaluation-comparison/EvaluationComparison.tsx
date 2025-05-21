@@ -766,6 +766,41 @@ const ModelComparison = () => {
         return { formattedScore, tagType };
     };
 
+    const extractQuestionsAndReplies = (prompts: any[]) => {
+        const splitQuestionsAndAnswers = (text: string): string[] => {
+            // Check if there are multiple "Question" occurrences
+            const questionCount = (text.match(/Question \d+:/g) || []).length;
+            if (questionCount <= 1) {
+                // If only one or no "Question" is found, return the entire text as a single part
+                return [text.trim()];
+            }
+    
+            // Split by patterns like "Question X:" or "answer brief:"
+            return text
+                .split(/(?=\nQuestion \d+:|### Question \d+:)/) // Split at "Question X:" or "### Question X:"
+                .map((part) => part.trim())
+                .filter(Boolean); // Remove empty strings
+        };
+    
+        const extractedQuestions = prompts.flatMap((prompt, index) => {
+            const userParts = splitQuestionsAndAnswers(prompt.user || ""); // Split user field into multiple questions
+            const assistantParts = splitQuestionsAndAnswers(prompt.assistant || ""); // Split assistant field into multiple answers
+    
+            console.log("User Parts:", userParts); // Debugging
+            console.log("Assistant Parts:", assistantParts); // Debugging
+    
+            // Pair each user part with the corresponding assistant part
+            return userParts.map((question, i) => ({
+                question,
+                reply: assistantParts[i] || "No reply available", // Pair directly by index
+                id: `question-${index + 1}-${i + 1}`, // Unique ID for each split question
+            }));
+        });
+    
+        console.log("Extracted Questions and Replies:", extractedQuestions);
+        return extractedQuestions;
+    };
+
     const handleCompare = () => {
         if (selectedGranite && selectedOther) {
           setIsLoading(true);
@@ -857,7 +892,7 @@ const ModelComparison = () => {
                     </div>
                 </Column>
                 <Column sm={4} md={8} lg={16}>
-                    <div className="compare-option-wrap">
+                    <div className="compare-option-wrap dark">
                         {/* <RadioButtonGroup
                             legendText="Compare with:"
                             name="compare-option"
@@ -979,16 +1014,20 @@ const ModelComparison = () => {
 
                                     if (selectedFileName) {
                                         const matchingModel = modelsData
-                                        .flatMap(entry => Object.values(entry).flat())
-                                        .find(m => m.name === model?.model?.name && m.file_name === selectedFileName);
+                                            .flatMap(entry => Object.values(entry).flat())
+                                            .find(m => m.name === model?.model?.name && m.file_name === selectedFileName);
+                                    
+                                        console.log("Matching Model:", matchingModel); // Debugging
                                     
                                         if (matchingModel?.prompt) {
-                                        matchingModel.prompt.forEach((prompt: any, idx: number) => {
-                                            const userPrompt = prompt.user.replace(/<\/?(user|assistant)>/g, '').trim();
-                                            const snippet = userPrompt.length > 100 ? userPrompt.slice(0, 100) + '...' : userPrompt;
-                                            questionOptions.push(`Chat ${idx + 1}: ${snippet}`);
-                                        });
+                                            console.log("Matching Model Prompts:", matchingModel.prompt); // Debugging
+                                            const extractedQuestions = extractQuestionsAndReplies(matchingModel.prompt);
+                                            console.log("Extracted Questions:", extractedQuestions); // Debugging
+                                            extractedQuestions.forEach((q) => {
+                                                questionOptions.push(q.question); // Add questions to the dropdown
+                                            });
                                         }
+                                        console.log("Question Options:", questionOptions); // Debugging
                                     }
 
                                     const filteredPrompts = modelsData
@@ -1287,7 +1326,7 @@ const ModelComparison = () => {
 
                                                                 fetchLogFiles(selectedFileName, resultKey); // Fetch log files for the specific model
                                                             
-                                                                console.log(`Filtered Prompts for ${resultKey}:`, filteredPrompts);
+                                                                console.log(`1..Filtered Prompts for ${resultKey}:`, filteredPrompts);
                                                             }}                                                        
                                                             selectedItem={selectedResults[`${model?.model?.name}-${index}`] || null}
                                                             titleText="Select a Result"
@@ -1440,7 +1479,7 @@ const ModelComparison = () => {
                                                 </Grid>
                                             </div>
                                             <p>
-                                                <strong>Prompt:</strong>
+                                                <strong>Prompt:</strong> <span>{selectedQuestion.length > 70 ? `${selectedQuestion.slice(0, 70)}...` : selectedQuestion}</span>
                                             </p>
 
                                             <div>
@@ -1463,8 +1502,8 @@ const ModelComparison = () => {
                                                 <div className="date-capsule-wrap">
                                                     <Tag className="date-capsule" type="warm-gray">
                                                         {selectedDates[model?.model?.name ?? 'default']
-                                                        ? format(new Date(selectedDates[model?.model?.name ?? 'default'] || ''), 'dd-MM-yyyy h:mmaaa')
-                                                        : formattedPromptDate}
+                                                            ? format(new Date(selectedDates[model?.model?.name ?? 'default'] || ''), 'dd-MM-yyyy h:mmaaa')
+                                                            : formattedPromptDate}
                                                     </Tag>
                                                 </div>
                                                 {filteredPrompts && filteredPrompts.length === 0 ? (
@@ -1474,44 +1513,51 @@ const ModelComparison = () => {
                                                 ) : (
                                                     <ul>
                                                         {selectedQuestion === "All" ? (
-                                                            filteredPrompts && filteredPrompts.map((prompt, index) => (
-                                                                <li key={index}>
-                                                                    <div className="user-message-bubble">
-                                                                        <strong>User</strong>
-                                                                        {formatPromptWithCodeTags(prompt.user)}
-                                                                    </div>
-                                                                    <div className="assistant-message-bubble">
-                                                                        <strong>Assistant</strong>
-                                                                        <span>{formatPromptWithCodeTags(prompt.assistant)}</span>
-                                                                        <div className="response-time">
-                                                                            <span style={{ display: "flex" }} title="indicates time taken to complete that prompt (question)">
-                                                                                <Alarm />: {formatMillisecondsToTime(prompt.time)}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            ))
-                                                        ) : (
-                                                            filteredPrompts && filteredPrompts
-                                                                .filter((_, index) => index === parseInt(selectedQuestion.split(" ")[1]) - 1)
+                                                            filteredPrompts
+                                                                .flatMap((prompt) => extractQuestionsAndReplies([prompt])) // Apply splitting to all prompts
                                                                 .map((prompt, index) => (
                                                                     <li key={index}>
                                                                         <div className="user-message-bubble">
                                                                             <strong>User</strong>
-                                                                            {formatPromptWithCodeTags(prompt.user)}
+                                                                            {formatPromptWithCodeTags(prompt.question)}
                                                                         </div>
                                                                         <div className="assistant-message-bubble">
                                                                             <strong>Assistant</strong>
-                                                                            <span>{formatPromptWithCodeTags(prompt.assistant)}</span>
+                                                                            <span>{formatPromptWithCodeTags(prompt.reply)}</span>
                                                                             <div className="response-time">
                                                                                 <span style={{ display: "flex" }} title="indicates time taken to complete that prompt (question)">
-                                                                                    <Alarm />: {formatMillisecondsToTime(prompt.time)}
+                                                                                    {/* <Alarm />: {formatMillisecondsToTime(prompt.time)} */}
                                                                                 </span>
                                                                             </div>
                                                                         </div>
                                                                     </li>
                                                                 ))
-                                                            )}
+                                                        ) : (
+                                                            filteredPrompts
+                                                                .flatMap((prompt) => extractQuestionsAndReplies([prompt])) // Apply splitting to all prompts
+                                                                .filter((prompt) => {
+                                                                    const isMatch = prompt.question.trim().includes(selectedQuestion.trim());
+                                                                    console.log("Filtering Prompt:", prompt, "Is Match:", isMatch);
+                                                                    return isMatch;
+                                                                })
+                                                                .map((prompt, index) => (
+                                                                    <li key={index}>
+                                                                        <div className="user-message-bubble">
+                                                                            <strong>User</strong>
+                                                                            {formatPromptWithCodeTags(prompt.question)}
+                                                                        </div>
+                                                                        <div className="assistant-message-bubble">
+                                                                            <strong>Assistant</strong>
+                                                                            <span>{formatPromptWithCodeTags(prompt.reply)}</span>
+                                                                            <div className="response-time">
+                                                                                <span style={{ display: "flex" }} title="indicates time taken to complete that prompt (question)">
+                                                                                    {/* <Alarm />: {formatMillisecondsToTime(prompt.time)} */}
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                ))
+                                                        )}
                                                     </ul>
                                                 )}
                                             </div>
@@ -1544,7 +1590,7 @@ const ModelComparison = () => {
                 ) : (
                     <Column sm={4} md={8} lg={16}>
                         {!isLoading && (
-                            <div style={{ color: "#fff", background: "#262626", border: "0.4px solid #514f4f", borderRadius: "4px", padding: "0.7rem", textAlign: "center", boxShadow: "0 0 6px 1px rgb(0 0 17)",  margin: "1.2rem auto", width: "50%" }}>
+                            <div className="no-comarison-found">
                                 <p>No comparison found. <br /> Please select models to compare.</p>
                             </div>
                         )}
