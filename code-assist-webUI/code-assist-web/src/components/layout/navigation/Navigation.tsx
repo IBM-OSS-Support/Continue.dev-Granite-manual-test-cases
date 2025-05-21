@@ -4,6 +4,7 @@ import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderMenuButton, HeaderNa
 import {Home, UserAvatar, Folders, Group, GroupResource, ServerDns, CloudLogging, Compare} from '@carbon/react/icons';
 import { ActiveTabProvider } from './use-active-tab/UseActiveTab';
 import "./_Navigation.scss";
+import { useTheme } from '../theme-context/ThemeContext';
 
 // Create a context for sharing the active tab
 // export const ActiveTabContext = createContext<string>('');
@@ -12,6 +13,7 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<string>('Dashboard');
+  const { themeType, toggleTheme } = useTheme();
 
   const handleNavLinkClick = (tab: string) => {
     setActiveTab(tab);
@@ -40,7 +42,7 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <>
     <ActiveTabProvider value={activeTab}>
-      <Theme theme="g90">
+      <Theme theme={themeType}>
         <Header
           aria-label="IBM Code-assist"
           className={`navigation-menu`}
@@ -81,17 +83,11 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </SideNav>
           <HeaderGlobalBar>
             <HeaderGlobalAction
-              className={`profile-trigger-button`}
-              aria-label={'Profile'}
+              className={`theme-toggle-button`}
+              aria-label={`Click to switch ${themeType === 'g90' ? 'Light' : 'Dark'} theme`}
+              onClick={toggleTheme}
             >
-              <UserAvatar size={25} />
-            {/* <HeaderMenu aria-label="User" menuLinkName="User">
-              <HeaderMenuItem href="#">Profile</HeaderMenuItem>
-              <HeaderMenuItem isActive href="#">
-                Settings
-              </HeaderMenuItem>
-              <HeaderMenuItem href="#">LogOut</HeaderMenuItem>
-            </HeaderMenu> */}
+              <span>{themeType === 'g90' ? '☀️' : '🌙'}</span>
             </HeaderGlobalAction>
           </HeaderGlobalBar>
         </Header>

@@ -209,6 +209,18 @@
     }
   }
 
+  .no-comarison-found {
+    color: #f4f4f4;
+    background: #262626;
+    border: 0.4px solid #514f4f;
+    border-radius: 4px;
+    padding: 0.7rem;
+    text-align: center;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.4);
+    margin: 1.2rem auto;
+    width: 50%;
+  }
+
   .time-taken-wrap {
     display: flex;
     align-items: center;
@@ -326,6 +338,7 @@
     }
     .cds--snippet--multi {
       background: #000011;
+      color: #f4f4f4;
       height: 100%;
       max-inline-size: 100%;
       margin-top: 0.75rem;

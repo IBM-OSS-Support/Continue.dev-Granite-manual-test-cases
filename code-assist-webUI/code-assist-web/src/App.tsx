@@ -8,9 +8,11 @@ import EvaluationReport from './components/evaluation-report/EvaluationReport';
 import Leaderboard from './components/evaluation-metrics/EvaluationMetrics';
 import EvaluationComparison from './components/evaluation-comparison/EvaluationComparison';
 import ModelServerLogs from './components/model-server-logs/ModelServerLogs';
+import { ThemeProvider } from './components/layout/theme-context/ThemeContext';
 
 const App: React.FC = () => {
   return (
+    <ThemeProvider>
       <Theme theme="g100">
         <div className="app">
           <Router>
@@ -28,6 +30,7 @@ const App: React.FC = () => {
           </Router>
         </div>
       </Theme>
+    </ThemeProvider>
   );
 };
 

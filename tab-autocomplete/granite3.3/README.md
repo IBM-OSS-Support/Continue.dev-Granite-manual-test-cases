@@ -50,6 +50,23 @@
 
 ---
 
+| #  | Test Case Description              | Expected Outcome Description                            | 2b-base (FIM) | 8b-instruct (FIM) | 8b-instruct (HFT) | 3.2:8b-instruct (HFT) |
+|----|------------------------------------|----------------------------------------------------------|----------------|--------------------|--------------------|------------------------|
+| 1  | Nested tax (prefix)               | Simple 3-slab bracket formula                            | ❌             | ✅                 | ❌                 | ❌ Garbage syntax      |
+| 2  | Lambda filter (prefix)           | `lambda x: x % 2 == 0`                                   | ✅             | ✅                 | ❌                 | ❌ Missing argument     |
+| 3  | Pandas chaining (prefix)         | Basic `.agg({})` usage                                   | ✅             | ✅                 | ⚠️                 | ❌ Broken logic         |
+| 4  | Raise ValueError (prefix)        | Simple exception message                                 | ✅             | ✅                 | ✅                 | ❌ Bad indentation      |
+| 5  | `__str__` method (prefix)        | Employee string representation                           | ⚠️             | ⚠️ Repetition bug  | ✅                 | ⚠️ Added unrelated method |
+| 6  | Factorial recursion (prefix)     | `return n * factorial(n - 1)`                            | ✅             | ✅                 | ✅                 | ✅                     |
+| 7  | Nested tax (suffix)              | Logic with suffix, proper bracket handling               | ❌             | ✅                 | ❌                 | ❌ Utterly broken       |
+| 8  | Lambda filter (suffix)           | `lambda x: x % 2 == 0`                                   | ✅             | ✅                 | ✅                 | ✅                     |
+| 9  | Pandas chaining (suffix)         | Multi-agg with suffix context                            | ⚠️             | ✅                 | ⚠️                 | ❌ Messy structure      |
+| 10 | Withdraw with print (suffix)     | Fully printed flow with account update                   | ✅             | ⚠️                 | ✅                 | ✅                     |
+| 11 | Bonus method (suffix)            | Return salary-based bonus                                | ✅             | ⚠️                 | ❌ Missing return  | ❌ Incomplete           |
+| 12 | Factorial (suffix)               | Same as prefix, with suffix                              | ✅             | ✅                 | ✅                 | ✅                     |
+
+---
+
 ## 🔬 Insights & Model Comparisons
 
 ### 🧩 Template Format Impact
@@ -102,6 +119,22 @@ Esc usage is a strong proxy for model friction. The 3.2:8b model required heavy 
 - 🧠 `2b-base (FIM)` is the best **lightweight + fast** option.
 - 🧪 `8b-instruct (FIM)` offers richer completions and logic scaffolding.
 - ❌ Avoid **HFT** as default — prone to structural issues and poor suffix support.
+
+---
+
+## 📝 Note
+
+These models were evaluated using a curated but **limited set of 12 Python completion tasks**, designed to simulate common code scenarios like:
+
+- Recursion
+- Conditional tax logic
+- Lambda/filter/map
+- Pandas `.agg()`
+- Class methods and bonus logic
+
+This is **not a comprehensive benchmark**, and outcomes may vary under different usage patterns or project complexity.
+
+These evaluations were based on **manual testing** over a few interactive sessions.
 
 ---
 
