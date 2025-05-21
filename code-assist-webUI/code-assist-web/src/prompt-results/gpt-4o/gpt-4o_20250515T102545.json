@@ -11,6 +11,7 @@
           "assistant": "```python src/main.py\n# In Python, a lambda function is an anonymous, single-expression function defined with the 'lambda' keyword.\n\n# Example usage:\n# A simple lambda function that adds two numbers\nadd = lambda x, y: x + y\nprint(add(3, 4))  # Output: 7\n```",
           "time": "7029.70"
         },
+        {
           "user": "Question 2: Write a code for quick-sort algorithm in Python.",
           "assistant": "```python src/main.py\ndef quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quick_sort(left) + middle + quick_sort(right)\n```",
           "time": "6029.70"
