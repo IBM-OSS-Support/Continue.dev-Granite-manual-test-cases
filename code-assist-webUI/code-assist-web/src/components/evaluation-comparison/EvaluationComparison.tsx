@@ -191,6 +191,9 @@ const ModelComparison = () => {
                                     .then(files => files.filter((f: any) => typeof f === 'string' && f.trim() !== ''));
         
                                 fileNames = fileNames.flat();
+
+                                console.log(`local All files for ${modelName}:`, fileNames);
+                                
         
                                 const fileResponses = await Promise.all(
                                     fileNames.map(async (fileName: string) => {
