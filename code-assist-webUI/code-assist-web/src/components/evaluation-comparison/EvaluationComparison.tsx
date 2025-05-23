@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Column, Grid, ComboBox, Button, Checkbox, DatePickerSkeleton, DatePicker, DatePickerInput, RadioButton, RadioButtonGroup, Tag, Dropdown, CodeSnippet, Tooltip, Loading, Modal, Tile, CodeSnippetSkeleton, ButtonSkeleton, DropdownSkeleton, OrderedList, ListItem, ProgressBar } from "@carbon/react";
+import React, { useEffect, useState, useRef } from "react";
+import { Column, Grid, ComboBox, Button, Checkbox, DatePickerSkeleton, DatePicker, DatePickerInput, RadioButton, RadioButtonGroup, Tag, Dropdown, CodeSnippet, Tooltip, Loading, Modal, Tile, CodeSnippetSkeleton, ButtonSkeleton, DropdownSkeleton, OrderedList, ListItem, ProgressBar, TextInput, CopyButton } from "@carbon/react";
 import "./_EvaluationComparison.scss";
 import { format, isValid, parse } from "date-fns";
-import { Alarm, Close, Download, FilterRemove, FilterReset, FlashFilled, Help, Hourglass } from "@carbon/react/icons";
+import { Alarm, ChevronDown, ChevronUp, Close, Download, FilterRemove, FilterReset, FlashFilled, Help, Hourglass } from "@carbon/react/icons";
 import { se } from "date-fns/locale";
 
 
@@ -61,6 +61,12 @@ const ModelComparison = () => {
     const [downloadedLogFileByModel, setDownloadedLogFileByModel] = useState<{ [key: string]: string | null }>({});
     const [selectedLogByModel, setSelectedLogByModel] = useState<{ [key: string]: string | null }>({});
     const [logContentByModel, setLogContentByModel] = useState<{ [key: string]: string | null }>({});
+    const [isExpanded, setIsExpanded] = useState(true);
+    const firstHighlightRef = useRef<HTMLDivElement | null>(null);
+    const [matchCount, setMatchCount] = useState(0);
+    const matchLines = [];
+    const MAX_LINES = 25;
+
 
     // Modified backend URL detection with GitHub fallback
     const getBackendURL = () => {
@@ -69,8 +75,6 @@ const ModelComparison = () => {
         } else if (window.location.hostname === "ibm-oss-support.github.io") {
             setUsingGitHub(true);
             return (usingGitHub);
-        } else {
-            return "http://9.20.192.160:5005";
         }
     };
 
@@ -527,8 +531,18 @@ const ModelComparison = () => {
         return extracted;
     };
 
+    useEffect(() => {
+        Object.entries(selectedResults).forEach(([resultKey, selectedFileName]) => {
+            resultKey = resultKey.replace(/^logs\//, ""); // Remove "logs/" prefix if present
+            if (selectedFileName) {
+                fetchLogFiles(selectedFileName, resultKey);
+            }
+        });
+    }, [selectedResults]);
+    
     const fetchLogFiles = async (resultFileName: string, resultKey: string) => {
         try {
+            resultKey = resultKey.replace(/^logs\//, ""); // Remove "logs/" prefix if present
             console.log("Fetching log files for:", resultFileName); // Debugging
             const logsJsonUrl = `${GITHUB_LOG_URL}/logs.json`;
             const response = await fetch(logsJsonUrl);
@@ -555,17 +569,31 @@ const ModelComparison = () => {
                 new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime()
             );
     
-            setLogFilesByModel((prev) => ({
-                ...prev,
-                [resultKey]: sortedFiles,
-            }));
+            // Automatically select the latest log file
+            const latestLogFile = sortedFiles[0]?.name;
+    
+            if (latestLogFile) {
+                // Fetch the content of the latest log file
+                await fetchLogContent(latestLogFile, resultKey);
+            } else {
+                console.warn("No log files found for the model.");
+                setLogContentByModel((prev) => ({
+                    ...prev,
+                    [resultKey]: "No log files available for this model.",
+                }));
+            }
         } catch (error) {
             console.error("Error fetching log files:", error);
+            setLogContentByModel((prev) => ({
+                ...prev,
+                [resultKey]: "⚠️ Failed to load log files.",
+            }));
         }
     };
-
+    
     const fetchLogContent = async (fileName: string, resultKey: string) => {
         try {
+            resultKey = resultKey.replace(/^logs\//, ""); // Remove "logs/" prefix if present
             setProgress(0); // Reset progress
             setDownloadedLogFileByModel((prev) => ({
                 ...prev,
@@ -575,12 +603,16 @@ const ModelComparison = () => {
                 ...prev,
                 [resultKey]: true,
             }));
+            setLogContentByModel((prev) => ({
+                ...prev,
+                [resultKey]: null, // Clear previous content
+            }));
             setSelectedLogByModel((prev) => ({
                 ...prev,
                 [resultKey]: fileName,
             }));
     
-            const logFileUrl = `${GITHUB_LOG_URL}/${fileName}`;
+            const logFileUrl = `${GITHUB_LOG_URL}/${fileName.replace(/^logs\//, "")}`;
             console.log("Fetching log file from URL:", logFileUrl); // Debugging
     
             const response = await fetch(logFileUrl, { method: "HEAD" });
@@ -640,15 +672,6 @@ const ModelComparison = () => {
             }));
         }
     };
-
-    useEffect(() => {
-        Object.entries(selectedResults).forEach(([resultKey, selectedFileName]) => {
-            if (selectedFileName) {
-                console.log(`Fetching log files for pre-populated result: ${selectedFileName}`);
-                fetchLogFiles(selectedFileName, resultKey);
-            }
-        });
-    }, [selectedResults]);
     
     const downloadLog = (format: "json" | "csv" | "log", resultKey: string) => {
         const selectedLog = selectedLogByModel[resultKey];
@@ -797,12 +820,34 @@ const ModelComparison = () => {
                 question,
                 reply: assistantParts[i] || "No reply available", // Pair directly by index
                 id: `question-${index + 1}-${i + 1}`, // Unique ID for each split question
+                time: prompt.time || "No Time Found." // Add time if available
             }));
         });
     
         console.log("Extracted Questions and Replies:", extractedQuestions);
         return extractedQuestions;
     };
+
+    // useEffect(() => {
+    //     // Delay slightly to allow DOM to update
+    //     const timeout = setTimeout(() => {
+    //       if (firstHighlightRef.current) {
+    //         firstHighlightRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    //       }
+    //     }, 100); // adjust as needed
+      
+    //     return () => clearTimeout(timeout);
+    // }, [selectedQuestions[isModalOpen || '']]);  
+    
+    const selectedQuestionKey = isModalOpen || "";
+    const logContentForModal = isModalOpen ? logContentByModel[isModalOpen] : null;
+
+    useEffect(() => {
+        if (firstHighlightRef.current) {
+            firstHighlightRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        setMatchCount(matchLines.length);
+    }, [selectedQuestions[selectedQuestionKey], logContentForModal, matchLines.length]);
 
     const handleCompare = () => {
         if (selectedGranite && selectedOther) {
@@ -1315,22 +1360,22 @@ const ModelComparison = () => {
                                                                     ...prev,
                                                                     [resultKey]: selectedItem as string,
                                                                 }));
-                                                                
+
                                                                 const selectedFileName = selectedItem as string;
                                                                 const filteredPrompts = modelsData
                                                                     .flatMap((entry) => Object.values(entry).flat())
                                                                     .filter((model) => model.file_name === selectedFileName)
                                                                     .flatMap((model) => model.prompt || []);
-                                                            
+
                                                                 setFilteredPrompts((prev) => ({
                                                                     ...prev,
                                                                     [resultKey]: filteredPrompts, // Make this unique too
                                                                 }));
 
                                                                 fetchLogFiles(selectedFileName, resultKey); // Fetch log files for the specific model
-                                                            
+
                                                                 console.log(`1..Filtered Prompts for ${resultKey}:`, filteredPrompts);
-                                                            }}                                                        
+                                                            }}
                                                             selectedItem={selectedResults[`${model?.model?.name}-${index}`] || null}
                                                             titleText="Select a Result"
                                                             placeholder="Choose a result version"
@@ -1388,7 +1433,7 @@ const ModelComparison = () => {
                                                                 )}
                                                             </>
                                                         )} */}
-                                                        {selectedResults[`${model?.model?.name}-${index}`] && (
+                                                        {/* {selectedResults[`${model?.model?.name}-${index}`] && (
                                                             <>
                                                                 {
                                                                     isLoading || !logFilesByModel[resultKey] ? (
@@ -1477,16 +1522,29 @@ const ModelComparison = () => {
                                                                     )
                                                                 }
                                                             </>
-                                                        )}
+                                                        )} */}
                                                      {/* </Column> */}
+                                                     <Column lg={16} md={8} sm={4}>
+                                                        {logContentByModel[resultKey] && (
+                                                            <div className="download-log-wrap" style={{ marginTop: "1rem", display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
+                                                                <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                                                                    <h5>Log File:</h5>
+                                                                    <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500, display: "flex", alignItems: "center" }}>
+                                                                        {selectedLogByModel[resultKey]?.replace(/^logs\//, "") || "No log file name available"}
+                                                                    </p>
+                                                                    <Button kind="ghost" size="sm" onClick={() => setIsModalOpen(resultKey)}>View File</Button>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </Column>
                                                 </Grid>
                                             </div>
                                             <p>
-                                                <strong>Prompt:</strong> <span>{selectedQuestion.length > 70 ? `${selectedQuestion.slice(0, 70)}...` : selectedQuestion}</span>
+                                                <strong>Prompt:</strong> <span>{selectedQuestion.length > 85 ? `${selectedQuestion.slice(0, 85)}...` : selectedQuestion}</span>
                                             </p>
 
                                             <div>
-                                                <Checkbox
+                                                {/* <Checkbox
                                                     id={`solid-background-toggle-${model?.model?.name}`}
                                                     className="solid-background-toggle"
                                                     labelText="Remove Prompt Background Wallpaper"
@@ -1498,7 +1556,7 @@ const ModelComparison = () => {
                                                         }));
                                                     }}
                                                     style={{ float: "right" }}
-                                                />
+                                                /> */}
                                             </div>
 
                                             <div className={solidBackgrounds[model?.model?.name ?? 'default'] ? "chat-screen solid-bg" : "chat-screen"}>
@@ -1529,7 +1587,7 @@ const ModelComparison = () => {
                                                                             <span>{formatPromptWithCodeTags(prompt.reply)}</span>
                                                                             <div className="response-time">
                                                                                 <span style={{ display: "flex" }} title="indicates time taken to complete that prompt (question)">
-                                                                                    {/* <Alarm />: {formatMillisecondsToTime(prompt.time)} */}
+                                                                                    <Alarm />: {formatMillisecondsToTime(prompt.time)}
                                                                                 </span>
                                                                             </div>
                                                                         </div>
@@ -1554,7 +1612,7 @@ const ModelComparison = () => {
                                                                             <span>{formatPromptWithCodeTags(prompt.reply)}</span>
                                                                             <div className="response-time">
                                                                                 <span style={{ display: "flex" }} title="indicates time taken to complete that prompt (question)">
-                                                                                    {/* <Alarm />: {formatMillisecondsToTime(prompt.time)} */}
+                                                                                    <Alarm />: {formatMillisecondsToTime(prompt.time)}
                                                                                 </span>
                                                                             </div>
                                                                         </div>
@@ -1609,7 +1667,7 @@ const ModelComparison = () => {
             ) : (
                 <Modal
                     open={isModalOpen !== null}
-                    modalHeading={`Log Content: ${selectedLogByModel[isModalOpen || ""]}`}
+                    modalHeading={`Log Content: ${selectedLogByModel[isModalOpen || ""]?.replace(/^logs\//, "")}`}
                     passiveModal
                     onRequestClose={() => setIsModalOpen(null)}
                     size="lg"
@@ -1648,7 +1706,7 @@ const ModelComparison = () => {
                                                             justifyContent: "flex-end",
                                                         }}
                                                     >
-                                                        <Button
+                                                        {/* <Button
                                                             kind="tertiary"
                                                             renderIcon={Download}
                                                             onClick={() => downloadLog("json", isModalOpen || "")}
@@ -1661,26 +1719,25 @@ const ModelComparison = () => {
                                                             onClick={() => downloadLog("csv", isModalOpen || "")}
                                                         >
                                                             Download CSV
-                                                        </Button>{" "}
+                                                        </Button>{" "} */}
+
+                                                        <Button kind="tertiary" renderIcon={Download} onClick={() => downloadLog("log", isModalOpen || "")}>Download File</Button>
                                                     </div>
                                                     <Tile className="log-summary-tile">
                                                         <h4>Log Summary</h4>
                                                         <div className="log-summary-content">
                                                             {Object.entries(logSummaryByModel[isModalOpen] || {}).map(([key, value]) => {
-                                                                const labelMap: Record<string, string> = {
+                                                                const labelMap = {
                                                                     "general.basename str": "Basename:",
                                                                     "llama_model_loader: - kv   2:                               general.name str": "General Name:",
                                                                     "llm_load_print_meta: model size": "Model Size:",
                                                                     "ggml_metal_init: found device": "User Device:",
                                                                     "ggml_metal_init: GPU name": "GPU Name:",
-                                                                    "ggml_metal_init: recommendedMaxWorkingSetSize":
-                                                                    "Recommended GPU Memory:",
+                                                                    "ggml_metal_init: recommendedMaxWorkingSetSize": "Recommended GPU Memory:",
                                                                 };
                                                                 return (
                                                                     <p key={key} style={{ marginBottom: "0.5rem" }}>
-                                                                        <strong style={{ color: "#08BDBA" }}>
-                                                                            {labelMap[key] || key}
-                                                                        </strong>{" "}
+                                                                        <strong style={{ color: "#08BDBA" }}>{labelMap[key as keyof typeof labelMap] || key}</strong>{" "}
                                                                         <span style={{ color: "#F1C21B" }}>{value}</span>
                                                                     </p>
                                                                 );
@@ -1690,14 +1747,109 @@ const ModelComparison = () => {
                                                 </div>
                                             )}
 
-                                            <CodeSnippet
-                                                key={`${selectedLog}-${Date.now()}`}
-                                                type="multi"
-                                                feedback="Copied to clipboard"
-                                                className="log-content-snippet"
-                                            >
-                                                {logContentByModel[isModalOpen] || "No content available"}
-                                            </CodeSnippet>
+                                            <div className="code-snippet-wrapper">
+                                                <div className="code-snippet-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0 1rem" }}>
+                                                    <span style={{ width: "100%", position: "relative"}}>
+                                                        <TextInput
+                                                            id="code-search"
+                                                            labelText=""
+                                                            placeholder="Search code..."
+                                                            size="sm"
+                                                            hideLabel
+                                                            className="code-snippet-search"
+                                                            value={selectedQuestions[isModalOpen || ""] === "All" ? "" : selectedQuestions[isModalOpen || ""] || ""} // Set value to empty if "All"
+                                                            onChange={(e) =>
+                                                                setSelectedQuestions((prev) => ({
+                                                                    ...prev,
+                                                                    [isModalOpen]: e.target.value,
+                                                                }))
+                                                            }
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === 'Enter' && firstHighlightRef.current) {
+                                                                    firstHighlightRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+                                                                }
+                                                            }}
+                                                        />
+                                                        {
+                                                            selectedQuestions[isModalOpen || ""] === "All" 
+                                                            ? 
+                                                            ""
+                                                            :
+                                                            selectedQuestions[isModalOpen || ""] && (
+                                                                <div style={{ fontSize: "0.75rem", color: "#bebdbd", background: "#393939cf", position: "absolute", bottom: "-1.05rem", right: "0", textAlign: "right", width: "100%" }}>
+                                                                    {matchCount} Match{matchCount !== 1 ? "es" : ""} Found.
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </span>
+
+                                                    <CopyButton
+                                                        feedback="Copied!"
+                                                        feedbackTimeout={2000}
+                                                        iconDescription="Copy log content"
+                                                        onClick={() =>
+                                                            navigator.clipboard.writeText(
+                                                                logContentByModel[isModalOpen] || "No content available"
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+
+                                                <div className="custom-carbon-code-snippet">
+                                                    <pre>
+                                                        <code>
+                                                            {(logContentByModel[isModalOpen] || "No content available")
+                                                                .split("\n")
+                                                                .slice(0, isExpanded ? undefined : MAX_LINES)
+                                                                .map((line, index) => {
+                                                                    const search = selectedQuestions[isModalOpen || ""] || "";
+                                                                    
+                                                                    // Skip highlighting if the selected question is "All"
+                                                                    if (!search || search === "All") {
+                                                                        return <div key={index} className="code-line">{line}</div>;
+                                                                    }
+
+                                                                    const regex = new RegExp(`(${search})`, "gi");
+                                                                    const parts = line.split(regex);
+                                                                    let foundInLine = false;
+
+                                                                    return (
+                                                                        <div key={index} className="code-line">
+                                                                            {parts.map((part, i) => {
+                                                                                const isMatch = regex.test(part);
+                                                                                if (isMatch && !foundInLine) {
+                                                                                    foundInLine = true;
+                                                                                    matchLines.push(index);
+                                                                                }
+                                                                                return (
+                                                                                    <span
+                                                                                        key={i}
+                                                                                        className={isMatch ? "highlight" : undefined}
+                                                                                        ref={isMatch && matchLines.length === 1 ? firstHighlightRef : null}
+                                                                                    >
+                                                                                        {part}
+                                                                                    </span>
+                                                                                );
+                                                                            })}
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                        </code>
+                                                    </pre>
+
+                                                    {logContentByModel[isModalOpen] &&
+                                                        logContentByModel[isModalOpen]!.split("\n").length > MAX_LINES && (
+                                                            <Button
+                                                                kind="secondary"
+                                                                renderIcon={isExpanded ? ChevronUp : ChevronDown}
+                                                                className="show-more-btn"
+                                                                onClick={() => setIsExpanded((prev) => !prev)}
+                                                            >
+                                                                <span>{isExpanded ? "Show less" : "Show more"}</span>
+                                                            </Button>
+                                                        )}
+                                                </div>
+                                            </div>
                                         </>
                                     ) : (
                                         <div
