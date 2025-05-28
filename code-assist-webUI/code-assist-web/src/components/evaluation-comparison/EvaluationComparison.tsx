@@ -1276,6 +1276,7 @@ const ModelComparison = () => {
                                                             display: "inline-flex",
                                                             alignItems: "center",
                                                             gap: "0.25rem",
+                                                            flexWrap: "wrap",
                                                         }}
                                                     >
                                                     {typeof model?.model?.total_time === "number" && !isNaN(model.model.total_time)
@@ -1527,19 +1528,21 @@ const ModelComparison = () => {
                                                      <Column lg={16} md={8} sm={4}>
                                                         {logContentByModel[resultKey] && (
                                                             <div className="download-log-wrap" style={{ marginTop: "1rem", display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
-                                                                <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                                                                <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
                                                                     <h5>Log File:</h5>
-                                                                    <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500, display: "flex", alignItems: "center" }}>
-                                                                        {selectedLogByModel[resultKey]?.replace(/^logs\//, "") || "No log file name available"}
-                                                                    </p>
-                                                                    <Button kind="ghost" size="sm" onClick={() => setIsModalOpen(resultKey)}>View File</Button>
+                                                                    <span style={{ display: "flex", flexWrap: "wrap" }}>
+                                                                        <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500, display: "flex", alignItems: "center" }}>
+                                                                            {selectedLogByModel[resultKey]?.replace(/^logs\//, "") || "No log file name available"}
+                                                                        </p>
+                                                                        <Button kind="ghost" size="sm" onClick={() => setIsModalOpen(resultKey)}>View File</Button>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         )}
                                                     </Column>
                                                 </Grid>
                                             </div>
-                                            <p>
+                                            <p style={{ display: "flex", gap: "0.4rem",}}>
                                                 <strong>Prompt:</strong> <span>{selectedQuestion.length > 85 ? `${selectedQuestion.slice(0, 85)}...` : selectedQuestion}</span>
                                             </p>
 
@@ -1627,7 +1630,7 @@ const ModelComparison = () => {
                                 })}
                             </div>
                         </Column>
-                        <Column lg={16} md={16} sm={16}>
+                        <Column lg={16} md={8} sm={4}>
                             <div className="information-wrap">
                                 <h4>Notes:</h4>
                                 <OrderedList>
