@@ -555,9 +555,9 @@ const ModelComparison = () => {
     
             // Filter files based on the model name and format
             const matchingFiles: LogFile[] = files
-                .filter(file => file.includes(modelName) && file.match(`${modelName}_ollama_server_\\d{8}_\\d{6}\\.log`))
+                .filter(file => file.includes(modelName) && file.match(`${modelName}_\\d{8}T\\d{6}\\.log`))
                 .map(file => {
-                    const match = file.match(/_(\d{8}_\d{6})/);
+                    const match = file.match(/_(\d{8}T\d{6})/);
                     const { formatted, raw } = match ? formatDate(match[1]) : { formatted: "Unknown Date", raw: "0" };
                     return { name: file, date: formatted, rawDate: raw };
                 });
