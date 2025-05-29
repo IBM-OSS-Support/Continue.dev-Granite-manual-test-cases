@@ -182,7 +182,7 @@ const EvaluationReport: React.FC = () => {
   return (
     <div className="evaluation-report">
       <Grid fullWidth narrow className="page-content">
-        <Column lg={16}>
+        <Column lg={16} md={8} sm={4}>
           <div className="heading-wrap">
             <h3>Al Chat Models</h3>
           </div>
@@ -219,7 +219,7 @@ const EvaluationReport: React.FC = () => {
           size="lg"
         >
           <Grid fullWidth narrow>
-            <Column lg={16} md={16} sm={16}>
+            <Column lg={16} md={8} sm={4}>
               <TableContainer>
                 <Table>
                   <TableHead>
@@ -261,7 +261,7 @@ const EvaluationReport: React.FC = () => {
       {!showAll && (
         <>
           <Grid fullWidth narrow className="page-content">
-            <Column lg={16} className="content-tile">
+            <Column lg={16} md={8} sm={4} className="content-tile">
               <TableContainer title="Detailed Summary Results">
                 <Table>
                   <TableHead>
@@ -302,16 +302,16 @@ const EvaluationReport: React.FC = () => {
             </Column>
           </Grid>
           <Grid fullWidth narrow className="page-content">
-            <Column lg={8} className="gauge-tile">
+            <Column lg={8} md={8} sm={4} className="gauge-tile">
               <LineChart
                 data={timeTakenData}
                 options={timeTakenLineOptions}
               />
             </Column>
-            <Column lg={4} className="gauge-tile">
+            <Column lg={4} md={4} sm={4} className="gauge-tile">
               <GaugeChart data={overallPassRateGaugeData} options={passRateGaugeOptions} />
             </Column>
-            <Column lg={4} className="gauge-tile">
+            <Column lg={4} md={4} sm={4} className="gauge-tile">
               <GaugeChart data={overallBleuScoreGaugeData} options={bleuScoreGaugeOptions} />
             </Column>
           </Grid>
