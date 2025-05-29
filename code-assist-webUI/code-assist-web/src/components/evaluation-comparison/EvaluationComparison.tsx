@@ -1014,7 +1014,7 @@ const ModelComparison = () => {
                 {compareClicked && selectedGranite && selectedOther && !isLoading ? (
                     <>
                         <Column sm={4} md={8} lg={16}>
-                            <div style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
+                            <div className="grid-inner-wrap" style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
                                 {[selectedGranite, selectedOther].map((modelName, index) => {
                                     console.log("1.modelName:::>>", modelName);
 
@@ -1672,7 +1672,15 @@ const ModelComparison = () => {
                     open={isModalOpen !== null}
                     modalHeading={`Log Content: ${selectedLogByModel[isModalOpen || ""]?.replace(/^logs\//, "")}`}
                     passiveModal
-                    onRequestClose={() => setIsModalOpen(null)}
+                    onRequestClose={
+                        () => {
+                            setIsModalOpen(null);
+                            setSelectedQuestions((prev) => ({
+                                ...prev,
+                                [isModalOpen || ""]: "",
+                            }));
+                        }
+                    }
                     size="lg"
                     className="log-modal"
                 >
