@@ -79,6 +79,9 @@ body {
         }
       }
     }
+    .code-line {
+      color: #f4f4f4;
+    }
     .information-wrap h4 {
       color: #161616;
     }
@@ -93,6 +96,11 @@ body {
     .main-heading-wrap {
       .main-heading {
         background: radial-gradient(circle, rgb(133 197 242) 0%, rgb(223 223 223) 100%);
+        color: #161616;
+      }
+    }
+    .log-modal {
+      .log-summary-tile > h4 {
         color: #161616;
       }
     }
