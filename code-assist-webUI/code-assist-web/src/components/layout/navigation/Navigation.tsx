@@ -17,7 +17,6 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const handleNavLinkClick = (tab: string) => {
     setActiveTab(tab);
-    console.log("handleNavLinkClick tab", tab);
   };
 
 
@@ -36,8 +35,6 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       setActiveTab('Model Server Logs');
     }
   }, [location]);
-
-  console.log("Nav activeTab:", activeTab);
   
   return (
     <>
@@ -67,9 +64,9 @@ const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <SideNavLink renderIcon={Home} href="#/dashboard" onClick={() => handleNavLinkClick('Dashboard')}>
                 Dashboard
               </SideNavLink>
-              <SideNavLink renderIcon={Folders} href="#/summary" onClick={() => handleNavLinkClick('Summary')}>
+              {/* <SideNavLink renderIcon={Folders} href="#/summary" onClick={() => handleNavLinkClick('Summary')}>
                 Summary
-              </SideNavLink>
+              </SideNavLink> */}
               <SideNavLink renderIcon={Group} href="#/leaderboard" onClick={() => handleNavLinkClick('BigCodeBench Leaderboard')}>
                 BigCodeBench Leaderboard
               </SideNavLink>

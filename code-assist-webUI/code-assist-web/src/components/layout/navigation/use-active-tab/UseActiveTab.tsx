@@ -16,15 +16,12 @@ export const ActiveTabProvider: React.FC<ActiveTabProviderProps> = ({ value, chi
   useEffect(() => {
     setActiveTab(value);
   }, [value]);
-  console.log("ActiveTabProvider value", value);
-  console.log("ActiveTabProvider activeTab", activeTab);
   
   const location = useLocation();
 
   useEffect(() => {
     // Assuming you want to set the initial active tab based on route
     const pathname = location.pathname;
-    console.log("pathname", pathname);
     
     if (pathname === '/' || pathname === '/dashboard') {
       setActiveTab('Dashboard');

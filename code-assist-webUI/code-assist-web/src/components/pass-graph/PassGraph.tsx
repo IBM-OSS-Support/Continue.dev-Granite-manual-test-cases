@@ -30,8 +30,6 @@ class PassGraph extends React.Component<{}, PassGraphState> {
 
   componentDidMount() {
     const currentTheme = this.context?.themeType;
-    console.log("PassGraph CHART_THEME (from context):", currentTheme);
-
     const aggregatedData: Record<string, { totalScore: number; count: number }> = {};
 
     Object.values(codeAssistData).forEach((models: any) => {

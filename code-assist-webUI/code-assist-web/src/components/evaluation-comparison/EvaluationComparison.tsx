@@ -91,7 +91,7 @@ const ModelComparison = () => {
                     return;
                 }
             } catch (githubError) {
-                console.log('Falling back to local server');
+                console.error('Falling back to local server');
             }
             
             // Fallback to local server
@@ -195,9 +195,6 @@ const ModelComparison = () => {
                                     .then(files => files.filter((f: any) => typeof f === 'string' && f.trim() !== ''));
         
                                 fileNames = fileNames.flat();
-
-                                console.log(`local All files for ${modelName}:`, fileNames);
-                                
         
                                 const fileResponses = await Promise.all(
                                     fileNames.map(async (fileName: string) => {
@@ -215,7 +212,6 @@ const ModelComparison = () => {
                                         );
                                     return [...prev, ...newFiles];
                                 });
-                                console.log(`local All files for ${modelName}:`, allFileNames);
                                 
                                 return fileResponses.flat();
                             }
@@ -274,9 +270,6 @@ const ModelComparison = () => {
             .filter(model => model.name && !model.name.toLowerCase().includes("granite"))
             .map(model => model.name)
     ));
-
-    console.log("Granite Models:", graniteModels);
-    console.log("Other Models:", otherModels);
 
 
     // Add null/undefined checks and safe defaults
@@ -415,10 +408,6 @@ const ModelComparison = () => {
           }
         });
       }, [selectedGranite, selectedOther, selectedDates]);
-      
-    
-    console.log("availableFiles", availableFiles, "modelsData:", modelsData);
-    console.log("Potentially problematic models:", modelsData.filter(model => !model.name));
 
     // for fetching pass@1 score fron code-assist-data.json file
     useEffect(() => {
@@ -543,7 +532,6 @@ const ModelComparison = () => {
     const fetchLogFiles = async (resultFileName: string, resultKey: string) => {
         try {
             resultKey = resultKey.replace(/^logs\//, ""); // Remove "logs/" prefix if present
-            console.log("Fetching log files for:", resultFileName); // Debugging
             const logsJsonUrl = `${GITHUB_LOG_URL}/logs.json`;
             const response = await fetch(logsJsonUrl);
             if (!response.ok) throw new Error("Failed to fetch log files");
@@ -551,7 +539,6 @@ const ModelComparison = () => {
     
             // Extract the model name from the result file name
             const modelName = resultFileName.split("_")[0];
-            console.log("Extracted model name:", modelName); // Debugging
     
             // Filter files based on the model name and format
             const matchingFiles: LogFile[] = files
@@ -561,9 +548,7 @@ const ModelComparison = () => {
                     const { formatted, raw } = match ? formatDate(match[1]) : { formatted: "Unknown Date", raw: "0" };
                     return { name: file, date: formatted, rawDate: raw };
                 });
-    
-            console.log("Matching log files:", matchingFiles); // Debugging
-    
+            
             // Sort files by date (newest first)
             const sortedFiles = matchingFiles.sort((a, b) =>
                 new Date(b.rawDate).getTime() - new Date(a.rawDate).getTime()
@@ -613,7 +598,6 @@ const ModelComparison = () => {
             }));
     
             const logFileUrl = `${GITHUB_LOG_URL}/${fileName.replace(/^logs\//, "")}`;
-            console.log("Fetching log file from URL:", logFileUrl); // Debugging
     
             const response = await fetch(logFileUrl, { method: "HEAD" });
             if (!response.ok) throw new Error("Failed to fetch log file metadata");
@@ -721,8 +705,6 @@ const ModelComparison = () => {
                 const averageScore = ((completePrompt + instructPrompt) / 2);
                 scores[modelName.trim()] = `${averageScore.toFixed(2)}%`;
             });
-    
-            console.log("Fetched Pass@1 Scores:", scores); // Debugging
             setModelScores(scores);
         } catch (error) {
             console.error("Error fetching Pass@1 scores:", error);
@@ -735,7 +717,6 @@ const ModelComparison = () => {
         fetchPassAt1Scores();
     }, []);
     useEffect(() => {
-        console.log("Log Summary:", logSummary);
     }, [logSummary]);
 
     const normalizeGraniteModelName = (modelName: string): string => {
@@ -748,14 +729,10 @@ const ModelComparison = () => {
 
     const getScoreAndTagType = (modelName: string) => {
         const normalizedModelName = normalizeGraniteModelName(modelName || '');
-        console.log("Normalized Model Name:", normalizedModelName);
-        console.log("Model Scores Keys:", Object.keys(modelScores));
     
         const matchingKey = Object.keys(modelScores).find((key) =>
             key.toLowerCase().includes(normalizedModelName.toLowerCase()) // Partial match
         );
-    
-        console.log("Matching Key in Model Scores:", matchingKey);
     
         const currentModelScoreRaw = matchingKey ? modelScores[matchingKey]?.split("%")[0]?.trim() : undefined;
         const comparingModelName = selectedGranite === modelName ? selectedOther : selectedGranite;
@@ -768,9 +745,6 @@ const ModelComparison = () => {
         }
     
         const comparingModelScoreRaw = comparingKey ? modelScores[comparingKey]?.split("%")[0]?.trim() : undefined;
-    
-        console.log("Current Model Score Raw:", currentModelScoreRaw);
-        console.log("Comparing Model Score Raw:", comparingModelScoreRaw);
     
         const currentScore = currentModelScoreRaw ? parseFloat(currentModelScoreRaw) : NaN;
         const comparingScore = comparingModelScoreRaw ? parseFloat(comparingModelScoreRaw) : NaN;
@@ -812,9 +786,6 @@ const ModelComparison = () => {
             const userParts = splitQuestionsAndAnswers(prompt.user || ""); // Split user field into multiple questions
             const assistantParts = splitQuestionsAndAnswers(prompt.assistant || ""); // Split assistant field into multiple answers
     
-            console.log("User Parts:", userParts); // Debugging
-            console.log("Assistant Parts:", assistantParts); // Debugging
-    
             // Pair each user part with the corresponding assistant part
             return userParts.map((question, i) => ({
                 question,
@@ -823,8 +794,7 @@ const ModelComparison = () => {
                 time: prompt.time || "No Time Found." // Add time if available
             }));
         });
-    
-        console.log("Extracted Questions and Replies:", extractedQuestions);
+
         return extractedQuestions;
     };
 
@@ -1016,11 +986,7 @@ const ModelComparison = () => {
                         <Column sm={4} md={8} lg={16}>
                             <div className="grid-inner-wrap" style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
                                 {[selectedGranite, selectedOther].map((modelName, index) => {
-                                    console.log("1.modelName:::>>", modelName);
-
                                     const model = getModelDetails(modelName);
-
-                                    console.log("modelmodel::", model);
 
                                     // const fastestTime = Math.min(
                                     //     ...(model.model?.total_time !== undefined 
@@ -1043,13 +1009,8 @@ const ModelComparison = () => {
                                         ? Number(model.model.total_time) === fastestTime
                                         : false;
 
-                                    console.log(
-                                        `model :: time: ${model?.model?.total_time}, isFastest: ${isFastest}`
-                                    );
-
                                     if (model) {
                                         const numberOfFiles = countFilesForModel(model.model?.name || '');
-                                        console.log(`countFilesForModel for ${model}: ${numberOfFiles}`);
                                     }
 
                                     if (!model) return null;
@@ -1065,17 +1026,12 @@ const ModelComparison = () => {
                                             .flatMap(entry => Object.values(entry).flat())
                                             .find(m => m.name === model?.model?.name && m.file_name === selectedFileName);
                                     
-                                        console.log("Matching Model:", matchingModel); // Debugging
-                                    
                                         if (matchingModel?.prompt) {
-                                            console.log("Matching Model Prompts:", matchingModel.prompt); // Debugging
                                             const extractedQuestions = extractQuestionsAndReplies(matchingModel.prompt);
-                                            console.log("Extracted Questions:", extractedQuestions); // Debugging
                                             extractedQuestions.forEach((q) => {
                                                 questionOptions.push(q.question); // Add questions to the dropdown
                                             });
                                         }
-                                        console.log("Question Options:", questionOptions); // Debugging
                                     }
 
                                     const filteredPrompts = modelsData
@@ -1101,9 +1057,6 @@ const ModelComparison = () => {
                                         })
                                         .filter((prompt) => {
                                             const modelName = model?.model?.name ?? '';
-
-                                            console.log("modelName:::", modelName, "modelJsonFiles", model?.modelJsonFiles);
-
                                             // If no date is selected for this model, show all prompts
                                             if (!selectedDates[modelName]) {
                                                 return true;
@@ -1117,13 +1070,9 @@ const ModelComparison = () => {
                                                 Number(model?.model?.date.substring(11, 13))
                                             ) : null;
 
-                                            console.log(`filteredPrompts -- createdAtDate for ${model?.model?.name}:`, createdAtDate);
-
                                             if (!createdAtDate || isNaN(createdAtDate.getTime())) return false;
 
                                             const formattedDate = createdAtDate.toLocaleDateString('en-GB').split('/').reverse().join('-');  // Convert to DD-MM-YYYY
-
-                                            console.log(`filteredPrompts -- formattedDate for ${model?.model?.name}:`, formattedDate, `selectedDates[modelName]:`, selectedDates[modelName]);
 
                                             const getModelName = (): string | undefined => {
                                                 return model?.model?.name;
@@ -1142,8 +1091,6 @@ const ModelComparison = () => {
                                             m.name.toLowerCase().trim() === modelName.toLowerCase().trim() &&
                                             m.file_name === selectedFileName && selectedFileName
                                         );
-                                        console.log("allSelectedPrompts::", modelName, selectedFileName, model);
-                                        
 
                                         if (model && selectedFileName) {
                                             const parsedFile = parseFileName(selectedFileName);
@@ -1162,8 +1109,6 @@ const ModelComparison = () => {
 
                                         return acc;
                                     }, {} as { [key: string]: any[] });
-
-                                    console.log("All Selected Prompts:", allSelectedPrompts);
                                     
 
                                     // Assuming you have access to the prompt's creation date (string or Date)
@@ -1179,11 +1124,6 @@ const ModelComparison = () => {
                                     const formattedPromptDate = parsedDate && isValid(parsedDate)
                                     ? format(parsedDate, 'dd MMM yyyy hh:mmaaa')
                                     : format(new Date(), 'dd MMM yyyy hh:mmaaa');
-
-
-                                    console.log(`Model: ${model?.model?.name}, Selected Date: ${formattedPromptDate}`);
-                                    console.log(`Prompts:`, model?.model?.prompt);
-                                    console.log(`Filtered Prompts:`, filteredPrompts);
 
                                     const formatMillisecondsToTime = (ms: number): string => {
                                         const totalSeconds = Math.floor(ms / 1000);
@@ -1374,8 +1314,6 @@ const ModelComparison = () => {
                                                                 }));
 
                                                                 fetchLogFiles(selectedFileName, resultKey); // Fetch log files for the specific model
-
-                                                                console.log(`1..Filtered Prompts for ${resultKey}:`, filteredPrompts);
                                                             }}
                                                             selectedItem={selectedResults[`${model?.model?.name}-${index}`] || null}
                                                             titleText="Select a Result"
@@ -1601,7 +1539,6 @@ const ModelComparison = () => {
                                                                 .flatMap((prompt) => extractQuestionsAndReplies([prompt])) // Apply splitting to all prompts
                                                                 .filter((prompt) => {
                                                                     const isMatch = prompt.question.trim().includes(selectedQuestion.trim());
-                                                                    console.log("Filtering Prompt:", prompt, "Is Match:", isMatch);
                                                                     return isMatch;
                                                                 })
                                                                 .map((prompt, index) => (

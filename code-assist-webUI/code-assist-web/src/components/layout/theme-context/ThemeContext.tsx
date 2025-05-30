@@ -35,8 +35,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   });
 
   const toggleTheme = () => {
-    console.log("toggleTheme");
-
     setThemeType((prevTheme) => (prevTheme === "g90" ? "g10" : "g90"));
 
     // Override the <Theme> component's theme if it exists
