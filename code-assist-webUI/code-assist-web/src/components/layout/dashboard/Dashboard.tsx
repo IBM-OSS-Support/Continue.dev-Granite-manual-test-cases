@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
           {/* </Grid>
         </div> */}
 
-        <div style={{ padding: "2rem", minHeight: "100vh" }}>
+        <div style={{ padding: "2rem", minHeight: "calc(100vh - 240px)" }}>
           <div className="dashboard-content">
             <Grid fullWidth narrow className="page-content" style={{ gap: "0.5rem 0"}}>
               <Column lg={16} md={8} sm={4}>
