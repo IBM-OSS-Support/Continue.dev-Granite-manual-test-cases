@@ -69,7 +69,7 @@ Experience the interactive model comparison interface with these key features:
 - Responsive design across devices
 
 Access the Web UI here:  
-[Open in new tab ↗](https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/#/model-comparison){:target="_blank"}
+<a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">[Open IBM Code Assist Web UI ↗]</a>
 
 *NB: You can also run this web UI locally by following the [Installation procedure](#-getting-started) above.*
 
