@@ -60,8 +60,8 @@ const Dashboard: React.FC = () => {
                     kind="primary"
                     href={
                       window.location.hostname === "ibm-oss-support.github.io"
-                        ? "https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/#/model-comparison"
-                        : "/#/model-comparison"
+                        ? "https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases#/model-comparison"
+                        : "#/model-comparison"
                     }
                     onClick={() => handleNavLinkClick('Model Comparison')}
                     style={{ marginTop: "1rem", maxWidth: "100%" }}
