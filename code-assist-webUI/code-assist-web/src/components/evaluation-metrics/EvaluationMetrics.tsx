@@ -50,7 +50,6 @@ const EvaluationMetrics = () => {
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
       
       const jsonData = await response.json();
-      console.log("Fetched Data JSON", jsonData);
 
       const tasks = jsonData.rows
         .map((row: any, index: number) => ({
@@ -63,7 +62,6 @@ const EvaluationMetrics = () => {
         .sort((a: { average: number; }, b: { average: number; }) => b.average - a.average)
         .map((item: any, index: number) => ({ ...item, rank: index + 1 }));
 
-      console.log("Sorted Tasks with Rank:", tasks);
       setBigCodeBenchData(tasks);
     } catch (err) {
       setError((err as Error).message);

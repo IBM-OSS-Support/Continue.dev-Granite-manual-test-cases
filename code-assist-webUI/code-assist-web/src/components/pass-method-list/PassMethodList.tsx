@@ -40,8 +40,6 @@ const PassMethodList = () => {
   const codeAssistData = useRef<CodeAssistDataType>(require('../../code-assist-data.json')).current;
 
   useEffect(() => {
-    console.log("Raw JSON Data:", codeAssistData);
-
     // Aggregate Pass@1 scores by Name
     const nameScoresMap = Object.keys(codeAssistData).reduce((acc, key) => {
       const items = codeAssistData[key];
@@ -85,8 +83,6 @@ const PassMethodList = () => {
         pass1Score: `${formattedScore}%`, // Append `%`
       };
     }).sort((a, b) => parseFloat(b.pass1Score) - parseFloat(a.pass1Score));
-
-    console.log("Processed Scores:", sortedScores);
     setScores(sortedScores);
   }, []);
 

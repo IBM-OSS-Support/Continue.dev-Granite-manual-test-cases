@@ -104,5 +104,10 @@ body {
         color: #161616;
       }
     }
+    .dashboard {
+      .cds--tile {
+        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+      }
+    }
   }
 }
