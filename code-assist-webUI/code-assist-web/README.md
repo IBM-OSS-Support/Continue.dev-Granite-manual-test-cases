@@ -1,53 +1,96 @@
-# **IBM Code Assist Web UI Project**
-## Overview
-This project is a testing suite for the VS Code Granite Project. It focuses on manual test cases and evaluations of different models against a set of scenarios/questions.
 
-## Purpose
-The main goals of this project are:
+<h3 align="center">
+    <img width="420" src="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/ibm-code-assist-logo.svg" alt="IBM Logo"/>
+</h3>
 
-- To evaluate the performance of various models (Granite-code:8b-instruct, granite3-dense:8b, Llama3.1:8b, Codestral-Mamba:7b, Starcoder2:7b) against specific test cases.
-- To measure the accuracy, precision, and consistency of these models in handling the given scenarios.
+A modern web interface for evaluating and comparing AI models—especially Granite models—on benchmark datasets like BigCodeBench. 
+The interface enables detailed model performance comparisons, log analysis and leaderboard views.
 
-## Key Features
-- Manual test case evaluation
-- Comparison of different AI models
-- Data visualization for model performance
-- User-friendly interface for selecting and comparing models
+## 🌟 Features
 
-## Technologies Used
-- Python (for backend operations)
-- React (for frontend UI)
-- TypeScript (for enhanced type safety)
-- Various libraries for data processing and visualization
+### ✅ Model Comparison UI
+- Side-by-side comparison of Granite/Ollama models
+- Response time metrics and log analysis
+- Searchable execution logs with metadata
+- Easy switching between question sets
 
-## Project Structure
-The project is organized into several directories:
+### 📊 Benchmark Leaderboards
+- BigCodeBench performance rankings
+- Pass@1 scores for top models (GPT-4, Claude, etc.)
+- Difficulty level toggles (Easy/Hard)
 
-- chat-results: Stores output for each iteration of running scenarios.
-- code-assist-webUI: Contains the web UI component.
-- context-providers: Houses context provider related files.
-- docs: Includes documentation related files.
-- features: Contains interest calculator and loan manager related files.
-- outputfiles: Stores session markdown files.
-- tasks: Contains file I/O and manager related files.
-- test-code: Scripts for data cleaning, feature creation, regression, etc.
-- tests: Test files for file I/O and manager.
-- utils: Contains validation related files.
+### 💻 Accessing the IBM Code Assist Web UI
 
-## Getting Started
-To run the project locally:
+You have two options to access the IBM Code Assist Web UI:
 
-1) Clone the repository (git clone https://github.com/IBM-OSS-Support/IBM-Code-Assist-Web-UI.git)
-2) Install dependencies (npm install)
-3) Run the development server (npm start)
-4) Access the application via localhost
+#### 1. Use the Prebuilt Version
+-  Access the prebuilt UI directly at:
+   [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
 
-## Contributing
+#### 2. Run the UI Locally
+-  You can also run the UI locally by following the setup instructions below [ <a href="#installation"> Installation </a> ].
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm (v8+)
+
+*Note: Make sure you have Node.js and npm installed before running the above commands.*
+
+### Installation
+```bash
+git clone https://github.com/IBM-OSS-Support/Continue.dev-Granite-manual-test-cases
+```
+Navigate to the web UI directory
+```bash
+cd Continue.dev-Granite-manual-test-cases/code-assist-webUI/code-assist-web
+```
+Install Dependencies
+```bash
+npm install
+```
+Running Locally
+```bash
+npm start
+```
+The app will be available at <a href="http://localhost:3000">http://localhost:3000</a>.
+
+Production Build
+```bash
+npm run build
+```
+*NB: Prior to committing code, it is essential to build.*
+
+## 🛠 Tech Stack
+| Category              | Technology                      | Purpose           |
+|-----------------------|---------------------------------|-------------------|
+| **Frontend**          | React 18                        | UI Components     |
+|                       | TypeScript                      | Type Safety       |
+|                       | Redux Toolkit                   | State Management  |
+|                       | React Router                    | Navigation        |
+| **Styling**           | Carbon Design                   | IBM Design System |
+|                       | SCSS Modules                    | Custom Styles     |
+| **Build**             | Webpack                         | Bundling          |
+|                       | Babel                           | Transpilation     |
+| **Backend**           | Node.js                         | Runtime           |
+|                       | Express                         | API Routes        |
+
+## 🌐 Web UI
+Experience the interactive model comparison interface with these key features:
+- Real-time side-by-side model outputs
+- Filterable execution logs
+- Dynamic leaderboard views
+- Responsive design across devices
+
+Access the Web UI here: [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
+
+
+## 📄 License
+Internal IBM OSS Support – shared for research and benchmarking use.
+
+## 📝 Contributing
 Contributions are welcome! Please feel free to submit pull requests or issues.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-- Special thanks to the VS Code team for providing the Granite Project models.
-- Thanks to all contributors who have helped shape this project.
+## 📬 Contact
+For questions or support, please reach out via the GitHub issues page.
