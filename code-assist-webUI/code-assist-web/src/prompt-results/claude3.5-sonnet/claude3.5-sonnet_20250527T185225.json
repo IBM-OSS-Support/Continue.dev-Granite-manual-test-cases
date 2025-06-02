@@ -1,0 +1,17 @@
+{
+  "0": [
+    {
+      "name": "claude3.5-sonnet",
+      "date": "20250527T185225",
+      "file_name": "claude3.5-sonnet_20250527T185225.json",
+      "total_time": 0,
+      "prompt": [
+        {
+          "user": "What is Lambda function in python?",
+          "assistant": "A lambda function in Python is a small, anonymous function defined using the `lambda` keyword. It's usually used for short, simple operations and can take any number of arguments but has only one expression. The expression is evaluated and returned. Lambda functions are often used as arguments to higher-order functions, such as those requiring a function as a parameter (e.g., `map`, `filter`, `sorted`).\nHere's a basic example:\n```python\n# A lambda function that adds 10 to a number\nadd_ten = lambda x: x + 10\n# Using the lambda function\nprint(add_ten(5))  # Output: 15\n```\nLambda functions are particularly useful when you need a simple function for a short duration and don't want to formally define it using `def`. They are often used in situations where a function is required temporarily and reused as a one-liner.",
+          "time": null
+        }
+      ]
+    }
+  ]
+}

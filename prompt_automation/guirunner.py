@@ -35,34 +35,27 @@ def wait_for_log_update(server, keyword="DEBUG [print_timings]           total t
                 print("Found the log: ", log)
                 return log
         print("Waiting for log update...")
-        time.sleep(1)
+        time.sleep(3)
 
 def automate_continue_dev(input_text):
     global first_time, MODEL_NAME, TIMINGS
     try:
-        if MODEL_TYPE == 'granite':
-            time.sleep(3)
-            pyautogui.write(input_text, interval=0.1)
-            pyautogui.press('enter')
-            pyautogui.press('enter')
+        time.sleep(3)
+        pyautogui.write(input_text, interval=0.1)
+        pyautogui.press('enter')
+        pyautogui.press('enter')
 
-            print("\nFetching server logs for updates...")
-            log = wait_for_log_update(server)
-            print("Returned Log: ", log)
-            match = re.search(r'total time\s*=\s*([\d.]+)\s*ms', log)
-            TIMINGS.append(match.group(1))
-            print("Timings List: ", TIMINGS)
-            if first_time == True:
-                MODEL_NAME = fetch_model_name.get_model_name()
-                print("\nGRANITE MODEL NAME: ", MODEL_NAME)
-                first_time = False
+        print("\nFetching server logs for updates...")
+        log = wait_for_log_update(server)
+        print("Returned Log: ", log)
+        match = re.search(r'total time\s*=\s*([\d.]+)\s*ms', log)
+        TIMINGS.append(match.group(1))
+        print("Timings List: ", TIMINGS)
+        if first_time == True:
+            MODEL_NAME = fetch_model_name.get_model_name()
+            print("\nGRANITE MODEL NAME: ", MODEL_NAME)
+            first_time = False
 
-        else:
-            time.sleep(3)
-            pyautogui.write(input_text, interval=0.1)
-            pyautogui.press('enter')
-            pyautogui.press('enter')
-            time.sleep(sleep_time)
 
     except pyautogui.FailSafeException:
         print("Fail-safe triggered. Mouse clicked away from the chat box.")
@@ -103,31 +96,15 @@ if __name__ == '__main__':
         # os.system('clear')
         print("GOODBYE!")
         exit(0)
- 
-    # os.system('clear')
-    print("######################################################\n\n")
-    print("      Please select a file from the below options:        \n\n")
-    print("######################################################\n\n")
-    options = ["Granite", "Other Models", "Exit"]
-    terminal_menu = TerminalMenu(options)
-    selected_index = terminal_menu.show()
-    choice = options[selected_index]
-    
-    if selected_index == 0:
-        MODEL_TYPE = 'granite'
-        print("\nStarting Ollama server...")
-        try:
-            server = ollama_server.OllamaServer()
-            server.start_server()
-        except Exception as e:
-            print(f"Error starting Ollama server: {e}")
 
-    elif selected_index == 1:
-        MODEL_TYPE = 'others'
-    else:
-        # os.system('clear')
-        print("GOODBYE!")
-        exit(0)
+    MODEL_TYPE = 'granite'
+    print("\nStarting Ollama server...")
+    try:
+        server = ollama_server.OllamaServer()
+        server.start_server()
+    except Exception as e:
+        print(f"Error starting Ollama server: {e}")
+
 
     # os.system('clear')
     print(f"\nExecuting prompts from {input_file}. The selected model type is: {MODEL_TYPE}")
@@ -140,8 +117,11 @@ if __name__ == '__main__':
         pyautogui.press('enter')
         pyautogui.press('enter')
         TIMINGS = list(map(float, TIMINGS))
-        generate_json(MODEL_NAME, TIMINGS)
+        output_filename = generate_json(MODEL_NAME, TIMINGS)
+        server.rename_log_file(output_filename)
         print("Process completed!!\n")
+
+        ## npm build
 
     except Exception as e:
         print(f"An unexpected error occurred in the main function: {e}")

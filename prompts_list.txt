@@ -1,2 +1,1 @@
-answer brief: What is AWS?
-what is java
+What is Lambda function in python?
