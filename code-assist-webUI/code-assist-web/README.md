@@ -19,11 +19,24 @@ The interface enables detailed model performance comparisons, log analysis and l
 - Pass@1 scores for top models (GPT-4, Claude, etc.)
 - Difficulty level toggles (Easy/Hard)
 
+### 💻 Accessing the IBM Code Assist Web UI
+
+You have two options to access the IBM Code Assist Web UI:
+
+#### 1. Use the Prebuilt Version
+-  Access the prebuilt UI directly at:
+   [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
+
+#### 2. Run the UI Locally
+-  You can also run the UI locally by following the setup instructions below [ <a href="#installation"> Installation </a> ].
+
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v16+ recommended)
 - npm (v8+)
+
+*Note: Make sure you have Node.js and npm installed before running the above commands.*
 
 ### Installation
 ```bash
@@ -41,7 +54,7 @@ Running Locally
 ```bash
 npm start
 ```
-The app will be available at `http://localhost:3000`.
+The app will be available at <a href="http://localhost:3000">http://localhost:3000</a>.
 
 Production Build
 ```bash
@@ -70,10 +83,8 @@ Experience the interactive model comparison interface with these key features:
 - Dynamic leaderboard views
 - Responsive design across devices
 
-Access the Web UI here:  
-<a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">[Open IBM Code Assist Web UI ↗]</a>
+Access the Web UI here: [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
 
-*NB: You can also run this web UI locally by following the [Installation procedure](#-getting-started) above.*
 
 ## 📄 License
 Internal IBM OSS Support – shared for research and benchmarking use.
