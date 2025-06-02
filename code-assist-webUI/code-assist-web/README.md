@@ -19,16 +19,20 @@ The interface enables detailed model performance comparisons, log analysis and l
 - Pass@1 scores for top models (GPT-4, Claude, etc.)
 - Difficulty level toggles (Easy/Hard)
 
-### 💻 Accessing the IBM Code Assist Web UI
+<hr style="border-top: 2px dashed #bbb; margin-top: 1rem; margin-bottom: 1rem;" />
+
+## 💻 Accessing the IBM Code Assist Web UI
 
 You have two options to access the IBM Code Assist Web UI:
 
 #### 1. Use the Prebuilt Version
 -  Access the prebuilt UI directly at:
-   [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
+   <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">[Open IBM Code Assist Web UI ↗]</a>
 
 #### 2. Run the UI Locally
 -  You can also run the UI locally by following the setup instructions below [ <a href="#installation"> Installation </a> ].
+
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
 
 ## 🚀 Getting Started
 
@@ -62,6 +66,8 @@ npm run build
 ```
 *NB: Prior to committing code, it is essential to build.*
 
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
+
 ## 🛠 Tech Stack
 | Category              | Technology                      | Purpose           |
 |-----------------------|---------------------------------|-------------------|
@@ -76,6 +82,8 @@ npm run build
 | **Backend**           | Node.js                         | Runtime           |
 |                       | Express                         | API Routes        |
 
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
+
 ## 🌐 Web UI
 Experience the interactive model comparison interface with these key features:
 - Real-time side-by-side model outputs
@@ -83,14 +91,20 @@ Experience the interactive model comparison interface with these key features:
 - Dynamic leaderboard views
 - Responsive design across devices
 
-Access the Web UI here: [ <a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a> ]
+Access the Web UI here:  
+<a href="https://ibm-oss-support.github.io/Continue.dev-Granite-manual-test-cases/" target="_blank">Open IBM Code Assist Web UI ↗</a>
 
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
 
 ## 📄 License
 Internal IBM OSS Support – shared for research and benchmarking use.
 
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
+
 ## 📝 Contributing
 Contributions are welcome! Please feel free to submit pull requests or issues.
+
+<hr style="border-top: 2px dashed #bbb; margin-top: 0.5rem; margin-bottom: 1rem;" />
 
 ## 📬 Contact
 For questions or support, please reach out via the GitHub issues page.
