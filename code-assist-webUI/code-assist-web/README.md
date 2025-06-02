@@ -41,6 +41,8 @@ Running Locally
 ```bash
 npm start
 ```
+The app will be available at `http://localhost:3000`.
+
 Production Build
 ```bash
 npm run build
