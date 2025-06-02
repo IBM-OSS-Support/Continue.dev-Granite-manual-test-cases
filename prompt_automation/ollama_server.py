@@ -99,7 +99,7 @@ class OllamaServer:
 
         print("JSONFILENAME: ", json_filename)
 #        base_name = os.path.basename(self.current_log_file)
-        new_file_name = os.path.join(self.log_dir, json_filename.split("/")[-1].split(".json")[0] + "_server_log.log")
+        new_file_name = os.path.join(self.log_dir, json_filename.split("/")[-1].split(".json")[0] + ".log")
         try:
             os.rename(self.current_log_file, new_file_name)
             print(f"Log file renamed to {new_file_name}")
