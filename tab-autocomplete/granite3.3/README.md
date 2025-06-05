@@ -137,19 +137,3 @@ This is **not a comprehensive benchmark**, and outcomes may vary under different
 These evaluations were based on **manual testing** over a few interactive sessions.
 
 ---
-
-## 📝 Note
-
-These models were evaluated using a curated but **limited set of 12 Python completion tasks**, designed to simulate common code scenarios like:
-
-- Recursion
-- Conditional tax logic
-- Lambda/filter/map
-- Pandas `.agg()`
-- Class methods and bonus logic
-
-This is **not a comprehensive benchmark**, and outcomes may vary under different usage patterns or project complexity.
-
-These evaluations were based on **manual testing** over a few interactive sessions.
-
----
