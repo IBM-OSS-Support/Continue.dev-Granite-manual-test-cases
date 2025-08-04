@@ -1,1 +1,2 @@
 What is Lambda function in python?
+How to run a java code?
